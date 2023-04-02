@@ -13,6 +13,12 @@ public class UserModel {
 
     private Timestamp updateAt;
 
+    public UserModel(String userName, String email, String password) {
+        this.email = email;
+        this.password = password;
+        this.userName = userName;
+    }
+
     public UserModel(String email, String password) {
         this.email = email;
         this.password = password;
