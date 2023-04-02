@@ -89,6 +89,7 @@
         android:layout_marginBottom="15dp"
         android:backgroundTint="@color/design_default_color_secondary"
         android:text="REGISTER"
+        android:textColor="@color/white"
         android:textSize="18dp" />
 
     <TextView
