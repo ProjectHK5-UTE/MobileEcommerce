@@ -1,8 +1,9 @@
 package com.example.mobileecommerce.model;
 
+import java.io.Serializable;
 import java.security.Timestamp;
 
-public class UserModel {
+public class UserModel implements Serializable {
     private Timestamp createdAt;
 
     private String email;
@@ -74,4 +75,16 @@ public class UserModel {
         this.userName = userName;
     }
     //private List<Customer> customers;
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "createdAt=" + createdAt +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", updateAt=" + updateAt +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

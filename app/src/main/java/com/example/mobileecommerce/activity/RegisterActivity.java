@@ -17,9 +17,14 @@ import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.service.UserService;
 import com.google.android.material.button.MaterialButton;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -28,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register);
+
         // Component
         EditText username = (EditText) findViewById(R.id.username);
         EditText email = (EditText) findViewById(R.id.email);
@@ -37,46 +43,54 @@ public class RegisterActivity extends AppCompatActivity {
 
         regbtn.setOnClickListener(new View.OnClickListener() {
             UserService userService = new UserService();
+
             @Override
             public void onClick(View v) {
-                if(userService.isGmailAddress(email.getText().toString().trim()))
+                String isCheck = userService.checkFormSignUp(email.getText().toString().trim(),
+                        password.getText().toString().trim(),
+                        re_password.getText().toString().trim());
+                if(isCheck == "Success")
                 {
-                    if(userService.checkPassword(password.getText().toString().trim(),
-                            re_password.getText().toString().trim())) {
-                        UserModel user = new UserModel(
-                                username.getText().toString().trim(),
-                                email.getText().toString().trim(),
-                                password.getText().toString().trim()
-                        );
-                        CallSignUpAPI(user);
-                    } else {
-                        Toast.makeText(RegisterActivity.this,"Password Confirmation Error",Toast.LENGTH_SHORT).show();
-                    }
+                    UserModel user = new UserModel(
+                            username.getText().toString().trim(),
+                            email.getText().toString().trim(),
+                            password.getText().toString().trim()
+                    );
+                    //gotoOTPVerify(user);
+                    CallSignUpAPI(user);
                 } else {
-                    Toast.makeText(RegisterActivity.this,"This is not GMAIL",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,isCheck,Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void CallSignUpAPI(UserModel user) {
-
-        SignUpAPI signUpAPI = RetrofitClient.getRetrofit().create(SignUpAPI.class);
+    public void CallSignUpAPI(UserModel user) {
+        SignUpAPI signUpAPI = RetrofitClient.getRetrofit60TimeOut().create(SignUpAPI.class);
 
         signUpAPI.SignUp(user).enqueue(new Callback<ResponseDTO>() {
             @Override
             public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
+
                 if(response.isSuccessful()){
-                    Toast.makeText(RegisterActivity.this, "Ok", Toast.LENGTH_SHORT).show();
+                    String message = response.body().getMessage();
+                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+                    gotoOTPVerify(user);
                 }else {
-                    Toast.makeText(RegisterActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Fail to Sent OTP", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseDTO> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Error When You Register", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void gotoOTPVerify(UserModel user) {
+        Intent intent = new Intent(this, OTPVerifyActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
     }
 }

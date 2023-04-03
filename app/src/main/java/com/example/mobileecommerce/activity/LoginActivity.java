@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     ResponseDTO responseDTO = response.body();
                     Toast.makeText(LoginActivity.this, responseDTO.getMessage(), Toast.LENGTH_SHORT).show();
                 } else{
-                    Toast.makeText(LoginActivity.this, "Not OK", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Wrong When You Login!!!", Toast.LENGTH_SHORT).show();
                 }
             }
 
