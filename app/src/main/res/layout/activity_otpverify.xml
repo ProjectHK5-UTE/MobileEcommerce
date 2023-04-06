@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:overScrollMode="never"
-    android:background="#FFEB3B"
+    android:background="#1E673AB7"
     tools:context=".activity.OTPVerifyActivity">
 
     <LinearLayout
@@ -209,11 +209,11 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Verfiy"
+                android:text="Verify"
                 android:id="@+id/btnsubmit"
                 android:layout_margin="30dp"
                 android:background="@drawable/backgroundbutton"
-                android:textColor="@color/colortextfirst"
+                android:textColor="@color/white"
                 android:textStyle="bold"/>
 
             <ProgressBar
