@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="horizontal" android:background="@color/red" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:background="@drawable/white_home_rect" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
+            <ImageView android:layout_gravity="center" android:layout_width="18dp" android:layout_height="18dp" android:layout_marginLeft="8dp" android:src="@drawable/ic_search"/>
+            <EditText android:textSize="15sp" android:id="@+id/editext" android:background="@color/transperent" android:padding="10sp" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Searching..." android:textColor="@color/txt_color" android:inputType="text" android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView android:background="@drawable/offer2" android:layout_width="match_parent" android:layout_height="180dp"/>
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
+        <TextView android:textColor="@color/txt_color" android:layout_width="0dp" android:layout_height="wrap_content" android:text="My Favorite" android:layout_weight="1" android:fontFamily="@font/roboto_bold"/>
+        <TextView android:textSize="13sp" android:textColor="@color/red" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View More" android:fontFamily="@font/roboto_regular"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/favourit_recyclerview" android:paddingLeft="10dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <ImageView android:background="@drawable/mobile" android:layout_width="match_parent" android:layout_height="150dp" android:layout_margin="10dp"/>
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
+        <TextView android:textColor="@color/txt_color" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Best Smartphones" android:layout_weight="1" android:fontFamily="@font/roboto_bold"/>
+        <TextView android:textSize="13sp" android:textColor="@color/red" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View More" android:fontFamily="@font/roboto_regular"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/smartphone_recyclerview" android:paddingLeft="10dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:layout_marginBottom="12dp">
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <ImageView android:background="@drawable/ac" android:layout_width="0dp" android:layout_height="120dp" android:layout_weight="1"/>
+            <ImageView android:background="@drawable/tv" android:layout_width="0dp" android:layout_height="120dp" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <ImageView android:background="@drawable/heater" android:layout_width="0dp" android:layout_height="120dp" android:layout_weight="1"/>
+            <ImageView android:background="@drawable/washing" android:layout_width="0dp" android:layout_height="120dp" android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

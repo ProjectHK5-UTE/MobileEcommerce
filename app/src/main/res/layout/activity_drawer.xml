@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_gravity="start" android:orientation="vertical" android:id="@+id/navigation_view" android:fitsSystemWindows="true" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="horizontal" android:background="@color/red" android:layout_width="match_parent" android:layout_height="140dp">
+            <de.hdodenhof.circleimageview.CircleImageView android:layout_gravity="center" android:id="@+id/profile_image" android:layout_width="56dp" android:layout_height="56dp" android:layout_marginLeft="20sp" android:src="@drawable/jacob"/>
+            <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginLeft="15sp" android:layout_weight="1">
+                <TextView android:textSize="16sp" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rahul Mimara" android:fontFamily="@font/roboto_medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="rahulmimara@gmail.com"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <ImageView android:layout_gravity="center" android:visibility="invisible" android:layout_width="20dp" android:layout_height="20dp" android:layout_marginRight="20dp" android:src="@drawable/ic_settings"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            android:text="@color/red" />
+    </LinearLayout>
+</com.google.android.material.navigation.NavigationView>

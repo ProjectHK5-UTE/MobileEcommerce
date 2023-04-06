@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/toolbar" android:background="@color/red" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <ImageView android:id="@+id/navigation_menu" android:layout_width="20dp" android:layout_height="wrap_content" android:src="@drawable/ic_menu3"/>
+    <TextView android:textSize="16sp" android:textColor="@color/white" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/app_name" android:fontFamily="@font/roboto_medium"/>
+    <ImageView android:layout_gravity="right" android:id="@+id/iv_ecart" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="15sp" android:src="@drawable/ic_supermarket"/>
+</androidx.appcompat.widget.Toolbar>
