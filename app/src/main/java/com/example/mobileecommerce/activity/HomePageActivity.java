@@ -36,7 +36,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     NavigationView navigationView;
     private RecyclerView recyclerView2;
     private String[] title2 = {"Home", "Cart", "My Orders", "Categories", "Offers"};
-    //private int[] image2 = {R.drawable.home, R.drawable.cart, R.drawable.order, R.drawable.category, R.drawable.offer};
+    private int[] image2 = {R.drawable.home_, R.drawable.cart_, R.drawable.order, R.drawable.category, R.drawable.offer};
     private Toolbar toolbar;
 
     /* JADX INFO: Access modifiers changed from: protected */
@@ -53,7 +53,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         this.recyclerView2 = (RecyclerView) findViewById(R.id.recyclerview2);
         this.eShoppingModelClasses = new ArrayList<>();
         for (int i = 0; i < this.title2.length; i++) {
-            this.eShoppingModelClasses.add(new EShoppingModelClass(this.title2[i]));
+            this.eShoppingModelClasses.add(new EShoppingModelClass(this.title2[i], this.image2[i]));
         }
         this.mAdapter = new NavigationRecycleAdapter(this, this.eShoppingModelClasses);
         this.recyclerView2.setLayoutManager(new LinearLayoutManager(this));

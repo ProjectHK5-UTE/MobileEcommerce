@@ -4,15 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.HomePageActivity;
 import com.example.mobileecommerce.model.EShoppingModelClass;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,9 +29,11 @@ public class NavigationRecycleAdapter extends RecyclerView.Adapter<NavigationRec
     /* loaded from: classes.dex */
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title;
+        ImageView image;
         public MyViewHolder(View view) {
             super(view);
             //NavigationRecycleAdapter.this = r1;
+            this.image = (ImageView) view.findViewById(R.id.image);
             this.title = (TextView) view.findViewById(R.id.title);
         }
     }
@@ -45,6 +51,7 @@ public class NavigationRecycleAdapter extends RecyclerView.Adapter<NavigationRec
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(MyViewHolder myViewHolder, @SuppressLint("RecyclerView") final int i) {
         myViewHolder.title.setText(this.OfferList.get(i).getTitle());
+        Picasso.get().load(this.OfferList.get(i).getImage()).into(myViewHolder.image);
         if (this.myPos == i) {
             myViewHolder.title.setTextColor(Color.parseColor("#38393f"));
         } else {

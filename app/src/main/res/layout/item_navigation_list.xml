@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <TextView android:textSize="15sp" android:textColor="@color/black" android:id="@+id/title" android:padding="15sp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Home" android:fontFamily="@font/roboto_regular"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/home" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="10sp"
+        android:text="Home"
+        android:textColor="@color/black"
+        android:gravity="center_vertical|start"
+        android:textSize="18sp" />
 </LinearLayout>
