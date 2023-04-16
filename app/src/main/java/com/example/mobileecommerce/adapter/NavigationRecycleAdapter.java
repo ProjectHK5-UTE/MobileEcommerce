@@ -58,9 +58,6 @@ public class NavigationRecycleAdapter extends RecyclerView.Adapter<NavigationRec
             myViewHolder.title.setTextColor(Color.parseColor("#acacac"));
         }
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            {
-//                NavigationRecycleAdapter.this = this;
-//            }
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
                 NavigationRecycleAdapter.this.myPos = i;

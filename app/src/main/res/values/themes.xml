@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="RatingBar" parent="@style/Theme.AppCompat">
+        <item name="colorControlActivated">@color/duskYellow</item>
+        <item name="colorControlNormal">@color/lightGrey</item>
+    </style>
 </resources>

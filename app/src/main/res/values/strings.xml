@@ -2,4 +2,6 @@
     <string name="app_name">MobileEcommerce</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
+
+    <string name="rs_2500">Rs. 2510</string>
 </resources>

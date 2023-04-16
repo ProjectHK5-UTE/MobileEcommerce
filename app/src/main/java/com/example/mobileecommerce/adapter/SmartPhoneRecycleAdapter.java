@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
+import com.example.mobileecommerce.activity.ProductDetailActivity;
 import com.example.mobileecommerce.model.FavouriteModelClass;
 
 import java.util.List;
@@ -64,12 +65,12 @@ public class SmartPhoneRecycleAdapter extends RecyclerView.Adapter<SmartPhoneRec
                 myViewHolder.like.setImageResource(R.drawable.ic_heart_light);
             }
         });
-//        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.ecommerce.template.adapter.SmartPhoneRecycleAdapter.2
-//            @Override // android.view.View.OnClickListener
-//            public void onClick(View view) {
-//                SmartPhoneRecycleAdapter.this.context.startActivity(new Intent(SmartPhoneRecycleAdapter.this.context, ProductDetailActivity.class));
-//            }
-//        });
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override // android.view.View.OnClickListener
+            public void onClick(View view) {
+                SmartPhoneRecycleAdapter.this.context.startActivity(new Intent(SmartPhoneRecycleAdapter.this.context, ProductDetailActivity.class));
+            }
+        });
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

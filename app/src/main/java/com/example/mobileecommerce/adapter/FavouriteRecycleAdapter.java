@@ -1,6 +1,7 @@
 package com.example.mobileecommerce.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
+import com.example.mobileecommerce.activity.ProductDetailActivity;
 import com.example.mobileecommerce.model.FavouriteModelClass;
 
 import java.util.List;
@@ -62,12 +64,12 @@ public class FavouriteRecycleAdapter extends RecyclerView.Adapter<FavouriteRecyc
                 myViewHolder.like.setImageResource(R.drawable.ic_heart_light);
             }
         });
-//        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.ecommerce.template.adapter.FavouriteRecycleAdapter.2
-//            @Override // android.view.View.OnClickListener
-//            public void onClick(View view) {
-//                FavouriteRecycleAdapter.this.context.startActivity(new Intent(FavouriteRecycleAdapter.this.context, ProductDetailActivity.class));
-//            }
-//        });
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override // android.view.View.OnClickListener
+            public void onClick(View view) {
+                FavouriteRecycleAdapter.this.context.startActivity(new Intent(FavouriteRecycleAdapter.this.context, ProductDetailActivity.class));
+            }
+        });
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
