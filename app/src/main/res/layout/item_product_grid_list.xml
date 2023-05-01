@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:background="@color/white" android:layout_width="wrap_content" android:layout_height="260dp" android:layout_weight="1">
+    <RelativeLayout android:orientation="vertical" android:id="@+id/rl_click_product_detail" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+            <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <ImageView android:layout_gravity="center" android:id="@+id/image" android:layout_width="66dp" android:layout_height="133dp" android:layout_marginTop="15dp" android:src="@drawable/s9plus"/>
+                    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20dp" android:layout_marginTop="25dp" android:layout_marginRight="15dp">
+                        <TextView android:textSize="11.7sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Samsung Galaxy S9 Plus (Midnight Black, 128GB)" android:fontFamily="@font/roboto_medium"/>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp">
+                            <TextView android:textSize="13.3sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rs" android:fontFamily="@font/roboto_bold"/>
+                            <TextView android:textSize="13.3sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" 49,999" android:fontFamily="@font/roboto_bold"/>
+                            <TextView android:textSize="12.3sp" android:textColor="#868791" android:id="@+id/offer" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:text="60,999" android:fontFamily="@font/roboto_medium"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView android:textSize="8.7sp" android:textColor="#1c1d1d" android:layout_gravity="right" android:id="@+id/text" android:background="@drawable/white_light_rect1" android:paddingLeft="10dp" android:paddingTop="3dp" android:paddingRight="10dp" android:paddingBottom="3dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:layout_marginRight="15dp" android:text="Save 30%" android:fontFamily="@font/roboto_medium"/>
+            </FrameLayout>
+        </LinearLayout>
+        <View android:layout_gravity="end" android:background="@color/view_line" android:layout_width="match_parent" android:layout_height="0.5dp" android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+    <View android:layout_gravity="bottom" android:background="@color/view_line" android:layout_width="1dp" android:layout_height="match_parent"/>
+</LinearLayout>

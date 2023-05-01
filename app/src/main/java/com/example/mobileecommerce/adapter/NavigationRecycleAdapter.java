@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
+import com.example.mobileecommerce.activity.CategoriesListActivity;
 import com.example.mobileecommerce.activity.HomePageActivity;
+import com.example.mobileecommerce.activity.ProductListActivity;
 import com.example.mobileecommerce.model.EShoppingModelClass;
 import com.squareup.picasso.Picasso;
 
@@ -68,10 +70,10 @@ public class NavigationRecycleAdapter extends RecyclerView.Adapter<NavigationRec
 //                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, MyCartActivity.class));
 //                } else if (2 == i2) {
 //                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, MyOrderActivity.class));
-//                } else if (3 == i2) {
-//                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, CategoriesListActivity.class));
-//                } else if (4 == i2) {
-//                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, ProductListActivity.class));
+                } else if (3 == i2) {
+                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, CategoriesListActivity.class));
+                } else if (4 == i2) {
+                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, ProductListActivity.class));
 //                } else if (5 == i2) {
 //                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, LoginActivity.class));
 //                } else if (6 == i2) {

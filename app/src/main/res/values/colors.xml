@@ -20,4 +20,6 @@
     <color name="color_view">#A5A2A2</color>
     <color name="duskYellow">#ffff66</color>
     <color name="lightGrey">#d3d3d3</color>
+    <color name="gray">#e6e6ee</color>
+    <color name="view_line">#e2e2e2</color>
 </resources>

@@ -53,7 +53,7 @@ public class SmartPhoneRecycleAdapter extends RecyclerView.Adapter<SmartPhoneRec
         myViewHolder.image.setImageResource(favouriteModelClass.getImage().intValue());
         myViewHolder.title.setText(favouriteModelClass.getTitle());
         myViewHolder.price.setText(favouriteModelClass.getPrice());
-        myViewHolder.like.setOnClickListener(new View.OnClickListener() { // from class: com.ecommerce.template.adapter.SmartPhoneRecycleAdapter.1
+        myViewHolder.like.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
                 if (favouriteModelClass.isSelected()) {

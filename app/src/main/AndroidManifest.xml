@@ -25,6 +25,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.ProductListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ProductGridActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CategoriesListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ProductDetailActivity"
             android:exported="false">
         </activity>
