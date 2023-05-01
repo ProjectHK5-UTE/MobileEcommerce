@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/red" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <ImageView android:id="@+id/iv_back" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_back_white"/>
+    <TextView android:textSize="16sp" android:textColor="@color/white" android:layout_gravity="center" android:id="@+id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="-20dp" android:text="Payment" android:fontFamily="@font/roboto_medium"/>
+    <FrameLayout android:layout_gravity="right" android:orientation="vertical" android:id="@+id/fl_ecart" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="15sp">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="7dp" android:layout_marginRight="8dp" android:src="@drawable/ic_supermarket"/>
+        <TextView android:textSize="8sp" android:gravity="center" android:layout_gravity="right" android:background="@drawable/white_circle" android:layout_width="12dp" android:layout_height="12dp" android:layout_marginBottom="5dp" android:text="2" android:fontFamily="@font/roboto_regular"/>
+    </FrameLayout>
+</androidx.appcompat.widget.Toolbar>

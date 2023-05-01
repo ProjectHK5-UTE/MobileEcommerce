@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.HomePageActivity"
             android:exported="true">
             <intent-filter>
@@ -35,12 +38,10 @@
             android:exported="false" />
         <activity
             android:name=".activity.ProductDetailActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".activity.SplashScreenActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".activity.OTPVerifyActivity"
             android:exported="false" />
@@ -49,6 +50,21 @@
             android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyCartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SucessfullActivity"
             android:exported="false" />
     </application>
 
