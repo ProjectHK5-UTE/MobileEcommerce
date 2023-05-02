@@ -1,16 +1,15 @@
 package com.example.mobileecommerce.model;
 
 /* loaded from: classes.dex */
-public class FavouriteModelClass {
+public class ProductListModelClass {
     Integer image;
-    boolean isSelected = true;
-    String price;
+    Integer like;
     String title;
 
-    public FavouriteModelClass(Integer num, String str, String str2) {
+    public ProductListModelClass(Integer num, String str, Integer num2) {
         this.image = num;
         this.title = str;
-        this.price = str2;
+        this.like = num2;
     }
 
     public Integer getImage() {
@@ -29,19 +28,11 @@ public class FavouriteModelClass {
         this.title = str;
     }
 
-    public String getPrice() {
-        return this.price;
+    public Integer getLike() {
+        return this.like;
     }
 
-    public void setPrice(String str) {
-        this.price = str;
-    }
-
-    public boolean isSelected() {
-        return this.isSelected;
-    }
-
-    public void setSelected(boolean z) {
-        this.isSelected = z;
+    public void setLike(Integer num) {
+        this.like = num;
     }
 }

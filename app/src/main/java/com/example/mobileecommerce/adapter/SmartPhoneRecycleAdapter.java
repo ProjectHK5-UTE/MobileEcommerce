@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.ProductDetailActivity;
-import com.example.mobileecommerce.model.FavouriteModelClass;
+import com.example.mobileecommerce.model.HomeViewModelClass;
 
 import java.util.List;
 
 /* loaded from: classes.dex */
 public class SmartPhoneRecycleAdapter extends RecyclerView.Adapter<SmartPhoneRecycleAdapter.MyViewHolder> {
-    private List<FavouriteModelClass> OfferList;
+    private List<HomeViewModelClass> OfferList;
     Context context;
     boolean showingfirst = true;
 
@@ -37,7 +37,7 @@ public class SmartPhoneRecycleAdapter extends RecyclerView.Adapter<SmartPhoneRec
         }
     }
 
-    public SmartPhoneRecycleAdapter(Context context, List<FavouriteModelClass> list) {
+    public SmartPhoneRecycleAdapter(Context context, List<HomeViewModelClass> list) {
         this.OfferList = list;
         this.context = context;
     }
@@ -49,19 +49,19 @@ public class SmartPhoneRecycleAdapter extends RecyclerView.Adapter<SmartPhoneRec
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(final MyViewHolder myViewHolder, int i) {
-        final FavouriteModelClass favouriteModelClass = this.OfferList.get(i);
-        myViewHolder.image.setImageResource(favouriteModelClass.getImage().intValue());
-        myViewHolder.title.setText(favouriteModelClass.getTitle());
-        myViewHolder.price.setText(favouriteModelClass.getPrice());
+        final HomeViewModelClass homeViewModelClass = this.OfferList.get(i);
+        //myViewHolder.image.setImageResource(homeViewModelClass.getImage().intValue());
+        myViewHolder.title.setText(homeViewModelClass.getTitle());
+        //myViewHolder.price.setText(homeViewModelClass.getPrice());
         myViewHolder.like.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                if (favouriteModelClass.isSelected()) {
-                    favouriteModelClass.setSelected(false);
+                if (homeViewModelClass.isSelected()) {
+                    homeViewModelClass.setSelected(false);
                     myViewHolder.like.setImageResource(R.drawable.ic_dark_like);
                     return;
                 }
-                favouriteModelClass.setSelected(true);
+                homeViewModelClass.setSelected(true);
                 myViewHolder.like.setImageResource(R.drawable.ic_heart_light);
             }
         });

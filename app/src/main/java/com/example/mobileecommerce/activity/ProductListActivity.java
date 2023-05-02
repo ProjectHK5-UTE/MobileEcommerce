@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.RecycleAdapteProductList;
-import com.example.mobileecommerce.model.ProductListModellClass;
+import com.example.mobileecommerce.model.ProductListModelClass;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class ProductListActivity extends AppCompatActivity {
     ImageView iv_back;
     private Integer[] like;
     private RecycleAdapteProductList mAdapter2;
-    private ArrayList<ProductListModellClass> productListModellClasses;
+    private ArrayList<ProductListModelClass> productListModelClasses;
     private RecyclerView recyclerview;
     private Integer[] image1 = {Integer.valueOf((int) R.drawable.s9plus), Integer.valueOf((int) R.drawable.iphnx), Integer.valueOf((int) R.drawable.googlepixel), Integer.valueOf((int) R.drawable.vivo11)};
     private String[] title1 = {"Samsung S9 Plus", "I Phone X", "Google Pixel 3", "Vivo V-11 Pro"};
@@ -46,11 +46,11 @@ public class ProductListActivity extends AppCompatActivity {
                 ProductListActivity.this.finish();
             }
         });
-        this.productListModellClasses = new ArrayList<>();
+        this.productListModelClasses = new ArrayList<>();
         for (int i = 0; i < this.image1.length; i++) {
-            this.productListModellClasses.add(new ProductListModellClass(this.image1[i], this.title1[i], this.like[i]));
+            this.productListModelClasses.add(new ProductListModelClass(this.image1[i], this.title1[i], this.like[i]));
         }
-        this.mAdapter2 = new RecycleAdapteProductList(this, this.productListModellClasses);
+        this.mAdapter2 = new RecycleAdapteProductList(this, this.productListModelClasses);
         this.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerview.setItemAnimator(new DefaultItemAnimator());
         this.recyclerview.setAdapter(this.mAdapter2);

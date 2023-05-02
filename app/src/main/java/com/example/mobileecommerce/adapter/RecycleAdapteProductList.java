@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.ProductDetailActivity;
-import com.example.mobileecommerce.model.ProductListModellClass;
+import com.example.mobileecommerce.model.ProductListModelClass;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public class RecycleAdapteProductList extends RecyclerView.Adapter<RecycleAdapteProductList.MyViewHolder> {
     Context context;
-    private List<ProductListModellClass> moviesList;
+    private List<ProductListModelClass> moviesList;
 
     /* loaded from: classes.dex */
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -38,7 +39,7 @@ public class RecycleAdapteProductList extends RecyclerView.Adapter<RecycleAdapte
         }
     }
 
-    public RecycleAdapteProductList(Context context, List<ProductListModellClass> list) {
+    public RecycleAdapteProductList(Context context, ArrayList<ProductListModelClass> list) {
         this.moviesList = list;
         this.context = context;
     }
@@ -50,7 +51,7 @@ public class RecycleAdapteProductList extends RecyclerView.Adapter<RecycleAdapte
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-        ProductListModellClass productListModellClass = this.moviesList.get(i);
+        ProductListModelClass productListModellClass = this.moviesList.get(i);
         myViewHolder.image.setImageResource(productListModellClass.getImage().intValue());
         myViewHolder.like.setImageResource(productListModellClass.getLike().intValue());
         myViewHolder.title.setText(productListModellClass.getTitle());

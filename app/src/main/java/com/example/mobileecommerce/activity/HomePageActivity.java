@@ -80,6 +80,13 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
         beginTransaction.add(R.id.fregmentlayout, homeFragment, "Home Fragment");
         beginTransaction.commit();
+
+        //Call API getLasted Product
+        getLastedProduct();
+    }
+
+    private void getLastedProduct() {
+
     }
 
     private void setToolbar() {

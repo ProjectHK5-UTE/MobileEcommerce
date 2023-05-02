@@ -2,6 +2,7 @@ package com.example.mobileecommerce.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.ProductDetailActivity;
-import com.example.mobileecommerce.model.FavouriteModelClass;
+import com.example.mobileecommerce.model.HomeViewModelClass;
 
 import java.util.List;
 
 /* loaded from: classes.dex */
-public class FavouriteRecycleAdapter extends RecyclerView.Adapter<FavouriteRecycleAdapter.MyViewHolder> {
-    private List<FavouriteModelClass> OfferList;
+public class HomeRecycleAdapter extends RecyclerView.Adapter<HomeRecycleAdapter.MyViewHolder> {
+    private List<HomeViewModelClass> OfferList;
     Context context;
     boolean showingfirst = true;
 
@@ -37,37 +39,42 @@ public class FavouriteRecycleAdapter extends RecyclerView.Adapter<FavouriteRecyc
         }
     }
 
-    public FavouriteRecycleAdapter(Context context, List<FavouriteModelClass> list) {
+    public HomeRecycleAdapter(Context context, List<HomeViewModelClass> list) {
         this.OfferList = list;
         this.context = context;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_favourite_list, viewGroup, false));
+        return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_home_product_list, viewGroup, false));
     }
 
     public void onBindViewHolder(final MyViewHolder myViewHolder, int i) {
-        final FavouriteModelClass favouriteModelClass = this.OfferList.get(i);
-        myViewHolder.image.setImageResource(favouriteModelClass.getImage().intValue());
-        myViewHolder.title.setText(favouriteModelClass.getTitle());
-        myViewHolder.price.setText(favouriteModelClass.getPrice());
+        final HomeViewModelClass homeViewModelClass = this.OfferList.get(i);
+        Log.d("URL", homeViewModelClass.getImage());
+        Glide.with(this.context).load(homeViewModelClass.getImage()).into(myViewHolder.image);
+        myViewHolder.title.setText(homeViewModelClass.getTitle());
+        if (homeViewModelClass.getPrice() == Math.floor(homeViewModelClass.getPrice())){
+            myViewHolder.price.setText(""+ homeViewModelClass.getPrice().intValue() + " $");
+        }else {
+            myViewHolder.price.setText(""+ homeViewModelClass.getPrice() + " $");
+        }
         myViewHolder.like.setOnClickListener(new View.OnClickListener() { // from class: com.ecommerce.template.adapter.FavouriteRecycleAdapter.1
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                if (favouriteModelClass.isSelected()) {
-                    favouriteModelClass.setSelected(false);
+                if (homeViewModelClass.isSelected()) {
+                    homeViewModelClass.setSelected(false);
                     myViewHolder.like.setImageResource(R.drawable.ic_dark_like);
                     return;
                 }
-                favouriteModelClass.setSelected(true);
+                homeViewModelClass.setSelected(true);
                 myViewHolder.like.setImageResource(R.drawable.ic_heart_light);
             }
         });
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                FavouriteRecycleAdapter.this.context.startActivity(new Intent(FavouriteRecycleAdapter.this.context, ProductDetailActivity.class));
+                HomeRecycleAdapter.this.context.startActivity(new Intent(HomeRecycleAdapter.this.context, ProductDetailActivity.class));
             }
         });
     }

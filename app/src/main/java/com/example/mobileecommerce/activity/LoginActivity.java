@@ -2,7 +2,9 @@ package com.example.mobileecommerce.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -74,6 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     ResponseDTO responseDTO = response.body();
                     Toast.makeText(LoginActivity.this, responseDTO.getMessage(), Toast.LENGTH_SHORT).show();
+                    saveJWT(responseDTO.getMessage());
+                    gotoHome();
                 } else{
                     Toast.makeText(LoginActivity.this, "Wrong When You Login!!!", Toast.LENGTH_SHORT).show();
                 }
@@ -84,5 +88,17 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void gotoHome() {
+        Intent intent = new Intent(this, HomePageActivity.class);
+        startActivity(intent);
+    }
+
+    private void saveJWT(String token) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Token", Context.MODE_PRIVATE);
+        SharedPreferences.Editor JWT = sharedPreferences.edit();
+        JWT.putString("jwt", token);
+        JWT.apply();
     }
 }

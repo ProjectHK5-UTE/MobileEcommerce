@@ -8,16 +8,21 @@
     </LinearLayout>
     <ImageView android:background="@drawable/offer2" android:layout_width="match_parent" android:layout_height="180dp"/>
     <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
-        <TextView android:textColor="@color/txt_color" android:layout_width="0dp" android:layout_height="wrap_content" android:text="My Favorite" android:layout_weight="1" android:fontFamily="@font/roboto_bold"/>
+        <TextView android:textColor="@color/txt_color" android:layout_width="0dp" android:layout_height="wrap_content" android:text="All Brand" android:layout_weight="1" android:fontFamily="@font/roboto_bold"/>
+<!--        <TextView android:textSize="13sp" android:textColor="@color/red" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View More" android:fontFamily="@font/roboto_regular"/>-->
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/brand_recyclerview" android:paddingLeft="10dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
+        <TextView android:textColor="@color/txt_color" android:layout_width="0dp" android:layout_height="wrap_content" android:text="New Smart Phone" android:layout_weight="1" android:fontFamily="@font/roboto_bold"/>
         <TextView android:textSize="13sp" android:textColor="@color/red" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View More" android:fontFamily="@font/roboto_regular"/>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView android:id="@+id/favourit_recyclerview" android:paddingLeft="10dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/lasted_product_recyclerview" android:paddingLeft="10dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
     <ImageView android:background="@drawable/mobile" android:layout_width="match_parent" android:layout_height="150dp" android:layout_margin="10dp"/>
     <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
-        <TextView android:textColor="@color/txt_color" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Best Smartphones" android:layout_weight="1" android:fontFamily="@font/roboto_bold"/>
+        <TextView android:textColor="@color/txt_color" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Best Sales Smartphones" android:layout_weight="1" android:fontFamily="@font/roboto_bold"/>
         <TextView android:textSize="13sp" android:textColor="@color/red" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View More" android:fontFamily="@font/roboto_regular"/>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView android:id="@+id/smartphone_recyclerview" android:paddingLeft="10dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/pupular_product_recyclerview" android:paddingLeft="10dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content"/>
     <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:layout_marginBottom="12dp">
         <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
             <ImageView android:background="@drawable/ac" android:layout_width="0dp" android:layout_height="120dp" android:layout_weight="1"/>
