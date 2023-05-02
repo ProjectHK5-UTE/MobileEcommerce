@@ -9,11 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.ProductDetailActivity;
-import com.example.mobileecommerce.model.ProductGridModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,24 @@ import java.util.List;
 /* loaded from: classes.dex */
 public class RecycleAdapteProductGrid extends RecyclerView.Adapter<RecycleAdapteProductGrid.MyViewHolder> {
     Context context;
-    private List<ProductGridModel> moviesList;
+    //private List<ProductGridModel> moviesList;
     int myPos = 0;
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
 
     /* loaded from: classes.dex */
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -42,36 +59,5 @@ public class RecycleAdapteProductGrid extends RecyclerView.Adapter<RecycleAdapte
         }
     }
 
-    public RecycleAdapteProductGrid(Context context, ArrayList<ProductGridModel> list) {
-        this.moviesList = list;
-        this.context = context;
-    }
 
-    @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_product_grid_list, viewGroup, false));
-    }
-
-    @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-        myViewHolder.image.setImageResource(this.moviesList.get(i).getImage().intValue());
-        myViewHolder.offer.setText("Rs 60,000");
-        myViewHolder.offer.setPaintFlags(myViewHolder.offer.getPaintFlags() | 16);
-        if ((i == 2) | (i == 5)) {
-            myViewHolder.text.setVisibility(View.VISIBLE);
-        } else {
-            myViewHolder.text.setVisibility(View.GONE);
-        }
-        myViewHolder.rl_click_product_detail.setOnClickListener(new View.OnClickListener() {
-            @Override // android.view.View.OnClickListener
-            public void onClick(View view) {
-                RecycleAdapteProductGrid.this.context.startActivity(new Intent(RecycleAdapteProductGrid.this.context, ProductDetailActivity.class));
-            }
-        });
-    }
-
-    @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public int getItemCount() {
-        return this.moviesList.size();
-    }
 }
