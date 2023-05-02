@@ -11,8 +11,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static Retrofit retrofit;
-    private static final String BASE_URL = "https://6f1f-2402-800-6216-efc7-5160-b57e-c6e7-24ac.ngrok-free.app";
+    private static Retrofit retrofit = null;;
+    static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
+    private static final String BASE_URL = "https://f6ca-2402-800-6216-efc7-2198-f422-123d-ca47.ngrok-free.app";
 
 
     public static Retrofit getRetrofit() {
