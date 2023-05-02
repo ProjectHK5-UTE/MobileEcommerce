@@ -42,7 +42,6 @@ public class BrandsListActivity extends AppCompatActivity {
         title.setText("Brands");
         GetBrands();
     }
-
     private void GetBrands(){
         brandAPI= RetrofitClient.getRetrofit().create(BrandAPI.class);
         brandAPI.getBrands().enqueue(new Callback<List<BrandsModel>>() {
@@ -58,14 +57,12 @@ public class BrandsListActivity extends AppCompatActivity {
                     int statusCode = response.code();
                 }
             }
-
             @Override
             public void onFailure(Call<List<BrandsModel>> call, Throwable t) {
 
             }
         });
     }
-
         void anhXa(){
             recyclerview = findViewById(R.id.recyclerview);
             title = findViewById(R.id.title);
