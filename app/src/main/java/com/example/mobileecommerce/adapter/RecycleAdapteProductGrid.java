@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.ProductDetailActivity;
-import com.example.mobileecommerce.model.ProductGridModellClass;
+import com.example.mobileecommerce.model.ProductGridModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 /* loaded from: classes.dex */
 public class RecycleAdapteProductGrid extends RecyclerView.Adapter<RecycleAdapteProductGrid.MyViewHolder> {
     Context context;
-    private List<ProductGridModellClass> moviesList;
+    private List<ProductGridModel> moviesList;
     int myPos = 0;
 
     /* loaded from: classes.dex */
@@ -42,7 +42,7 @@ public class RecycleAdapteProductGrid extends RecyclerView.Adapter<RecycleAdapte
         }
     }
 
-    public RecycleAdapteProductGrid(Context context, ArrayList<ProductGridModellClass> list) {
+    public RecycleAdapteProductGrid(Context context, ArrayList<ProductGridModel> list) {
         this.moviesList = list;
         this.context = context;
     }

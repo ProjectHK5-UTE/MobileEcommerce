@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
-import com.example.mobileecommerce.activity.CategoriesListActivity;
+import com.example.mobileecommerce.activity.BrandsListActivity;
 import com.example.mobileecommerce.activity.HomePageActivity;
 import com.example.mobileecommerce.activity.MyCartActivity;
 import com.example.mobileecommerce.activity.MyOrderActivity;
@@ -74,7 +72,7 @@ public class NavigationRecycleAdapter extends RecyclerView.Adapter<NavigationRec
                 } else if (2 == i2) {
                     NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, MyOrderActivity.class));
                 } else if (3 == i2) {
-                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, CategoriesListActivity.class));
+                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, BrandsListActivity.class));
                 } else if (4 == i2) {
                     NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, ProductListActivity.class));
                 } else if (5 == i2) {

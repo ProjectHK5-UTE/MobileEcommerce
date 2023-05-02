@@ -34,7 +34,7 @@
             android:name=".activity.ProductGridActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.CategoriesListActivity"
+            android:name=".activity.BrandsListActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ProductDetailActivity"
