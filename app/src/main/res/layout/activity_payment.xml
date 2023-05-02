@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical" android:background="#f6f6f6" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <include layout="@layout/toolbar_payment"/>
+        <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="15dp">
+            <TextView android:textSize="14sp" android:textColor="#acacac" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total :" android:fontFamily="@font/roboto_regular"/>
+            <TextView android:textSize="14sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" Rs 30,500" android:fontFamily="@font/roboto_medium"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:background="@drawable/white_light_rect" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
+            <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="12dp">
+                <ImageView android:layout_gravity="center" android:layout_width="30dp" android:layout_height="30dp" android:layout_marginLeft="10dp" android:src="@drawable/ic_visa_logo"/>
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20dp">
+                    <TextView android:textSize="16sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Visa" android:fontFamily="@font/roboto_bold"/>
+                    <TextView android:textSize="16sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="**** **** **** 1234" android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View android:background="#f2f2f2" android:layout_width="match_parent" android:layout_height="1dp"/>
+            <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="12dp">
+                <ImageView android:layout_gravity="center" android:layout_width="30dp" android:layout_height="30dp" android:layout_marginLeft="10dp" android:src="@drawable/ic_paypal"/>
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20dp">
+                    <TextView android:textSize="16sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paypal" android:fontFamily="@font/roboto_bold"/>
+                    <TextView android:textSize="14sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="rahulmimara@gmail.com" android:fontFamily="@font/roboto_medium"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:background="@drawable/white_light_rect" android:padding="12sp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp">
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:background="@drawable/circle_light_plus" android:layout_width="30dp" android:layout_height="30dp" android:layout_marginLeft="10dp">
+                <ImageView android:layout_gravity="center" android:layout_width="15dp" android:layout_height="15dp" android:src="@drawable/ic_add"/>
+            </LinearLayout>
+            <TextView android:textSize="15sp" android:textColor="@color/red" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20dp" android:text="Add New Payment Method" android:fontFamily="@font/roboto_medium"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:background="@drawable/white_light_rect" android:padding="12sp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp">
+            <LinearLayout android:orientation="vertical" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1">
+                <TextView android:textColor="#acacac" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Address" android:fontFamily="@font/roboto_regular"/>
+                <TextView android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:text="A-15,San Plaza ,Black Buliding,\10 Rajkot."/>
+            </LinearLayout>
+            <ImageView android:layout_width="15dp" android:layout_height="15dp" android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:src="@drawable/ic_edit"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView android:textSize="15sp" android:textColor="@color/white" android:gravity="center" android:id="@+id/text_paynow" android:background="@color/red" android:padding="15dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Pay Now" android:layout_alignParentBottom="true" android:fontFamily="@font/roboto_medium"/>
+</RelativeLayout>

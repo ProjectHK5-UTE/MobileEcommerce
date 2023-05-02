@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <LinearLayout android:orientation="vertical" android:background="@drawable/white_light_rect" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.5dp" android:layout_marginTop="2dp" android:layout_marginRight="8.5dp" android:layout_marginBottom="8dp">
-        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="98dp">
-            <de.hdodenhof.circleimageview.CircleImageView android:layout_gravity="center" android:id="@+id/image" android:layout_width="90dp" android:layout_height="90dp" android:layout_marginLeft="15dp" android:layout_marginRight="15dp" android:src="@drawable/ac"/>
-            <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1">
-                <TextView android:textSize="15.3sp" android:textColor="@color/txt_color" android:id="@+id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vigo Atom + Personal Air conditioner, white color" android:fontFamily="@font/roboto_medium"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8.5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="8.5dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/white_light_rect"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ac" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Vigo Atom + Personal Air conditioner, white color"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15.3sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

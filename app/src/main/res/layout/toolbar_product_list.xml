@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/red" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <ImageView android:id="@+id/iv_back" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_back_white"/>
-    <TextView android:textSize="16sp" android:textColor="@color/white" android:layout_gravity="center" android:id="@+id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Product List" android:fontFamily="@font/roboto_medium"/>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/red">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_back_white" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Product List"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 </androidx.appcompat.widget.Toolbar>

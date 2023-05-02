@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
-import com.example.mobileecommerce.activity.CategoriesListActivity;
+import com.example.mobileecommerce.activity.BrandsListActivity;
 import com.example.mobileecommerce.activity.HomePageActivity;
+import com.example.mobileecommerce.activity.MyCartActivity;
+import com.example.mobileecommerce.activity.MyOrderActivity;
 import com.example.mobileecommerce.activity.ProductListActivity;
+import com.example.mobileecommerce.activity.ProfileActivity;
 import com.example.mobileecommerce.model.EShoppingModelClass;
 import com.squareup.picasso.Picasso;
 
@@ -66,24 +67,21 @@ public class NavigationRecycleAdapter extends RecyclerView.Adapter<NavigationRec
                 int i2 = i;
                 if (i2 == 0) {
                     NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, HomePageActivity.class));
-//                } else if (1 == i2) {
-//                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, MyCartActivity.class));
-//                } else if (2 == i2) {
-//                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, MyOrderActivity.class));
+                } else if (1 == i2) {
+                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, MyCartActivity.class));
+                } else if (2 == i2) {
+                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, MyOrderActivity.class));
                 } else if (3 == i2) {
-                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, CategoriesListActivity.class));
+                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, BrandsListActivity.class));
                 } else if (4 == i2) {
                     NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, ProductListActivity.class));
-//                } else if (5 == i2) {
-//                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, LoginActivity.class));
-//                } else if (6 == i2) {
-//                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, SignupActivity.class));
+                } else if (5 == i2) {
+                    NavigationRecycleAdapter.this.context.startActivity(new Intent(NavigationRecycleAdapter.this.context, ProfileActivity.class));
                 }
                 NavigationRecycleAdapter.this.notifyDataSetChanged();
             }
         });
     }
-
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public int getItemCount() {
         return this.OfferList.size();

@@ -1,6 +1,5 @@
 package com.example.mobileecommerce.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -35,11 +34,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private NavigationRecycleAdapter mAdapter;
     NavigationView navigationView;
     private RecyclerView recyclerView2;
-    private String[] title2 = {"Home", "Cart", "My Orders", "Categories", "Offers"};
-    private int[] image2 = {R.drawable.home_, R.drawable.cart_, R.drawable.order, R.drawable.category, R.drawable.offer};
+    private String[] title2 = {"Home", "Cart", "My Orders", "Brands", "Offers"};
+    private int[] image2 = {R.drawable.home_, R.drawable.cart_, R.drawable.order, R.drawable.category, R.drawable.offer, R.drawable.profile_};
     private Toolbar toolbar;
 
-    /* JADX INFO: Access modifiers changed from: protected */
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);

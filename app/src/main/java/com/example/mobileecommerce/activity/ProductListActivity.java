@@ -40,7 +40,7 @@ public class ProductListActivity extends AppCompatActivity {
         this.recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         ImageView imageView = (ImageView) findViewById(R.id.iv_back);
         this.iv_back = imageView;
-        imageView.setOnClickListener(new View.OnClickListener() { // from class: com.ecommerce.template.activity.ProductListActivity.1
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
                 ProductListActivity.this.finish();
