@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.RecycleAdapteProductGrid;
-import com.example.mobileecommerce.model.ProductGridModel;
+import com.example.mobileecommerce.model.ProductGridModellClass;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class ProductGridActivity extends AppCompatActivity {
     private Integer[] image1;
     ImageView iv_back;
     private RecycleAdapteProductGrid mAdapter2;
-    private ArrayList<ProductGridModel> productGridModellClasses;
+    private ArrayList<ProductGridModellClass> productGridModellClasses;
     private RecyclerView recyclerview;
     TextView title;
 
@@ -42,15 +42,7 @@ public class ProductGridActivity extends AppCompatActivity {
                 ProductGridActivity.this.finish();
             }
         });
-        this.productGridModellClasses = new ArrayList<>();
-        for (int i = 0; i < this.image1.length; i++) {
-            this.productGridModellClasses.add(new ProductGridModel(this.image1[i]));
-        }
 
-        this.mAdapter2 = new RecycleAdapteProductGrid(this, this.productGridModellClasses);
-        this.recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
-        this.recyclerview.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerview.setAdapter(this.mAdapter2);
     }
     void anhXa(){
         recyclerview = findViewById(R.id.recyclerview);

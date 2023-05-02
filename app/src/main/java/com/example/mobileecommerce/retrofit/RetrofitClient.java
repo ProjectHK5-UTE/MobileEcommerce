@@ -1,20 +1,29 @@
 package com.example.mobileecommerce.retrofit;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static Retrofit retrofit;
-    private static final String BASE_URL = "https://532a-2001-ee0-4fc5-9330-5c89-2117-f2b6-d3c2.ap.ngrok.io";
+    private static Retrofit retrofit = null;;
+    static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
+    private static final String BASE_URL = "http://192.168.56.1:8080/";
 
     public static Retrofit getRetrofit() {
         if(retrofit == null) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .client(client)
                     .build();
         }
         return retrofit;

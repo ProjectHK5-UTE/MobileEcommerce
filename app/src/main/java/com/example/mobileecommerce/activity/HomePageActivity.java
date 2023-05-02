@@ -34,7 +34,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private NavigationRecycleAdapter mAdapter;
     NavigationView navigationView;
     private RecyclerView recyclerView2;
-    private String[] title2 = {"Home", "Cart", "My Orders", "Categories", "Offers", "My Account"};
+    private String[] title2 = {"Home", "Cart", "My Orders", "Brands", "Offers"};
     private int[] image2 = {R.drawable.home_, R.drawable.cart_, R.drawable.order, R.drawable.category, R.drawable.offer, R.drawable.profile_};
     private Toolbar toolbar;
 
