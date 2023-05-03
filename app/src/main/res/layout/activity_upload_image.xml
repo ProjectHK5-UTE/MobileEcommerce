@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UploadImageActivity">
+    <include layout="@layout/toolbar_product_list"/>
+
+    <ImageView
+        android:id="@+id/imgPreview"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="102dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/imagepreview" />
+
+    <ProgressBar
+        android:id="@+id/uploadProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgPreview"
+        android:layout_marginTop="36dp" />
+
+    <Button
+        android:id="@+id/chooseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_below="@+id/uploadProgress"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="114dp"
+        android:drawableLeft="@drawable/icon_camera"
+        android:text="Choose Image"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="210dp"
+        android:layout_marginBottom="148dp"
+        android:backgroundTint="@color/colorAccent"
+        android:drawableLeft="@drawable/icon_upload"
+        android:text="Upload"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/viewGallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="78dp"
+        android:layout_marginBottom="161dp"
+        android:text="View Gallery"
+        android:textSize="16sp" />
+
+</RelativeLayout>
