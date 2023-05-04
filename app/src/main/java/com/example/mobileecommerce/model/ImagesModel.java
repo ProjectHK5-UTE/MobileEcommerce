@@ -1,6 +1,8 @@
 package com.example.mobileecommerce.model;
 
-public class ImagesModel {
+import java.io.Serializable;
+
+public class ImagesModel implements Serializable {
     private int imageId;
     private String path;
 
