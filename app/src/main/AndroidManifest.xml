@@ -25,13 +25,14 @@
             android:name=".activity.ProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.UpdatePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UploadImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.BrandsListActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".activity.ProductListActivity"
@@ -41,7 +42,13 @@
             android:exported="false" />
         <activity
             android:name=".activity.HomePageActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>
+        </activity>
         <activity
             android:name=".activity.ProductDetailActivity"
             android:exported="false"></activity>

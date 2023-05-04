@@ -27,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.iv_back);
         this.iv_back = imageView;
         Button btnLoadImage = (Button) findViewById(R.id.btnLoadImage);
+        Button btnChangePassword = (Button) findViewById(R.id.btnChangePwd);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
@@ -34,6 +35,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         this.title.setText("My Profile");
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfileActivity.this.startActivity(new Intent(ProfileActivity.this, UpdatePasswordActivity.class));
+            }
+        });
         btnLoadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
