@@ -25,7 +25,7 @@
             android:name=".activity.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.HomePageActivity"
+            android:name=".activity.BrandsListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
             android:name=".activity.ProductGridActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.BrandsListActivity"
+            android:name=".activity.HomePageActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ProductDetailActivity"
