@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "https://f6ca-2402-800-6216-efc7-2198-f422-123d-ca47.ngrok-free.app";
+    private static final String BASE_URL = "https://7ca4-2402-800-6216-efc7-80e0-3068-2b71-202d.ngrok-free.app";
 
 
     public static Retrofit getRetrofit() {
