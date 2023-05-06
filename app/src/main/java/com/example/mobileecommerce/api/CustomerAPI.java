@@ -1,6 +1,7 @@
 package com.example.mobileecommerce.api;
 
 import com.example.mobileecommerce.model.CustomerModel;
+import com.example.mobileecommerce.model.UserModel;
 import com.example.mobileecommerce.model.dto.ResponseObject;
 
 import okhttp3.MultipartBody;
@@ -13,6 +14,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface CustomerAPI {
     String prefixURL = "api/customer";
@@ -30,7 +32,7 @@ public interface CustomerAPI {
     @POST(prefixURL + "/change-avatar")
     Call<ResponseObject> updateAvatar(@Part("name") RequestBody username, @Part MultipartBody.Part avatar);
 
-//    @GET("api/user/change-password")
-//    Call<UserModel> updatePassword(@Query("username") String username, @Query("oldPassword") String oldPassword,
-//                                   @Query("newPassword") String newPassword);
+    @GET("api/user/change-password")
+    Call<UserModel> updatePassword(@Query("username") String username, @Query("oldPassword") String oldPassword,
+                                   @Query("newPassword") String newPassword);
 }
