@@ -28,7 +28,7 @@ public interface CustomerAPI {
 
     @Multipart
     @POST(prefixURL + "/change-avatar")
-    Call<String> updateAvatar(@Part("name") RequestBody username, @Part MultipartBody.Part avatar);
+    Call<ResponseObject> updateAvatar(@Part("name") RequestBody username, @Part MultipartBody.Part avatar);
 
 //    @GET("api/user/change-password")
 //    Call<UserModel> updatePassword(@Query("username") String username, @Query("oldPassword") String oldPassword,
