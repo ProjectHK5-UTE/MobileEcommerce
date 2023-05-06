@@ -3,9 +3,13 @@ package com.example.mobileecommerce.retrofit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -13,18 +17,38 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "http://192.168.56.1:8080/";
+    private static final String BASE_URL = "http://192.168.192.1:8080/";
+
+
+    private static OkHttpClient client = new OkHttpClient.Builder()
+            .addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Request request = chain.request();
+
+                    // Add JWT token to Authorization header
+                    String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..NqB_73-DZl_cDXGymF3hcA._rUauIWKA_n2y98QNwrtymbaXkRkRh9_zJNmTjB1sl2yz0yhT8yVTBGSSi6tHcY9ymWxLxnv2ao4KQvYWBGWPw.Wmxda8NNX2tJTwKFWLLkLQ";
+                    if (token != null && !token.isEmpty()) {
+                        request = request.newBuilder()
+                                .addHeader("Authorization", "Bearer " + token)
+                                .build();
+                    }
+
+                    return chain.proceed(request);
+                }
+            })
+            .build();
 
 
     public static Retrofit getRetrofit() {
         if(retrofit == null) {
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+//            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(client)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit;

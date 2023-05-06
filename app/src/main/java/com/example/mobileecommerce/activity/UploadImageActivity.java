@@ -26,6 +26,8 @@ public class UploadImageActivity extends AppCompatActivity {
     ImageView imgPreview;
     Uri imgUrl;
 
+    Uri mUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,15 @@ public class UploadImageActivity extends AppCompatActivity {
                 showFileChoose();
             }
         });
+
+        btnUploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mUri != null) {
+                    UpdateAvatar();
+                }
+            }
+        });
     }
     private void showFileChoose(){
         Intent intent = new Intent();
@@ -58,11 +69,16 @@ public class UploadImageActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,CHOOSE_IMAGE);
     }
+
+    private void UpdateAvatar() {
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode==CHOOSE_IMAGE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imgUrl = data.getData();
+            mUri = imgUrl;
             Picasso.get().load(imgUrl).into(imgPreview);
         }
     }
