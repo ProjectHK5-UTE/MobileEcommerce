@@ -2,9 +2,10 @@ package com.example.mobileecommerce.model;
 
 import com.example.mobileecommerce.model.ImagesModel;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class OptionModel {
+public class OptionModel implements Serializable {
     private int optionId;
     private String ram;
     private String rom;

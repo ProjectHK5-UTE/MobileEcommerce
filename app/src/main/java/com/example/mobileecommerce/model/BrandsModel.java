@@ -1,7 +1,9 @@
 package com.example.mobileecommerce.model;
 
+import java.io.Serializable;
+
 /* loaded from: classes.dex */
-public class BrandsModel {
+public class BrandsModel implements Serializable {
 
     private int brandId;
     private String name;

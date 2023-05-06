@@ -34,9 +34,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private NavigationRecycleAdapter mAdapter;
     NavigationView navigationView;
     private RecyclerView recyclerView2;
-    private String[] title2 = {"Home", "Cart", "My Orders", "Brands", "Offers","My Account"};
+
+    private String[] title2 = {"Home", "Cart", "My Orders", "Brands", "Offers", "My Account"};
+
     private int[] image2 = {R.drawable.home_, R.drawable.cart_, R.drawable.order, R.drawable.category, R.drawable.offer, R.drawable.profile_};
-    private Toolbar toolbar;
 
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     public void onCreate(Bundle bundle) {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/white_home_rect">
+    <FrameLayout
+        android:layout_width="125dp"
+        android:layout_height="75dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="103dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_launcher" />
+    </FrameLayout>
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Headphone"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="12sp" />
+    <View android:layout_gravity="end" android:background="@color/view_line" android:layout_width="match_parent" android:layout_height="1dp" android:layout_alignParentBottom="true"/>
+</LinearLayout>
+

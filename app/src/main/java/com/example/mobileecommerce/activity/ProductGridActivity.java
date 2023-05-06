@@ -1,6 +1,7 @@
 package com.example.mobileecommerce.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ public class ProductGridActivity extends AppCompatActivity {
     ImageView iv_back;
     TextView title;
     ProductAPI productAPI;
+    int id;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -44,13 +46,15 @@ public class ProductGridActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_grid);
         anhXa();
         this.title.setText("Product Grid");
+        Intent intent = getIntent();
+        id = intent.getIntExtra("idBrand", 0);
         ProductGridActivity();
     }
 
     @SuppressLint("NotConstructor")
     public void ProductGridActivity() {
         productAPI= RetrofitClient.getRetrofit().create(ProductAPI.class);
-        productAPI.getProductByBrand().enqueue(new Callback<List<ProductGridModel>>() {
+        productAPI.getProductByBrand(id).enqueue(new Callback<List<ProductGridModel>>() {
             @Override
             public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
                 if(response.isSuccessful()){
