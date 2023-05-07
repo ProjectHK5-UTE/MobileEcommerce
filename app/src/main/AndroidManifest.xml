@@ -41,7 +41,7 @@
             android:name=".activity.ProductGridActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.HomePageActivity"
+            android:name=".activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,7 +53,7 @@
             android:name=".activity.ProductDetailActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".activity.SplashScreenActivity"
+            android:name=".activity.HomePageActivity"
             android:exported="false"></activity>
         <activity
             android:name=".activity.OTPVerifyActivity"
