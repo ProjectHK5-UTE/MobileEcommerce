@@ -91,6 +91,8 @@ public class RecycleAdapterProductGrid extends RecyclerView.Adapter<RecycleAdapt
             rl_click_product_detail = (RelativeLayout) view.findViewById(R.id.rl_click_product_detail);
         }
     }
-
-
+    public void setProductList(List<ProductGridModel> productList) {
+        this.productList = productList;
+        notifyDataSetChanged();
+    }
 }
