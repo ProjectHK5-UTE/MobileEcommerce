@@ -52,10 +52,12 @@ public class RecycleAdapteBrandList extends RecyclerView.Adapter<RecycleAdapteBr
         //myViewHolder.title.setText(categoriesListModellClass.getTitle());
         Glide.with(this.context).load(brandsModelClass.getLogo()).into(myViewHolder.image);
         myViewHolder.title.setText(brandsModelClass.getName());
-        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.ecommerce.template.adapter.RecycleAdapteCategoriesList.1
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                RecycleAdapteBrandList.this.context.startActivity(new Intent(RecycleAdapteBrandList.this.context, ProductGridActivity.class));
+                Intent intent = new Intent(myViewHolder.itemView.getContext(), ProductGridActivity.class);
+                intent.putExtra("idBrand", brandsModelClass.getBrandId());
+                myViewHolder.itemView.getContext().startActivity(intent);
             }
         });
     }
