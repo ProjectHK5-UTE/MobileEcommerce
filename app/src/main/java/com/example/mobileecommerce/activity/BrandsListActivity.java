@@ -25,6 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BrandsListActivity extends AppCompatActivity {
+
+
     private List<BrandsModel> brandsModels;
     private RecycleAdapterBrandsList mAdapter2;
     private RecyclerView recyclerview;

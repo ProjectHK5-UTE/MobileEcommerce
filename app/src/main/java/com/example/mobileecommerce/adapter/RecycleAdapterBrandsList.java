@@ -68,7 +68,6 @@ public class RecycleAdapterBrandsList extends RecyclerView.Adapter<RecycleAdapte
             super(itemView);
             images=itemView.findViewById(R.id.image);
             title=itemView.findViewById(R.id.title);
-
         }
     }
 }

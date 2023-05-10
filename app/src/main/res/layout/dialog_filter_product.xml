@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_corner_16"
+    android:orientation="vertical"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@drawable/bg_yellow_corner_16_top_left_top_right"
+        android:text="Filter Product" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:text="Filter Price" />
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/slider_price"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="3000"
+            app:values="@array/rangeSlider"
+            tools:ignore="SpeakableTextPresentCheck"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:text="Filter Battery" />
+
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/slider_battery"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:valueFrom="2000"
+            android:valueTo="6000"
+            app:values="@array/rangeBattery"
+            tools:ignore="SpeakableTextPresentCheck"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:text="Filter Screen" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/slider_screen"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="8"
+            app:values="@array/rangeScreen"
+            tools:ignore="SpeakableTextPresentCheck"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <Button
+                android:id="@+id/btnReset"
+                android:layout_width="155dp"
+                android:layout_height="60dp"
+                android:text="Reset Filter" />
+
+            <Button
+                android:id="@+id/btnFilter"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:text="Filter Product"
+                android:layout_marginLeft="32dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnThoatFilter"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Exit" />
+    </LinearLayout>
+</LinearLayout>
