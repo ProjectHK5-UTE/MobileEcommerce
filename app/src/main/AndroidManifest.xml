@@ -74,6 +74,18 @@
         <activity
             android:name=".activity.SucessfullActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.AdminPanelHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminPanelBrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddBrandDialogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditBrandDialogActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
