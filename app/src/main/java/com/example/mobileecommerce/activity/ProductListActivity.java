@@ -1,35 +1,56 @@
 package com.example.mobileecommerce.activity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Range;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.app.Dialog;
+import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
+import com.example.mobileecommerce.adapter.ProductRecycleAdapter;
 import com.example.mobileecommerce.adapter.RecycleAdapteProductList;
+import com.example.mobileecommerce.api.BrandAPI;
+import com.example.mobileecommerce.api.CustomerAPI;
+import com.example.mobileecommerce.api.ProductAPI;
+import com.example.mobileecommerce.model.ProductGridModel;
 import com.example.mobileecommerce.model.ProductListModelClass;
+import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.google.android.material.slider.RangeSlider;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /* loaded from: classes.dex */
 public class ProductListActivity extends AppCompatActivity {
-    ImageView iv_back;
-    private Integer[] like;
-    private RecycleAdapteProductList mAdapter2;
-    private ArrayList<ProductListModelClass> productListModelClasses;
-    private RecyclerView recyclerview;
-    private Integer[] image1 = {Integer.valueOf((int) R.drawable.s9plus), Integer.valueOf((int) R.drawable.iphnx), Integer.valueOf((int) R.drawable.googlepixel), Integer.valueOf((int) R.drawable.vivo11)};
-    private String[] title1 = {"Samsung S9 Plus", "I Phone X", "Google Pixel 3", "Vivo V-11 Pro"};
 
-    public ProductListActivity() {
-        Integer valueOf = Integer.valueOf((int) R.drawable.ic_heart_light);
-        Integer valueOf2 = Integer.valueOf((int) R.drawable.ic_dark_like);
-        this.like = new Integer[]{valueOf, valueOf2, valueOf2, valueOf};
-    }
+    ImageView iv_back;
+    private RecyclerView recyclerView;
+
+    private ProductRecycleAdapter productRecycleAdapter;
+
+    private List<ProductGridModel> listProduct;
+
+    ProductAPI productAPI = RetrofitClient.getRetrofit().create(ProductAPI.class);
+
+    private ProgressDialog progressDialog;
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
@@ -37,22 +58,108 @@ public class ProductListActivity extends AppCompatActivity {
         super.onCreate(bundle);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_product_list);
-        this.recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         ImageView imageView = (ImageView) findViewById(R.id.iv_back);
         this.iv_back = imageView;
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override // android.view.View.OnClickListener
-            public void onClick(View view) {
-                ProductListActivity.this.finish();
+        recyclerView = findViewById(R.id.recyclerview_list_product);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please Wait...");
+
+        productAPI.getAllProduct().enqueue(new Callback<List<ProductGridModel>>() {
+            @Override
+            public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
+                listProduct = response.body();
+                productRecycleAdapter = new ProductRecycleAdapter(listProduct, ProductListActivity.this);
+                recyclerView.setAdapter(productRecycleAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductGridModel>> call, Throwable t) {
+
             }
         });
-        this.productListModelClasses = new ArrayList<>();
-        for (int i = 0; i < this.image1.length; i++) {
-            this.productListModelClasses.add(new ProductListModelClass(this.image1[i], this.title1[i], this.like[i]));
+
+        Button btnShowFilter = findViewById(R.id.btn_show_filter_product);
+        btnShowFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenFilterDialog();
+            }
+        });
+    }
+
+    private void OpenFilterDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_filter_product);
+
+        Window window = dialog.getWindow();
+        if(window == null) {
+            return;
         }
-        this.mAdapter2 = new RecycleAdapteProductList(this, this.productListModelClasses);
-        this.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        this.recyclerview.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerview.setAdapter(this.mAdapter2);
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.CENTER;
+        window.setAttributes(windowAttributes);
+
+
+        Button btnExitFilter = dialog.findViewById(R.id.btnThoatFilter);
+        Button btnReset = dialog.findViewById(R.id.btnReset);
+        Button btnFilter = dialog.findViewById(R.id.btnFilter);
+        RangeSlider sliderPrice = dialog.findViewById(R.id.slider_price);
+        RangeSlider sliderBattery = dialog.findViewById(R.id.slider_battery);
+        RangeSlider sliderScreen = dialog.findViewById(R.id.slider_screen);
+
+//        double min_price, max_price, min_screen, max_screen;
+//        int min_battery, max_battery;
+
+        btnExitFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sliderPrice.setValues(0f, 3000f);
+                sliderBattery.setValues(2000f, 6000f);
+                sliderScreen.setValues(0f, 8f);
+            }
+        });
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double startPrice = sliderPrice.getValues().get(0);
+                double endPrice = sliderPrice.getValues().get(1);
+                int startBattery = sliderBattery.getValues().get(0).intValue();
+                int endBattery = sliderBattery.getValues().get(1).intValue();
+                double startScreen = sliderScreen.getValues().get(0);
+                double endScreen = sliderScreen.getValues().get(1);
+                progressDialog.show();
+                productAPI.filterProduct(startPrice, endPrice, startBattery, endBattery, startScreen, endScreen).enqueue(new Callback<List<ProductGridModel>>() {
+                    @Override
+                    public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
+                        listProduct = response.body();
+                        productRecycleAdapter = new ProductRecycleAdapter(listProduct, ProductListActivity.this);
+                        recyclerView.setAdapter(productRecycleAdapter);
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ProductGridModel>> call, Throwable t) {
+                        progressDialog.dismiss();
+                    }
+                });
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

@@ -20,7 +20,7 @@ public interface CustomerAPI {
     String prefixURL = "api/customer";
 
     @GET(prefixURL + "/{name}")
-    Call<CustomerModel> getCustomerInfor(@Path("name") String name);
+    Call<ResponseObject> getCustomerInfor(@Path("name") String name);
 
     @GET(prefixURL + "/image/{id}")
     Call<ResponseBody> getImage(@Path("id") String name);

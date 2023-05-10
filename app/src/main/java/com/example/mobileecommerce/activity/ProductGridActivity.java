@@ -3,7 +3,10 @@ package com.example.mobileecommerce.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +41,7 @@ public class ProductGridActivity extends AppCompatActivity {
     TextView title;
     ProductAPI productAPI;
     int id;
-
+    EditText inputSearch;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -49,8 +52,41 @@ public class ProductGridActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra("idBrand", 0);
         ProductGridActivity();
-    }
 
+        //Search products by name
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String searchQuery = s.toString();
+                // Gọi phương thức tìm kiếm sản phẩm với searchQuery
+                searchProduct(searchQuery);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+    private void searchProduct(String searchQuery) {
+        // Tìm kiếm sản phẩm theo tên
+        List<ProductGridModel> productList = getProductListByName(searchQuery);
+
+        // Cập nhật danh sách sản phẩm trong RecyclerView
+        mAdapter2.setProductList(productList);
+    }
+    private List<ProductGridModel> getProductListByName(String searchQuery) {
+        List<ProductGridModel> productList = new ArrayList<>();
+        for (ProductGridModel product : productGridModelList) {
+            if (product.getProductName().toLowerCase().contains(searchQuery.toLowerCase())) {
+                productList.add(product);
+            }
+        }
+        return productList;
+    }
     @SuppressLint("NotConstructor")
     public void ProductGridActivity() {
         productAPI= RetrofitClient.getRetrofit().create(ProductAPI.class);
@@ -69,7 +105,6 @@ public class ProductGridActivity extends AppCompatActivity {
                     Toast.makeText(ProductGridActivity.this, "dm", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<List<ProductGridModel>> call, Throwable t) {
                 Toast.makeText(ProductGridActivity.this, "cc", Toast.LENGTH_SHORT).show();
@@ -80,5 +115,6 @@ public class ProductGridActivity extends AppCompatActivity {
         recyclerview = findViewById(R.id.recyclerview);
         title = findViewById(R.id.title);
         iv_back = findViewById(R.id.iv_back);
+        inputSearch = findViewById(R.id.search_editext);
     }
 }

@@ -61,6 +61,8 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageView;
     Button btnChangePassword;
     Button btnUpdateProfile;
+
+    Button btnLogout;
     Context context;
 
     CustomerAPI customerAPI = RetrofitClient.getRetrofit().create(CustomerAPI.class);
@@ -117,6 +119,14 @@ public class ProfileActivity extends AppCompatActivity {
                 changeInfor();
             }
         });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, HomePageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void mapView() {
@@ -132,6 +142,7 @@ public class ProfileActivity extends AppCompatActivity {
         spi_district = findViewById(R.id.spi_district);
         spi_sub_district = findViewById(R.id.spi_subdistrict);
         imgAvatar = findViewById(R.id.profileImage);
+        btnLogout = findViewById(R.id.btn_logout_profile);
     }
 
     private void getProvince(Context context) {
@@ -271,11 +282,13 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void callAPI() {
-        customerAPI.getCustomerInfor("thangpham").enqueue(new Callback<CustomerModel>() {
+        customerAPI.getCustomerInfor("thangpham").enqueue(new Callback<ResponseObject>() {
             @Override
-            public void onResponse(Call<CustomerModel> call, Response<CustomerModel> response) {
+            public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if(response.isSuccessful()) {
-                    customer = response.body();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(response.body().getData());
+                    customer = gson.fromJson(json, CustomerModel.class);
                     tvUsername.setText(customer.getUserName());
                     edtFullname.setText(customer.getFullname());
                     edtPhone.setText(customer.getPhonenumber());
@@ -290,7 +303,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CustomerModel> call, Throwable t) {
+            public void onFailure(Call<ResponseObject> call, Throwable t) {
                 Toast.makeText(ProfileActivity.this, "Call API Error", Toast.LENGTH_SHORT).show();
             }
         });

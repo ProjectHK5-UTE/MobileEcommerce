@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ProductAPI {
     @GET("api/product/lasted-product")
@@ -22,4 +23,14 @@ public interface ProductAPI {
 
     @GET("api/product/{brandId}")
     Call<List<ProductGridModel>> getProductByBrand(@Path("brandId") Integer brandId);
+    @GET("api/product")
+    Call<List<ProductGridModel>> getAllProduct();
+
+    @GET("api/product/filter")
+    Call<List<ProductGridModel>> filterProduct(@Query("start-price") double startPrice,
+                                               @Query("end-price") double endPrice,
+                                               @Query("start-battery") int startBattery,
+                                               @Query("end-battery") int endBattery,
+                                               @Query("start-screen") double startScreen,
+                                               @Query("end-screen") double endScreen);
 }

@@ -25,6 +25,7 @@ public class RetrofitClient {
 
     static SharedPreferences pres;
 
+
     private static OkHttpClient client = new OkHttpClient.Builder()
             .addInterceptor(new Interceptor() {
                 @Override
@@ -33,6 +34,7 @@ public class RetrofitClient {
                     String token = getJWT();
                     Log.e("jwt",token);
                     //String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0.._gdsaQJWcbBBw7ZZ6i7mIg.HyFw_KIvqJY7HoIFkOtvBdhkHvjPwKvZOUuExx7k5kw0ynffZOKGvN3o3Opf0C3MBpu2TfFlhSNe6F05gdMrxA.dg4loilh91-jFxzbzkfhmw";
+
                     if (token != null && !token.isEmpty()) {
                         request = request.newBuilder()
                                 .addHeader("Authorization", "Bearer " + token)

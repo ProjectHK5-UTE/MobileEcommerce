@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ProfileActivity">
     <include layout="@layout/toolbar_product_list"/>
     <LinearLayout android:orientation="horizontal" android:background="@drawable/white_home_rect" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
         <ImageView android:layout_gravity="center" android:layout_width="18dp" android:layout_height="18dp" android:layout_marginLeft="8dp" android:src="@drawable/ic_search"/>
-        <EditText android:textSize="15sp" android:id="@+id/editext" android:background="@color/transperent" android:padding="10sp" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Searching..." android:textColor="@color/txt_color" android:inputType="text" android:fontFamily="@font/roboto_regular"/>
+        <EditText
+            android:textSize="15sp"
+            android:id="@+id/editext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transperent"
+            android:padding="10sp"
+            android:hint="Searching..."
+            android:textColor="@color/txt_color" android:inputType="text"
+            android:fontFamily="@font/roboto_regular"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_show_filter_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filter"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
     </LinearLayout>
     <androidx.core.widget.NestedScrollView android:scrollbars="none" android:layout_width="match_parent" android:layout_height="match_parent">
         <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerview" android:paddingTop="20dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="match_parent"/>
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerview_list_product" android:paddingTop="20dp" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="match_parent"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </LinearLayout>
