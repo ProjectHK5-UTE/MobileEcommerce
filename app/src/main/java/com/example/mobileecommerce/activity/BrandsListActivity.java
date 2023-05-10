@@ -66,7 +66,7 @@ public class BrandsListActivity extends AppCompatActivity {
         });
     }
         void anhXa(){
-            recyclerview = findViewById(R.id.recyclerview);
+            recyclerview = findViewById(R.id.recyclerview_list_product);
             title = findViewById(R.id.title);
             iv_back = findViewById(R.id.iv_back);
         }

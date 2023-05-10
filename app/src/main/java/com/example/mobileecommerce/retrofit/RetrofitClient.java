@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "http://192.168.0.102:8088/";
+    private static final String BASE_URL = "http://192.168.11.104:8088/";
 
     private static OkHttpClient client = new OkHttpClient.Builder()
             .addInterceptor(new Interceptor() {
@@ -26,7 +26,7 @@ public class RetrofitClient {
                     Request request = chain.request();
 
                     // Add JWT token to Authorization header
-                    String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..MrG-K_WdoEPB-ODZnpVskQ._F83q-n9wEoI1-Uoi77scANsctgNTj_vzZA7Fwj_kYb0-Mhphg_M3kfVyaRisjDicnP0w2-Yzjaa7am0la7k2w.JbOHdbk9srKveYG71f6Nbw";
+                    String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..Z4aLONtih8fDNN2kDvrgJw.hJabtNta8icYZgRpJu4HIP_nNFo0PgwDiJtlPkoxdtkmw70_W3WHB1KTneKv1kdc6VHSMuitjML7b-SVaHnaAQ.yOOz1jcmmTi5d8XSCPeBbg";
                     if (token != null && !token.isEmpty()) {
                         request = request.newBuilder()
                                 .addHeader("Authorization", "Bearer " + token)
