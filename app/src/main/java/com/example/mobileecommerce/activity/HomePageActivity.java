@@ -1,5 +1,6 @@
 package com.example.mobileecommerce.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -7,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +23,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.NavigationRecycleAdapter;
+import com.example.mobileecommerce.api.LoginAPI;
 import com.example.mobileecommerce.fragment.HomeFragment;
 import com.example.mobileecommerce.model.EShoppingModelClass;
+import com.example.mobileecommerce.model.UserModel;
+import com.example.mobileecommerce.model.dto.ResponseDTO;
+import com.example.mobileecommerce.retrofit.RetrofitProvince;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /* loaded from: classes.dex */
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,10 +49,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private String[] title2 = {"Home", "Cart", "My Orders", "Brands", "Offers", "My Account"};
 
     private int[] image2 = {R.drawable.home_, R.drawable.cart_, R.drawable.order, R.drawable.category, R.drawable.offer, R.drawable.profile_};
+    private Toolbar toolbar;
 
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        checkJWT();
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_home_page);
         getWindow().setSoftInputMode(3);
@@ -79,14 +92,17 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
         beginTransaction.add(R.id.fregmentlayout, homeFragment, "Home Fragment");
         beginTransaction.commit();
-
-        //Call API getLasted Product
-        getLastedProduct();
     }
 
-    private void getLastedProduct() {
+    private void checkJWT() {
 
     }
+
+    private void gotoLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 
     private void setToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -31,6 +31,10 @@ public class CustomerModel {
         this.codeSubDistrict = codeSubDistrict;
     }
 
+    public CustomerModel(String string) {
+        this.userName = string;
+    }
+
     public String getUserName() {
         return userName;
     }

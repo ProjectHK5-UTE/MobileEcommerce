@@ -1,5 +1,10 @@
 package com.example.mobileecommerce.retrofit;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,25 +15,24 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static Retrofit retrofit = null;;
+    private static Retrofit retrofit = null;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "https://7ca4-2402-800-6216-efc7-80e0-3068-2b71-202d.ngrok-free.app";
+    private static final String BASE_URL = "https://4a74-2001-ee0-4fc7-dce0-a89b-3429-6bdb-cfc4.ngrok-free.app";
 
-
+    static SharedPreferences pres;
 
     private static OkHttpClient client = new OkHttpClient.Builder()
             .addInterceptor(new Interceptor() {
                 @Override
-                public Response intercept(Interceptor.Chain chain) throws IOException {
+                public Response intercept(Chain chain) throws IOException {
                     Request request = chain.request();
-
-                    // Add JWT token to Authorization header
-                    String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..NqB_73-DZl_cDXGymF3hcA._rUauIWKA_n2y98QNwrtymbaXkRkRh9_zJNmTjB1sl2yz0yhT8yVTBGSSi6tHcY9ymWxLxnv2ao4KQvYWBGWPw.Wmxda8NNX2tJTwKFWLLkLQ";
+                    String token = getJWT();
+                    Log.e("jwt",token);
+                    //String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0.._gdsaQJWcbBBw7ZZ6i7mIg.HyFw_KIvqJY7HoIFkOtvBdhkHvjPwKvZOUuExx7k5kw0ynffZOKGvN3o3Opf0C3MBpu2TfFlhSNe6F05gdMrxA.dg4loilh91-jFxzbzkfhmw";
                     if (token != null && !token.isEmpty()) {
                         request = request.newBuilder()
                                 .addHeader("Authorization", "Bearer " + token)
@@ -40,6 +44,11 @@ public class RetrofitClient {
             })
             .build();
 
+    private static String getJWT() {
+        ProfileManager profileManager = ProfileManager.getInstance(pres);
+        String token = profileManager.getJWT();
+        return token;
+    }
 
     public static Retrofit getRetrofit() {
         if(retrofit == null) {

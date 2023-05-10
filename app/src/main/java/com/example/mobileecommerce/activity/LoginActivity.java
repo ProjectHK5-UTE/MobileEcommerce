@@ -2,9 +2,7 @@ package com.example.mobileecommerce.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,16 +14,17 @@ import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.api.LoginAPI;
 import com.example.mobileecommerce.model.UserModel;
 import com.example.mobileecommerce.model.dto.ResponseDTO;
+import com.example.mobileecommerce.retrofit.ProfileManager;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.example.mobileecommerce.retrofit.RetrofitProvince;
 import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
-
+    ProfileManager profileManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +37,13 @@ public class LoginActivity extends AppCompatActivity {
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
 
-        //admin and admin
+        profileManager = ProfileManager
+                .getInstance(getSharedPreferences("jwt", MODE_PRIVATE));
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CallLoginAPI(username.getText().toString().trim(), password.getText().toString().trim());
-//                if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
-//                    //correct
-//                    Toast.makeText(LoginActivity.this,"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
-//                }else
-//                    //incorrect
-//                    Toast.makeText(LoginActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -68,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Get data
         UserModel user = new UserModel(username, password);
-        LoginAPI loginAPI = RetrofitClient.getRetrofit().create(LoginAPI.class);
+        LoginAPI loginAPI = RetrofitProvince.getRetrofit().create(LoginAPI.class);
         loginAPI.Login(user).enqueue(new Callback<ResponseDTO>() {
 
             @Override
@@ -96,9 +89,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveJWT(String token) {
-        SharedPreferences sharedPreferences = getSharedPreferences("Token", Context.MODE_PRIVATE);
-        SharedPreferences.Editor JWT = sharedPreferences.edit();
-        JWT.putString("jwt", token);
-        JWT.apply();
+        profileManager.saveJWT(token);
     }
 }
