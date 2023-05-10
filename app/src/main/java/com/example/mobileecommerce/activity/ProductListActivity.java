@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.app.Dialog;
 import android.widget.LinearLayout;
@@ -28,9 +29,13 @@ import com.example.mobileecommerce.api.CustomerAPI;
 import com.example.mobileecommerce.api.ProductAPI;
 import com.example.mobileecommerce.model.ProductGridModel;
 import com.example.mobileecommerce.model.ProductListModelClass;
+import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.google.android.material.slider.RangeSlider;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +64,8 @@ public class ProductListActivity extends AppCompatActivity {
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_product_list);
         ImageView imageView = (ImageView) findViewById(R.id.iv_back);
+        ImageView imgSearch = findViewById(R.id.img_click_search);
+        EditText edtSearch = findViewById(R.id.edit_txt_search);
         this.iv_back = imageView;
         recyclerView = findViewById(R.id.recyclerview_list_product);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -68,6 +75,51 @@ public class ProductListActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
 
+        LoadAllProduct();
+
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (edtSearch.getText().toString().equals("")) {
+                    LoadAllProduct();
+                    return;
+                }
+
+                productAPI.searchProduct(edtSearch.getText().toString()).enqueue(new Callback<ResponseObject>() {
+                    @Override
+                    public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                        if (response.isSuccessful()) {
+                            Gson gson = new Gson();
+                            String json = gson.toJson(response.body().getData());
+                            Type productListType = new TypeToken<List<ProductGridModel>>(){}.getType();
+                            List<ProductGridModel> productList = gson.fromJson(json, productListType);
+                            productRecycleAdapter = new ProductRecycleAdapter(productList, ProductListActivity.this);
+                            recyclerView.setAdapter(productRecycleAdapter);
+                        }
+                        else {
+                            productRecycleAdapter = new ProductRecycleAdapter(new ArrayList<>(), ProductListActivity.this);
+                            recyclerView.setAdapter(productRecycleAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseObject> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        Button btnShowFilter = findViewById(R.id.btn_show_filter_product);
+        btnShowFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenFilterDialog();
+            }
+        });
+    }
+
+    private void LoadAllProduct() {
         productAPI.getAllProduct().enqueue(new Callback<List<ProductGridModel>>() {
             @Override
             public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
@@ -79,14 +131,6 @@ public class ProductListActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ProductGridModel>> call, Throwable t) {
 
-            }
-        });
-
-        Button btnShowFilter = findViewById(R.id.btn_show_filter_product);
-        btnShowFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OpenFilterDialog();
             }
         });
     }

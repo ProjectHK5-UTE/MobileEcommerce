@@ -4,6 +4,7 @@ import com.example.mobileecommerce.model.HomeViewModelClass;
 import com.example.mobileecommerce.model.UserModel;
 import com.example.mobileecommerce.model.BrandsModel;
 import com.example.mobileecommerce.model.ProductGridModel;
+import com.example.mobileecommerce.model.dto.ResponseObject;
 
 import java.util.List;
 import retrofit2.Call;
@@ -33,4 +34,7 @@ public interface ProductAPI {
                                                @Query("end-battery") int endBattery,
                                                @Query("start-screen") double startScreen,
                                                @Query("end-screen") double endScreen);
+
+    @GET("api/product/search")
+    Call<ResponseObject> searchProduct(@Query("keyword") String keyword);
 }
