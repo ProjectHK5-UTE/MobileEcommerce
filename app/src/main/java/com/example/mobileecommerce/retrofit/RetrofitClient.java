@@ -1,10 +1,9 @@
 package com.example.mobileecommerce.retrofit;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "https://4a74-2001-ee0-4fc7-dce0-a89b-3429-6bdb-cfc4.ngrok-free.app";
+    private static final String BASE_URL = "https://b88a-2001-ee0-4fc7-dce0-1969-b5d3-e9c-9cda.ngrok-free.app";
 
     static SharedPreferences pres;
 
@@ -47,8 +46,8 @@ public class RetrofitClient {
             .build();
 
     private static String getJWT() {
-        ProfileManager profileManager = ProfileManager.getInstance(pres);
-        String token = profileManager.getJWT();
+        SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(pres);
+        String token = sharedPreferencesManager.getJWT();
         return token;
     }
 
@@ -80,4 +79,13 @@ public class RetrofitClient {
         }
         return retrofit;
     }
+//    public static Retrofit getRetrofitForLogin() {
+//        if(retrofit == null) {
+//            retrofit = new Retrofit.Builder()
+//                    .baseUrl(BASE_URL)
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build();
+//        }
+//        return retrofit;
+//    }
 }

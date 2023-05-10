@@ -16,8 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.HomeRecycleAdapter;
 import com.example.mobileecommerce.adapter.RecycleAdapteBrandList;
+import com.example.mobileecommerce.api.BrandAPI;
 import com.example.mobileecommerce.api.ProductAPI;
-import com.example.mobileecommerce.model.CategoriesListModellClass;
+import com.example.mobileecommerce.model.BrandsModel;
 import com.example.mobileecommerce.model.HomeViewModelClass;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 
@@ -37,12 +38,12 @@ public class HomeFragment extends Fragment {
     EditText editext;
     private ArrayList<HomeViewModelClass> homeViewModelClasses;
     private ArrayList<HomeViewModelClass> homeViewModelClasses1;
-    private ArrayList<CategoriesListModellClass> categoriesListModellClass;
+    private ArrayList<BrandsModel> brandListModelClass;
     private RecyclerView LastedProductRecyclerView;
     private RecyclerView PopularProductRecyclerView;
-    private RecyclerView recyclerView2;
+    private RecyclerView AllBrandRecyclerView;
     private View view;
-    private int[] image2 = {R.drawable.s1, R.drawable.s2, R.drawable.s3, R.drawable.s4, R.drawable.s5, R.drawable.s6};
+
     private String[] title2 = {"SAMSUNG", "IPHONE", "OPPO", "XIAOMI", "VSMART", "NOKIA"};
     private HomeRecycleAdapter bAdapter;
     private HomeRecycleAdapter bAdapter1;
@@ -55,21 +56,24 @@ public class HomeFragment extends Fragment {
         this.editext = (EditText) inflate.findViewById(R.id.editext);
         getLastedProduct();
         getPopularProduct();
-
-        //Set Adapter cho brand vao cho nay
-        this.recyclerView2 = (RecyclerView) this.view.findViewById(R.id.brand_recyclerview);
-        new LinearLayoutManager(getActivity());
-        this.recyclerView2.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        this.recyclerView2.setItemAnimator(new DefaultItemAnimator());
-        this.categoriesListModellClass = new ArrayList<>();
-        for (int i = 0; i < this.image2.length; i++) {
-            this.categoriesListModellClass.add(new CategoriesListModellClass(Integer.valueOf(this.image2[i]), this.title2[i]));
-        }
-        RecycleAdapteBrandList brandRecycleAdapter = new RecycleAdapteBrandList(getActivity(), this.categoriesListModellClass);
-        this.bAdapter2 = brandRecycleAdapter;
-        this.recyclerView2.setAdapter(brandRecycleAdapter);
-
+        getAllBrand();
         return this.view;
+    }
+
+    private void getAllBrand() {
+        BrandAPI brandAPI = RetrofitClient.getRetrofit().create(BrandAPI.class);
+        brandAPI.getBrands().enqueue(new Callback<List<BrandsModel>>() {
+            @Override
+            public void onResponse(Call<List<BrandsModel>> call, Response<List<BrandsModel>> response) {
+                ArrayList<BrandsModel> list = (ArrayList<BrandsModel>) response.body();
+                SetAdapterAllBrand(list);
+            }
+
+            @Override
+            public void onFailure(Call<List<BrandsModel>> call, Throwable t) {
+                Toast.makeText(getActivity() , "Fail To Load Product", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getPopularProduct() {
@@ -123,5 +127,15 @@ public class HomeFragment extends Fragment {
         HomeRecycleAdapter PopularProductRecycleAdapter = new HomeRecycleAdapter(getActivity(), this.homeViewModelClasses1);
         this.bAdapter1 = PopularProductRecycleAdapter;
         this.PopularProductRecyclerView.setAdapter(PopularProductRecycleAdapter);
+    }
+    private void SetAdapterAllBrand(ArrayList<BrandsModel> list) {
+        this.AllBrandRecyclerView = (RecyclerView) this.view.findViewById(R.id.brand_recyclerview);
+        new LinearLayoutManager(getActivity());
+        this.AllBrandRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        this.AllBrandRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.brandListModelClass = list;
+        RecycleAdapteBrandList brandRecycleAdapter = new RecycleAdapteBrandList(getActivity(), this.brandListModelClass);
+        this.bAdapter2 = brandRecycleAdapter;
+        this.AllBrandRecyclerView.setAdapter(brandRecycleAdapter);
     }
 }

@@ -9,15 +9,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.ProductGridActivity;
-import com.example.mobileecommerce.model.CategoriesListModellClass;
+import com.example.mobileecommerce.model.BrandsModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /* loaded from: classes.dex */
 public class RecycleAdapteBrandList extends RecyclerView.Adapter<RecycleAdapteBrandList.MyViewHolder> {
-    private List<CategoriesListModellClass> categoriesListModellClassList;
+    private ArrayList<BrandsModel> brandListModelClassList;
     Context context;
 
     /* loaded from: classes.dex */
@@ -33,8 +35,8 @@ public class RecycleAdapteBrandList extends RecyclerView.Adapter<RecycleAdapteBr
         }
     }
 
-    public RecycleAdapteBrandList(Context context, List<CategoriesListModellClass> list) {
-        this.categoriesListModellClassList = list;
+    public RecycleAdapteBrandList(Context context, ArrayList<BrandsModel> list) {
+        this.brandListModelClassList = list;
         this.context = context;
     }
 
@@ -45,9 +47,11 @@ public class RecycleAdapteBrandList extends RecyclerView.Adapter<RecycleAdapteBr
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-        CategoriesListModellClass categoriesListModellClass = this.categoriesListModellClassList.get(i);
-        myViewHolder.image.setImageResource(categoriesListModellClass.getImage().intValue());
-        myViewHolder.title.setText(categoriesListModellClass.getTitle());
+        final BrandsModel brandsModelClass = this.brandListModelClassList.get(i);
+        //myViewHolder.image.setImageResource(categoriesListModellClass.getImage().intValue());
+        //myViewHolder.title.setText(categoriesListModellClass.getTitle());
+        Glide.with(this.context).load(brandsModelClass.getLogo()).into(myViewHolder.image);
+        myViewHolder.title.setText(brandsModelClass.getName());
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.ecommerce.template.adapter.RecycleAdapteCategoriesList.1
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
@@ -58,6 +62,6 @@ public class RecycleAdapteBrandList extends RecyclerView.Adapter<RecycleAdapteBr
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public int getItemCount() {
-        return this.categoriesListModellClassList.size();
+        return this.brandListModelClassList.size();
     }
 }

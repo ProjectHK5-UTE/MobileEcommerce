@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -14,9 +13,9 @@ import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.api.LoginAPI;
 import com.example.mobileecommerce.model.UserModel;
 import com.example.mobileecommerce.model.dto.ResponseDTO;
-import com.example.mobileecommerce.retrofit.ProfileManager;
+import com.example.mobileecommerce.retrofit.RetrofitForLogin;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
-import com.example.mobileecommerce.retrofit.RetrofitProvince;
 import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
@@ -24,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    ProfileManager profileManager;
+    SharedPreferencesManager sharedPreferencesManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
 
-        profileManager = ProfileManager
+        sharedPreferencesManager = SharedPreferencesManager
                 .getInstance(getSharedPreferences("jwt", MODE_PRIVATE));
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
@@ -61,14 +60,14 @@ public class LoginActivity extends AppCompatActivity {
 
         // Get data
         UserModel user = new UserModel(username, password);
-        LoginAPI loginAPI = RetrofitProvince.getRetrofit().create(LoginAPI.class);
+        LoginAPI loginAPI = RetrofitForLogin.getRetrofitForLogin().create(LoginAPI.class);
         loginAPI.Login(user).enqueue(new Callback<ResponseDTO>() {
 
             @Override
             public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
                 if(response.isSuccessful()){
                     ResponseDTO responseDTO = response.body();
-                    Toast.makeText(LoginActivity.this, responseDTO.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     saveJWT(responseDTO.getMessage());
                     gotoHome();
                 } else{
@@ -89,6 +88,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveJWT(String token) {
-        profileManager.saveJWT(token);
+        sharedPreferencesManager.saveJWT(token);
     }
 }

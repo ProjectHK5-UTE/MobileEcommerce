@@ -1,21 +1,21 @@
-package com.example.mobileecommerce.retrofit;
+package com.example.mobileecommerce.sharedpreferences;
 
 import android.content.SharedPreferences;
 
-public class ProfileManager {
+public class SharedPreferencesManager {
 
     private final SharedPreferences prefs;
    private final SharedPreferences.Editor editor;
-   private static ProfileManager INSTANCE  = null;
+   private static SharedPreferencesManager INSTANCE  = null;
 
 
-   public static synchronized ProfileManager getInstance(SharedPreferences prefs){
+   public static synchronized SharedPreferencesManager getInstance(SharedPreferences prefs){
         if(INSTANCE == null){
-            INSTANCE = new ProfileManager(prefs);
+            INSTANCE = new SharedPreferencesManager(prefs);
         }
         return INSTANCE;
     }
-   private ProfileManager(SharedPreferences prefs) {
+   private SharedPreferencesManager(SharedPreferences prefs) {
        this.prefs = prefs;
        this.editor = prefs.edit();
    }

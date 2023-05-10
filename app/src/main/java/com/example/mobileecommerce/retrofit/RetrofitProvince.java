@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitProvince {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://4a74-2001-ee0-4fc7-dce0-a89b-3429-6bdb-cfc4.ngrok-free.app";
+    private static final String BASE_URL = "https://provinces.open-api.vn/";
 
     public static Retrofit getRetrofit() {
         if(retrofit == null) {
