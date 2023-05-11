@@ -37,4 +37,7 @@ public interface ProductAPI {
 
     @GET("api/product/search")
     Call<ResponseObject> searchProduct(@Query("keyword") String keyword);
+
+    @GET("api/product/get")
+    Call<ProductGridModel> getProduct(@Query("id") Integer id);
 }

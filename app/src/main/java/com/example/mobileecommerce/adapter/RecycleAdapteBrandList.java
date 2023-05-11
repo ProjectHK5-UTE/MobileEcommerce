@@ -48,8 +48,6 @@ public class RecycleAdapteBrandList extends RecyclerView.Adapter<RecycleAdapteBr
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
         final BrandsModel brandsModelClass = this.brandListModelClassList.get(i);
-        //myViewHolder.image.setImageResource(categoriesListModellClass.getImage().intValue());
-        //myViewHolder.title.setText(categoriesListModellClass.getTitle());
         Glide.with(this.context).load(brandsModelClass.getLogo()).into(myViewHolder.image);
         myViewHolder.title.setText(brandsModelClass.getName());
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

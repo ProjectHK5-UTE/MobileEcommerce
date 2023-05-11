@@ -8,18 +8,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.activity.ProductDetailActivity;
+import com.example.mobileecommerce.api.ProductAPI;
 import com.example.mobileecommerce.model.HomeViewModelClass;
+import com.example.mobileecommerce.model.ProductGridModel;
+import com.example.mobileecommerce.retrofit.RetrofitClient;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /* loaded from: classes.dex */
 public class HomeRecycleAdapter extends RecyclerView.Adapter<HomeRecycleAdapter.MyViewHolder> {
     private List<HomeViewModelClass> OfferList;
+
+    private ProductGridModel productDetail;
     Context context;
     boolean showingfirst = true;
 
@@ -51,7 +62,6 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<HomeRecycleAdapter.
 
     public void onBindViewHolder(final MyViewHolder myViewHolder, int i) {
         final HomeViewModelClass homeViewModelClass = this.OfferList.get(i);
-        Log.d("URL", homeViewModelClass.getImage());
         Glide.with(this.context).load(homeViewModelClass.getImage()).into(myViewHolder.image);
         myViewHolder.title.setText(homeViewModelClass.getTitle());
         if (homeViewModelClass.getPrice() == Math.floor(homeViewModelClass.getPrice())){
@@ -74,11 +84,29 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<HomeRecycleAdapter.
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                HomeRecycleAdapter.this.context.startActivity(new Intent(HomeRecycleAdapter.this.context, ProductDetailActivity.class));
+                ProductAPI productAPI = RetrofitClient.getRetrofit().create(ProductAPI.class);
+                productAPI.getProduct(homeViewModelClass.getId()).enqueue(new Callback<ProductGridModel>() {
+                    @Override
+                    public void onResponse(Call<ProductGridModel> call, Response<ProductGridModel> response) {
+                        if (response.isSuccessful()){
+                            productDetail = response.body();
+                            Intent intent = new Intent(myViewHolder.itemView.getContext(), ProductDetailActivity.class);
+                            intent.putExtra("product", productDetail);
+                            myViewHolder.itemView.getContext().startActivity(intent);
+                        } else {
+                            Log.e("callAPIgetPRODUCT","Gọi ko thành công" );
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ProductGridModel> call, Throwable t) {
+                        Log.e("getPRODUCT","getAPI product fail");
+                    }
+                });
             }
         });
     }
-
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public int getItemCount() {
         return this.OfferList.size();
