@@ -1,6 +1,7 @@
 package com.example.mobileecommerce.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.WindowDecorActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,11 +16,15 @@ import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.BarChartAdapter;
 import com.example.mobileecommerce.adapter.PieChartAdapter;
 import com.example.mobileecommerce.api.MonthlyBillAPI;
+import com.example.mobileecommerce.api.OrderByBrandAPI;
+import com.example.mobileecommerce.api.StatisticAPI;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,14 +36,17 @@ import retrofit2.Response;
 public class AdminPanelHomeActivity extends AppCompatActivity {
 
     ImageView brandImageView;
+    TextView reviewsQuantityTextView;
     TextView productsQuantityTextView;
     TextView customersQuantityTextView;
     TextView revenueQuantityTextView;
     TextView title;
+    List<Float> listStatistic;
     RecyclerView pieChart;
     RecyclerView barChart;
-    BarChartAdapter mAdapter;
+    StatisticAPI statisticAPI;
     MonthlyBillAPI monthlyBillAPI;
+    OrderByBrandAPI orderByBrandAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +59,9 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
         productsQuantityTextView = (TextView) findViewById(R.id.products_quantity_textview);
         customersQuantityTextView = (TextView) findViewById(R.id.customers_quantity_textview);
         revenueQuantityTextView = (TextView) findViewById(R.id.revenue_quantity_textview);
+        reviewsQuantityTextView = (TextView) findViewById(R.id.review_quantity_textview);
         title = (TextView) findViewById(R.id.title);
+        listStatistic = new ArrayList<Float>();
         pieChart = (RecyclerView) findViewById(R.id.pie_chart_recyclerview);
         barChart = (RecyclerView) findViewById(R.id.bar_chart_recyclerview);
 
@@ -64,29 +74,75 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
             }
         });
 
-        // Thiết lập dữ liệu cứng cho các thành phần
-        this.productsQuantityTextView.setText("1000");
-        this.customersQuantityTextView.setText("500");
-        this.revenueQuantityTextView.setText("$10,000");
+        // Call API get Data cho số liệu thống kê
+        statisticAPI = RetrofitClient.getRetrofit().create(StatisticAPI.class);
+        Call<HashMap<String, Float>> call = statisticAPI.getStatistics();
+        call.enqueue(new Callback<HashMap<String, Float>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, Float>> call, Response<HashMap<String, Float>> response) {
+                if(response.isSuccessful()){
+                    HashMap<String, Float> hashMap = response.body();
+                    List<Float> values = new ArrayList<>();
+                    Iterator<Map.Entry<String, Float>> it = hashMap.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry<String, Float> pair = (Map.Entry) it.next();
+                        float value = pair.getValue();
+                        values.add(new Float(value));
+                    }
+                    listStatistic.addAll(values);
+                    productsQuantityTextView.setText(String.valueOf(listStatistic.get(0)));
+                    customersQuantityTextView.setText(String.valueOf(listStatistic.get(1)));
+                    revenueQuantityTextView.setText('$'+String.valueOf(listStatistic.get(2)));
+                    reviewsQuantityTextView.setText(String.valueOf(listStatistic.get(3)));
+                }
+                else{
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<HashMap<String, Float>> call, Throwable t) {
 
-        // Thiết lập dữ liệu cứng cho biểu đồ tròn
-        List<PieEntry> pieEntries = new ArrayList<>();
-        pieEntries.add(new PieEntry(30f, "Brand 1"));
-        pieEntries.add(new PieEntry(40f, "Brand 2"));
-        pieEntries.add(new PieEntry(20f, "Brand 3"));
-        pieEntries.add(new PieEntry(10f, "Brand 4"));
-        PieChartAdapter pieChartAdapter = new PieChartAdapter(pieEntries);
-        pieChart.setAdapter(pieChartAdapter);
-        pieChart.setLayoutManager(new LinearLayoutManager(this));
+            }
+        });
+
+        // Call API get Data cho biểu đồ tròn
+        orderByBrandAPI = RetrofitClient.getRetrofit().create(OrderByBrandAPI.class);
+        Call<HashMap<String, Float>> call1 = orderByBrandAPI.getTotalPriceOfBrand();
+        call1.enqueue(new Callback<HashMap<String, Float>>() {
+            @Override
+            public void onResponse(Call<HashMap<String, Float>> call1, Response<HashMap<String, Float>> response) {
+                if(response.isSuccessful()){
+                    HashMap<String, Float> hashMap = response.body();
+                    List<PieEntry> entries = new ArrayList<>();
+                    Iterator it = hashMap.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        String label = (String) pair.getKey();
+                        float value = (Float) pair.getValue();
+                        entries.add(new PieEntry(value, label));
+                    }
+                    PieChartAdapter barChartAdapter = new PieChartAdapter(entries);
+                    pieChart.setAdapter(barChartAdapter);
+                    pieChart.setLayoutManager(new LinearLayoutManager(AdminPanelHomeActivity.this));
+                }
+                else{
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<HashMap<String, Float>> call1, Throwable t) {
+
+            }
+        });
 
         // Call API get Data cho biểu đồ cột
         monthlyBillAPI = RetrofitClient.getRetrofit().create(MonthlyBillAPI.class);
-        Call<TreeMap<String, Float>> call = monthlyBillAPI.getBillInMonth();
-        call.enqueue(new Callback<TreeMap<String, Float>>() {
+        Call<TreeMap<String,Float>> call2 = monthlyBillAPI.getBillInMonth();
+        call2.enqueue(new Callback<TreeMap<String, Float>>() {
             @Override
-            public void onResponse(Call<TreeMap<String, Float>> call, Response<TreeMap<String, Float>> response) {
+            public void onResponse(Call<TreeMap<String, Float>> call2, Response<TreeMap<String, Float>> response) {
                 if(response.isSuccessful()){
-                    TreeMap<String, Float> treeMap = response.body();
+                    TreeMap<String,Float> treeMap = response.body();
                     List<BarEntry> entries = new ArrayList<>();
                     int index = -2;
                     for (Map.Entry<String, Float> entry : treeMap.entrySet()) {
@@ -104,7 +160,7 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<TreeMap<String, Float>> call, Throwable t) {
+            public void onFailure(Call<TreeMap<String, Float>> call2, Throwable t) {
 
             }
         });
