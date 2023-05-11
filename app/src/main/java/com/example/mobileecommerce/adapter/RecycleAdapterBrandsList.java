@@ -66,8 +66,8 @@ public class RecycleAdapterBrandsList extends RecyclerView.Adapter<RecycleAdapte
         private TextView title;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            images=itemView.findViewById(R.id.image);
-            title=itemView.findViewById(R.id.title);
+            images=itemView.findViewById(R.id.image_brand_products);
+            title=itemView.findViewById(R.id.title_brand_products);
         }
     }
 }

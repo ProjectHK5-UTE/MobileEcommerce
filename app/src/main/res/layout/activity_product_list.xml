@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.BrandsListActivity">
+    android:layout_height="match_parent">
     <include layout="@layout/toolbar_product_list"/>
     <LinearLayout android:orientation="horizontal" android:background="@drawable/white_home_rect" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp">
         <ImageView android:id="@+id/img_click_search" android:layout_gravity="center" android:layout_width="18dp" android:layout_height="18dp" android:layout_marginLeft="8dp" android:src="@drawable/ic_search"/>

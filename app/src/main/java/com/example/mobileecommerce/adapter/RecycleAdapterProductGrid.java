@@ -84,10 +84,10 @@ public class RecycleAdapterProductGrid extends RecyclerView.Adapter<RecycleAdapt
 
         public MyViewHolder(View view) {
             super(view);
-            image = view.findViewById(R.id.image);
-            offer = view.findViewById(R.id.offer);
-            text = view.findViewById(R.id.text);
-            txtName =  view.findViewById(R.id.txtName);
+            image = view.findViewById(R.id.image_product_grid);
+            offer = view.findViewById(R.id.offer_product_grid);
+            text = view.findViewById(R.id.text_product_grid);
+            txtName =  view.findViewById(R.id.txtName_product_grid);
             rl_click_product_detail = (RelativeLayout) view.findViewById(R.id.rl_click_product_detail);
         }
     }
