@@ -14,13 +14,19 @@ import android.widget.TextView;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.BarChartAdapter;
 import com.example.mobileecommerce.adapter.PieChartAdapter;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
+import com.example.mobileecommerce.api.MonthlyBillAPI;
+import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdminPanelHomeActivity extends AppCompatActivity {
 
@@ -29,9 +35,10 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
     TextView customersQuantityTextView;
     TextView revenueQuantityTextView;
     TextView title;
-
-    private PieChart pieChart;
-    private BarChart barChart;
+    RecyclerView pieChart;
+    RecyclerView barChart;
+    BarChartAdapter mAdapter;
+    MonthlyBillAPI monthlyBillAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +52,8 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
         customersQuantityTextView = (TextView) findViewById(R.id.customers_quantity_textview);
         revenueQuantityTextView = (TextView) findViewById(R.id.revenue_quantity_textview);
         title = (TextView) findViewById(R.id.title);
-        RecyclerView pieChart = (RecyclerView) findViewById(R.id.pie_chart_recyclerview);
-        RecyclerView barChart = (RecyclerView) findViewById(R.id.bar_chart_recyclerview);
+        pieChart = (RecyclerView) findViewById(R.id.pie_chart_recyclerview);
+        barChart = (RecyclerView) findViewById(R.id.bar_chart_recyclerview);
 
         this.title.setText("Dashboard Home");
         brandImageView.setOnClickListener(new View.OnClickListener() {
@@ -72,17 +79,34 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
         pieChart.setAdapter(pieChartAdapter);
         pieChart.setLayoutManager(new LinearLayoutManager(this));
 
-        // Thiết lập dữ liệu cứng cho biểu đồ cột
-        List<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(1f, 1000));
-        barEntries.add(new BarEntry(2f, 2000));
-        barEntries.add(new BarEntry(3f, 1500));
-        barEntries.add(new BarEntry(4f, 3000));
-        barEntries.add(new BarEntry(5f, 2500));
-        barEntries.add(new BarEntry(6f, 4000));
-        barEntries.add(new BarEntry(7f, 3500));
-        BarChartAdapter barChartAdapter = new BarChartAdapter(barEntries);
-        barChart.setAdapter(barChartAdapter);
-        barChart.setLayoutManager(new LinearLayoutManager(this));
+        // Call API get Data cho biểu đồ cột
+        monthlyBillAPI = RetrofitClient.getRetrofit().create(MonthlyBillAPI.class);
+        Call<TreeMap<String, Float>> call = monthlyBillAPI.getBillInMonth();
+        call.enqueue(new Callback<TreeMap<String, Float>>() {
+            @Override
+            public void onResponse(Call<TreeMap<String, Float>> call, Response<TreeMap<String, Float>> response) {
+                if(response.isSuccessful()){
+                    TreeMap<String, Float> treeMap = response.body();
+                    List<BarEntry> entries = new ArrayList<>();
+                    int index = -2;
+                    for (Map.Entry<String, Float> entry : treeMap.entrySet()) {
+                        float value = entry.getValue().floatValue(); // Chuyển đổi kiểu dữ liệu từ Integer sang float
+                        BarEntry barEntry = new BarEntry(index, value);
+                        entries.add(barEntry);
+                        index++;
+                    }
+                    BarChartAdapter barChartAdapter = new BarChartAdapter(entries);
+                    barChart.setAdapter(barChartAdapter);
+                    barChart.setLayoutManager(new LinearLayoutManager(AdminPanelHomeActivity.this));
+                }
+                else{
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<TreeMap<String, Float>> call, Throwable t) {
+
+            }
+        });
     }
 }

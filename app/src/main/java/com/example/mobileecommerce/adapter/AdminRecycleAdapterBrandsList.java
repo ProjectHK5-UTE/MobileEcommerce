@@ -1,7 +1,6 @@
 package com.example.mobileecommerce.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.example.mobileecommerce.activity.EditBrandDialogActivity;
 import java.util.List;
 
 /* loaded from: classes.dex */
-public class AdminRecycleAdapteCategoriesList extends RecyclerView.Adapter<AdminRecycleAdapteCategoriesList.MyViewHolder> {
+public class AdminRecycleAdapterBrandsList extends RecyclerView.Adapter<AdminRecycleAdapterBrandsList.MyViewHolder> {
     private List<CategoriesListModellClass> categoriesListModellClassList;
     Context context;
 
@@ -33,7 +32,7 @@ public class AdminRecycleAdapteCategoriesList extends RecyclerView.Adapter<Admin
         }
     }
 
-    public AdminRecycleAdapteCategoriesList(Context context, List<CategoriesListModellClass> list) {
+    public AdminRecycleAdapterBrandsList(Context context, List<CategoriesListModellClass> list) {
         this.categoriesListModellClassList = list;
         this.context = context;
     }

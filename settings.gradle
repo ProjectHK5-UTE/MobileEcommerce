@@ -2,10 +2,8 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
         gradlePluginPortal()
-
-        maven { url 'https://jitpack.io' }
+        maven { url 'https://jitpack.io'}
     }
 }
 dependencyResolutionManagement {
@@ -13,9 +11,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
-
-        maven { url 'https://jitpack.io' }
+        gradlePluginPortal()
+        maven { url 'https://jitpack.io'}
     }
 }
 rootProject.name = "MobileEcommerce"

@@ -35,7 +35,7 @@ public class BarChartAdapter extends RecyclerView.Adapter<BarChartAdapter.BarCha
     public void onBindViewHolder(@NonNull BarChartViewHolder holder, int position) {
         BarDataSet barDataSet = new BarDataSet(barEntries, "");
         barDataSet.setColors(new int[] { Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED, Color.MAGENTA, Color.CYAN, Color.GRAY });
-        barDataSet.setValueTextColor(Color.WHITE);
+        barDataSet.setValueTextColor(Color.RED);
         barDataSet.setValueTextSize(12f);
 
         BarData barData = new BarData(barDataSet);

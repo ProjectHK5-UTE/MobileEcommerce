@@ -12,14 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mobileecommerce.R;
-import com.example.mobileecommerce.adapter.AdminRecycleAdapteCategoriesList;
+import com.example.mobileecommerce.adapter.AdminRecycleAdapterBrandsList;
 import com.example.mobileecommerce.model.CategoriesListModellClass;
 
 import java.util.ArrayList;
 
 public class AdminPanelBrandActivity extends AppCompatActivity {
     private ArrayList<CategoriesListModellClass> categoriesListModellClasses;
-    private AdminRecycleAdapteCategoriesList mAdapter2;
+    private AdminRecycleAdapterBrandsList mAdapter2;
     Button btnAdd;
     RecyclerView recyclerview;
     private Integer[] image1 = {Integer.valueOf((int) R.drawable.mobile_cat), Integer.valueOf((int) R.drawable.tv_cat), Integer.valueOf((int) R.drawable.laptop_cat), Integer.valueOf((int) R.drawable.all_cat)};
@@ -49,7 +49,7 @@ public class AdminPanelBrandActivity extends AppCompatActivity {
         for (int i = 0; i < this.image1.length; i++) {
             this.categoriesListModellClasses.add(new CategoriesListModellClass(this.image1[i], this.title1[i]));
         }
-        this.mAdapter2 = new AdminRecycleAdapteCategoriesList(this, this.categoriesListModellClasses);
+        this.mAdapter2 = new AdminRecycleAdapterBrandsList(this, this.categoriesListModellClasses);
         this.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         this.recyclerview.setItemAnimator(new DefaultItemAnimator());
         this.recyclerview.setAdapter(this.mAdapter2);
