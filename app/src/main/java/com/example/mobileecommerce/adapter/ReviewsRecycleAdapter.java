@@ -51,7 +51,7 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
         ReviewModel reviewModel = listReview.get(position);
         if(reviewModel == null)
             return;
-        holder.nameReview.setText(reviewModel.getCustomer().getFullname());
+        holder.nameReview.setText(reviewModel.getCustomer().getUserName());
         holder.dateReview.setText(reviewModel.getUpdateAt().toString());
         holder.contentReview.setText(reviewModel.getContent());
         // 5 phut

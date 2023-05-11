@@ -13,12 +13,16 @@ public class ReviewModel {
 
     private CustomerModel customer;
 
-    public ReviewModel(Integer reviewId, Integer rate, String content, Timestamp updateAt, CustomerModel customer) {
+    private ProductGridModel product;
+
+
+    public ReviewModel(Integer reviewId, Integer rate, String content, Timestamp updateAt, CustomerModel customer, ProductGridModel product) {
         this.reviewId = reviewId;
         this.rate = rate;
         this.content = content;
         this.updateAt = updateAt;
         this.customer = customer;
+        this.product = product;
     }
 
     public ReviewModel() {
@@ -62,5 +66,13 @@ public class ReviewModel {
 
     public void setCustomer(CustomerModel customer) {
         this.customer = customer;
+    }
+
+    public ProductGridModel getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductGridModel product) {
+        this.product = product;
     }
 }

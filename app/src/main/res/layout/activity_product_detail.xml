@@ -184,6 +184,23 @@
                     android:textColor="@color/txt_color"
                     android:textSize="15sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+                    <Button
+                        android:id="@+id/btn_add_review"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="Add"
+                        android:textSize="12sp"
+                        android:background="@drawable/btn_red_rect"
+                        android:fontFamily="@font/roboto_regular"
+                        />
+                </LinearLayout>
+
+
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_review"
                     android:layout_width="match_parent"
