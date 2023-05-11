@@ -77,7 +77,7 @@ public class ProductGridActivity extends AppCompatActivity {
         });
     }
     void anhXa(){
-        recyclerview = findViewById(R.id.recyclerview);
+        recyclerview = findViewById(R.id.recyclerview_product_grid);
         title = findViewById(R.id.title);
         iv_back = findViewById(R.id.iv_back);
     }

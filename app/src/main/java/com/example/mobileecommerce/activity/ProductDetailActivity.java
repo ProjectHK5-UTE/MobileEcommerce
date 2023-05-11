@@ -21,17 +21,25 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.ProductDetailPagerAdapter;
 import com.example.mobileecommerce.adapter.RecycleAdapterOptionList;
+import com.example.mobileecommerce.adapter.RecycleViewAllProduct;
 import com.example.mobileecommerce.adapter.ReviewsRecycleAdapter;
+import com.example.mobileecommerce.api.ProductAPI;
+import com.example.mobileecommerce.api.ReviewAPI;
 import com.example.mobileecommerce.model.OptionModel;
 import com.example.mobileecommerce.model.ProductGridModel;
+import com.example.mobileecommerce.model.ReviewModel;
 import com.example.mobileecommerce.model.ReviewModelClass;
 import com.example.mobileecommerce.model.cartRoomDatabase.ItemDatabase;
 import com.example.mobileecommerce.model.cartRoomDatabase.entity.Item;
+import com.example.mobileecommerce.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /* loaded from: classes.dex */
 public class ProductDetailActivity extends AppCompatActivity {
@@ -42,8 +50,16 @@ public class ProductDetailActivity extends AppCompatActivity {
     ViewPager viewPager;
     ProductGridModel product;
     RecyclerView rc_view;
+
+    RecyclerView rcvReview;
     RecycleAdapterOptionList recycleAdapterOptionList;
+
+    private ReviewsRecycleAdapter reviewsRecycleAdapter;
+
+    ReviewAPI reviewAPI = RetrofitClient.getRetrofit().create(ReviewAPI.class);
     private int oId;
+
+    List<ReviewModel> listReview;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -54,6 +70,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         product = (ProductGridModel) intent.getSerializableExtra("product");
         loadProductDetail();
+
+        // Recycle Review Set Up
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
+        rcvReview.setLayoutManager(linearLayoutManager1);
+        rcvReview.setItemAnimator(new DefaultItemAnimator());
+        AddReviews();
         recycleAdapterOptionList = new RecycleAdapterOptionList(this, product.getOptions(), new RecycleAdapterOptionList.ItemClickListener() {
             @Override
             public void onClick(int id) {
@@ -79,6 +101,22 @@ public class ProductDetailActivity extends AppCompatActivity {
                 //intent.putExtra("product", product);
                 addItem(oId);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void AddReviews() {
+        reviewAPI.getReviewsByProductId(product.getProductId(), "thangpham").enqueue(new Callback<List<ReviewModel>>() {
+            @Override
+            public void onResponse(Call<List<ReviewModel>> call, Response<List<ReviewModel>> response) {
+                listReview = response.body();
+                reviewsRecycleAdapter = new ReviewsRecycleAdapter(listReview, ProductDetailActivity.this);
+                rcvReview.setAdapter(reviewsRecycleAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ReviewModel>> call, Throwable t) {
+
             }
         });
     }
@@ -118,6 +156,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         addToCart = findViewById(R.id.btn_addtocart);
         viewPager = findViewById(R.id.viewPager);
         rc_view = findViewById(R.id.rc_view_option);
+        rcvReview = findViewById(R.id.recyclerview_review);
     }
 
 }

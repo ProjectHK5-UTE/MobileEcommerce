@@ -5,5 +5,5 @@
         <ImageView android:layout_gravity="center" android:layout_width="18dp" android:layout_height="18dp" android:layout_marginLeft="8dp" android:src="@drawable/ic_search"/>
         <EditText android:textSize="15sp" android:id="@+id/editext" android:background="@color/transperent" android:padding="10sp" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Searching..." android:textColor="@color/txt_color" android:inputType="text" android:fontFamily="@font/roboto_regular"/>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerview" android:background="@color/white" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerview_product_grid" android:background="@color/white" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="match_parent"/>
 </LinearLayout>

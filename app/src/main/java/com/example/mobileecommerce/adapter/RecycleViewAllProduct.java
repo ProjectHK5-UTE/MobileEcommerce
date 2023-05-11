@@ -16,26 +16,26 @@ import com.example.mobileecommerce.model.ProductGridModel;
 
 import java.util.List;
 
-public class ProductRecycleAdapter extends RecyclerView.Adapter<ProductRecycleAdapter.MyViewHolder> {
+public class RecycleViewAllProduct extends RecyclerView.Adapter<RecycleViewAllProduct.MyViewHolder> {
     private List<ProductGridModel> listProduct;
 
     private Context context;
 
-    public ProductRecycleAdapter(List<ProductGridModel> listProduct, Context context) {
+    public RecycleViewAllProduct(List<ProductGridModel> listProduct, Context context) {
         this.listProduct = listProduct;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ProductRecycleAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecycleViewAllProduct.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list,
                 parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductRecycleAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecycleViewAllProduct.MyViewHolder holder, int position) {
         ProductGridModel productModel = listProduct.get(position);
         if(productModel == null)
             return;

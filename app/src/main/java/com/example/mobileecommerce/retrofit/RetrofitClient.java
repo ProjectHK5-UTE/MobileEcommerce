@@ -27,7 +27,7 @@ public class RetrofitClient {
                     Request request = chain.request();
 
                     // Add JWT token to Authorization header
-                    String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..MrG-K_WdoEPB-ODZnpVskQ._F83q-n9wEoI1-Uoi77scANsctgNTj_vzZA7Fwj_kYb0-Mhphg_M3kfVyaRisjDicnP0w2-Yzjaa7am0la7k2w.JbOHdbk9srKveYG71f6Nbw";
+                    String token = "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..YfxrNsTE-wBAAD2V6ruG2A.JgmeAWlZGO0LTgOoqbsFDB7AhbW42akeB4MjFD1AZZNfheiCMqqaEyVjFcudHFrmF0N38g-pGLq-EgCSfoTOhw.B-i7rJMffFLxFkNasY-b3g";
                     if (token != null && !token.isEmpty()) {
                         request = request.newBuilder()
                                 .addHeader("Authorization", "Bearer " + token)

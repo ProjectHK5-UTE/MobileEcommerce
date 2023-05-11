@@ -1,13 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
     <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_marginRight="15dp">
-        <TextView android:textSize="13sp" android:textColor="@color/txt_color" android:id="@+id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mark Henry" android:fontFamily="@font/roboto_medium"/>
+        <TextView
+            android:textSize="13sp"
+            android:textColor="@color/txt_color"
+            android:id="@+id/txt_name_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark Henry"
+            android:fontFamily="@font/roboto_medium"/>
         <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
             <RatingBar android:theme="@style/RatingBar" android:id="@+id/ratingbar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:numStars="5" android:rating="3" android:stepSize="1" style="?android:attr/ratingBarStyleSmall"/>
-            <TextView android:textSize="11sp" android:textColor="#acacac" android:gravity="right" android:layout_gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="20 Feb 2019"/>
+
+            <TextView
+                android:id="@+id/txt_date_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:text="20 Feb 2019"
+                android:textColor="#acacac"
+                android:textSize="11sp" />
         </LinearLayout>
-        <TextView android:textSize="12sp" android:textColor="#8f909e" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:text="Lorem Ipsum is simply dummy text of the prnting and typesetting industry.Lorem Ipsum is simply dummy text of and typesetting industry." android:lineSpacingExtra="3dp" android:fontFamily="@font/roboto_regular"/>
-        <TextView android:textSize="12sp" android:textColor="@color/red" android:gravity="right" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="More" android:fontFamily="@font/roboto_medium"/>
+
+        <TextView
+            android:id="@+id/txt_content_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:lineSpacingExtra="3dp"
+            android:text="Lorem Ipsum is simply dummy text of the prnting and typesetting industry.Lorem Ipsum is simply dummy text of and typesetting industry."
+            android:textColor="#8f909e"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/BTN"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_edit_review"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:text="Edit"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_regular"/>
+
+            <Button
+                android:id="@+id/btn_remove_review"
+                android:layout_width="82dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:text="Remove"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
     </LinearLayout>
-    <View android:background="#f2f2f2" android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginLeft="15dp" android:layout_marginTop="7dp" android:layout_marginRight="15dp"/>
+    <View
+        android:background="#f2f2f2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="15dp"/>
 </LinearLayout>

@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Range;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -13,8 +12,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.app.Dialog;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -22,13 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
-import com.example.mobileecommerce.adapter.ProductRecycleAdapter;
-import com.example.mobileecommerce.adapter.RecycleAdapteProductList;
-import com.example.mobileecommerce.api.BrandAPI;
-import com.example.mobileecommerce.api.CustomerAPI;
+import com.example.mobileecommerce.adapter.RecycleViewAllProduct;
 import com.example.mobileecommerce.api.ProductAPI;
 import com.example.mobileecommerce.model.ProductGridModel;
-import com.example.mobileecommerce.model.ProductListModelClass;
 import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.google.android.material.slider.RangeSlider;
@@ -49,7 +42,7 @@ public class ProductListActivity extends AppCompatActivity {
     ImageView iv_back;
     private RecyclerView recyclerView;
 
-    private ProductRecycleAdapter productRecycleAdapter;
+    private RecycleViewAllProduct recycleViewAllProduct;
 
     private List<ProductGridModel> listProduct;
 
@@ -72,8 +65,6 @@ public class ProductListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please Wait...");
 
         LoadAllProduct();
 
@@ -93,12 +84,12 @@ public class ProductListActivity extends AppCompatActivity {
                             String json = gson.toJson(response.body().getData());
                             Type productListType = new TypeToken<List<ProductGridModel>>(){}.getType();
                             List<ProductGridModel> productList = gson.fromJson(json, productListType);
-                            productRecycleAdapter = new ProductRecycleAdapter(productList, ProductListActivity.this);
-                            recyclerView.setAdapter(productRecycleAdapter);
+                            recycleViewAllProduct = new RecycleViewAllProduct(productList, ProductListActivity.this);
+                            recyclerView.setAdapter(recycleViewAllProduct);
                         }
                         else {
-                            productRecycleAdapter = new ProductRecycleAdapter(new ArrayList<>(), ProductListActivity.this);
-                            recyclerView.setAdapter(productRecycleAdapter);
+                            recycleViewAllProduct = new RecycleViewAllProduct(new ArrayList<>(), ProductListActivity.this);
+                            recyclerView.setAdapter(recycleViewAllProduct);
                         }
                     }
 
@@ -124,8 +115,8 @@ public class ProductListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
                 listProduct = response.body();
-                productRecycleAdapter = new ProductRecycleAdapter(listProduct, ProductListActivity.this);
-                recyclerView.setAdapter(productRecycleAdapter);
+                recycleViewAllProduct = new RecycleViewAllProduct(listProduct, ProductListActivity.this);
+                recyclerView.setAdapter(recycleViewAllProduct);
             }
 
             @Override
@@ -150,7 +141,6 @@ public class ProductListActivity extends AppCompatActivity {
         WindowManager.LayoutParams windowAttributes = window.getAttributes();
         windowAttributes.gravity = Gravity.CENTER;
         window.setAttributes(windowAttributes);
-
 
         Button btnExitFilter = dialog.findViewById(R.id.btnThoatFilter);
         Button btnReset = dialog.findViewById(R.id.btnReset);
@@ -185,19 +175,15 @@ public class ProductListActivity extends AppCompatActivity {
                 int endBattery = sliderBattery.getValues().get(1).intValue();
                 double startScreen = sliderScreen.getValues().get(0);
                 double endScreen = sliderScreen.getValues().get(1);
-                progressDialog.show();
                 productAPI.filterProduct(startPrice, endPrice, startBattery, endBattery, startScreen, endScreen).enqueue(new Callback<List<ProductGridModel>>() {
                     @Override
                     public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
                         listProduct = response.body();
-                        productRecycleAdapter = new ProductRecycleAdapter(listProduct, ProductListActivity.this);
-                        recyclerView.setAdapter(productRecycleAdapter);
-                        progressDialog.dismiss();
+                        recycleViewAllProduct = new RecycleViewAllProduct(listProduct, ProductListActivity.this);
+                        recyclerView.setAdapter(recycleViewAllProduct);
                     }
-
                     @Override
                     public void onFailure(Call<List<ProductGridModel>> call, Throwable t) {
-                        progressDialog.dismiss();
                     }
                 });
                 dialog.dismiss();

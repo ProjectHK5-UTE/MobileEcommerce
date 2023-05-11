@@ -28,8 +28,8 @@ public class RecycleAdapteBrandList extends RecyclerView.Adapter<RecycleAdapteBr
 
         public MyViewHolder(View view) {
             super(view);
-            this.image = (ImageView) view.findViewById(R.id.image);
-            this.title = (TextView) view.findViewById(R.id.title);
+            this.image = (ImageView) view.findViewById(R.id.image_brand);
+            this.title = (TextView) view.findViewById(R.id.title_brand);
         }
     }
 
