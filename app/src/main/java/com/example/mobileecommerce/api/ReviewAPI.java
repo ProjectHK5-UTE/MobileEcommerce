@@ -8,6 +8,7 @@ import java.util.List;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -19,4 +20,7 @@ public interface ReviewAPI {
 
     @POST("api/review")
     Call<ReviewModel> insertReview(@Body ReviewModel reviewModel);
+
+    @DELETE("api/review/{id}")
+    Call<ReviewModel> deleteReview(@Path("id") Integer reviewId);
 }
