@@ -19,13 +19,13 @@
             android:layout_height="98dp"
             android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+
+            <ImageView
                 android:id="@+id/image_brand_products"
-                android:layout_width="90dp"
+                android:layout_width="96dp"
                 android:layout_height="90dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/ac" />
 
             <LinearLayout
