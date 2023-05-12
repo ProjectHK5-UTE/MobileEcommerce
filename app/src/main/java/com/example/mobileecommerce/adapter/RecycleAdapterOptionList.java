@@ -1,6 +1,7 @@
 package com.example.mobileecommerce.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +51,11 @@ public class RecycleAdapterOptionList extends RecyclerView.Adapter<RecycleAdapte
     @Override
     public void onBindViewHolder(@NonNull RecycleAdapterOptionList.MyViewHolder holder, int position) {
         OptionModel optionModel = optionModelList.get(position);
-        holder.radioButton.setText(optionModel.getRam());
+        if(position==0){
+            selectedPosition = holder.getAdapterPosition();
+            itemClickListener.onClick(optionModel.getOptionId());
+        }
+        holder.radioButton.setText(optionModel.getRam() + " Ram, "+optionModel.getRom()+ " Rom");
 
         holder.radioButton.setChecked(position==selectedPosition);
         holder.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

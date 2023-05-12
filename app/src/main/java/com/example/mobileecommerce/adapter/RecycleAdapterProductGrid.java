@@ -43,18 +43,12 @@ public class RecycleAdapterProductGrid extends RecyclerView.Adapter<RecycleAdapt
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         int id = position;
         ProductGridModel product = productList.get(id);
-        holder.txtName.setText(product.getProductName());
+        holder.title.setText(product.getProductName());
+        holder.price.setText(String.valueOf(product.getPrice()));
+        holder.os.setText(product.getOs());
         Glide.with(context)
                 .load(product.getOptions().get(0).getImages().get(0).getPath())
                 .into(holder.image);
-
-        holder.offer.setText(product.getOs()+" "+product.getPrice());
-        holder.offer.setPaintFlags(holder.offer.getPaintFlags() | 16);
-        if ((position == 2) | (position == 5)) {
-            holder.text.setVisibility(View.VISIBLE);
-        } else {
-            holder.text.setVisibility(View.GONE);
-        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,18 +70,15 @@ public class RecycleAdapterProductGrid extends RecyclerView.Adapter<RecycleAdapt
     /* loaded from: classes.dex */
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        LinearLayout linear;
-        TextView offer;
         RelativeLayout rl_click_product_detail;
-        TextView text, txtName;
-        TextView title;
+        TextView title, price, os;
 
         public MyViewHolder(View view) {
             super(view);
             image = view.findViewById(R.id.image_product_grid);
-            offer = view.findViewById(R.id.offer_product_grid);
-            text = view.findViewById(R.id.text_product_grid);
-            txtName =  view.findViewById(R.id.txtName_product_grid);
+            title =  view.findViewById(R.id.tv_pGrid_title);
+            price = view.findViewById(R.id.tv_pGrid_price);
+            os = view.findViewById(R.id.tv_pGrid_os);
             rl_click_product_detail = (RelativeLayout) view.findViewById(R.id.rl_click_product_detail);
         }
     }

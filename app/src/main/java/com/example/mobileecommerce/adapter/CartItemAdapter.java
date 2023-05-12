@@ -20,16 +20,11 @@ import java.util.List;
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ItemHolder> {
     private List<Item> itemList;
     private  Context context;
-    //private  iClickListener listener;
+    private  iClickListener listener;
     public CartItemAdapter(List<Item> itemList, Context context, iClickListener listener) {
         this.itemList = itemList;
         this.context = context;
-        //this.listener = listener;
-    }
-
-    public CartItemAdapter(List<Item> itemList, Context context) {
-        this.itemList = itemList;
-        this.context = context;
+        this.listener = listener;
     }
 
     public void setData(List<Item> list){
@@ -49,9 +44,33 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ItemHo
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Item item = itemList.get(position);
         holder.tvProductName.setText(item.getName());
+        holder.tvQuantity.setText(String.valueOf(item.getQuantity()));
+        holder.tvPrice.setText(String.valueOf(item.getPrice())+" $");
         Glide.with(context)
                 .load(item.getImage())
                 .into(holder.ivImage);
+
+        //xử lí sự kiện
+        holder.ivMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.minusQuantity(item);
+            }
+        });
+
+        holder.ivPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.plusQuantity(item);
+            }
+        });
+
+        holder.iv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.deleteItem(item);
+            }
+        });
     }
 
     @Override
@@ -62,7 +81,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ItemHo
         return 0;
     }
     public class ItemHolder extends RecyclerView.ViewHolder{
-        private ImageView ivImage, ivPlus, ivMinus;
+        private ImageView ivImage, ivPlus, ivMinus, iv_delete;
         private TextView tvProductName, tvQuantity, tvPrice, tvDelete;
 
         public ItemHolder(@NonNull View itemView){
@@ -70,16 +89,16 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ItemHo
             ivImage = itemView.findViewById(R.id.image);
             ivPlus = itemView.findViewById(R.id.iv_plus);
             ivMinus = itemView.findViewById(R.id.iv_minus);
+            iv_delete = itemView.findViewById(R.id.iv_delete);
             tvProductName = itemView.findViewById(R.id.tv_title);
             tvQuantity = itemView.findViewById(R.id.tv_number);
-            tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvPrice = itemView.findViewById(R.id.itemtv_price);
         }
     }
 
     public interface iClickListener{
         void plusQuantity(Item item);
         void minusQuantity(Item item);
-
         void deleteItem(Item item);
     }
 }

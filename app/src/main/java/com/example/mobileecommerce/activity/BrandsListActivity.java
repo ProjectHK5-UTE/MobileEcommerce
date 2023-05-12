@@ -1,5 +1,6 @@
 package com.example.mobileecommerce.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -41,6 +42,15 @@ public class BrandsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_brands_product_list);
         anhXa();
         GetBrands();
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent = new Intent(BrandsListActivity.this, HomePageActivity.class);
+                startActivity(intent);*/
+                onBackPressed();
+            }
+        });
     }
     private void GetBrands(){
         brandAPI= RetrofitClient.getRetrofit().create(BrandAPI.class);

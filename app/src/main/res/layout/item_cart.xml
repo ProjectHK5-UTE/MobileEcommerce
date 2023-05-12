@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_price"
+                        android:id="@+id/itemtv_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
@@ -144,7 +144,8 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="20dp"
+                android:id="@+id/iv_delete"
+                android:layout_width="15dp"
                 android:layout_height="20dp"
                 android:layout_gravity="bottom"
                 android:layout_marginRight="20dp"

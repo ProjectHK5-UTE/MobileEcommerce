@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +50,6 @@ import retrofit2.Response;
 
 /* loaded from: classes.dex */
 public class ProductDetailActivity extends AppCompatActivity {
-
     ImageView iv_back;
     TextView title,tvName, tvPrice, tvDescription;
     Button addToCart;
@@ -89,7 +89,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(int id) {
                 oId= id;
-                Toast.makeText(ProductDetailActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProductDetailActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
                 rc_view.post(new Runnable() {
                     @Override
                     public void run() {
@@ -117,6 +117,12 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openReviewDialog();
+            }
+        });
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -195,8 +201,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void addItem(int optionId){
-        Log.e("dfsdfsdafasfsd",product.toString());
-        Log.e("dfsdfsdafasfsd",product.getProductName());
         String pName = product.getProductName();
         double pPrice = product.getPrice();
         int pQuantity = 1;
