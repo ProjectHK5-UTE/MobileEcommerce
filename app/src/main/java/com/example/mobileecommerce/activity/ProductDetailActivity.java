@@ -89,7 +89,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(int id) {
                 oId= id;
-                Toast.makeText(ProductDetailActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProductDetailActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
                 rc_view.post(new Runnable() {
                     @Override
                     public void run() {
