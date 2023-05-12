@@ -151,7 +151,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ReviewModel reviewModel = new ReviewModel();
                 reviewModel.setContent(edtContent.getText().toString());
-                reviewModel.setRate(sbRate.getProgress());
+                reviewModel.setRate(sbRate.getProgress() + 1);
                 reviewModel.setProduct(new ProductGridModel(product.getProductId()));
                 reviewModel.setCustomer(new CustomerModel("thangpham"));
                 reviewAPI.insertReview(reviewModel).enqueue(new Callback<ReviewModel>() {

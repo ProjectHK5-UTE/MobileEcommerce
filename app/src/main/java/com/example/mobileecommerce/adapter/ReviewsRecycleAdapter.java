@@ -1,12 +1,20 @@
 package com.example.mobileecommerce.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +41,8 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
     Context context;
 
     ReviewAPI reviewAPI = RetrofitClient.getRetrofit().create(ReviewAPI.class);
+
+    private Dialog dialog;
 
 
     public ReviewsRecycleAdapter(List<ReviewModel> listReview, Context context) {
@@ -64,6 +74,8 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
         holder.nameReview.setText(reviewModel.getCustomer().getUserName());
         holder.dateReview.setText(reviewModel.getUpdateAt().toString());
         holder.contentReview.setText(reviewModel.getContent());
+
+
         // 5 phut
         if(reviewModel.getCustomer().getUserName().equals("thangpham") &&
                 System.currentTimeMillis() - reviewModel.getUpdateAt().getTime() < 5 * 60 * 1000) {
@@ -88,12 +100,74 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
                     });
                 }
             });
+
+            holder.btnEditReview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showDialog();
+                    dialog.show();
+                    Button btnNoThank = dialog.findViewById(R.id.btn_no_thank);
+                    SeekBar sbRate = dialog.findViewById(R.id.sb_rate_review);
+                    EditText edtContent = dialog.findViewById(R.id.edt_content_review);
+                    Button btnSendReview = dialog.findViewById(R.id.btn_send_review);
+
+                    edtContent.setText(reviewModel.getContent());
+                    sbRate.setProgress(reviewModel.getRate() - 1);
+                    btnSendReview.setText("Update");
+                    btnNoThank.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    btnSendReview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            reviewAPI.updateReview(reviewModel.getReviewId(), sbRate.getProgress() + 1, edtContent.getText().toString()).enqueue(new Callback<ReviewModel>() {
+                                @Override
+                                public void onResponse(Call<ReviewModel> call, Response<ReviewModel> response) {
+                                    if(response.isSuccessful()) {
+                                        ReviewModel newReview = listReview.get(position);
+                                        newReview.setContent(edtContent.getText().toString());
+
+                                        notifyItemChanged(position);
+                                        dialog.dismiss();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ReviewModel> call, Throwable t) {
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
         }
         else {
             holder.btnEditReview.setVisibility(View.GONE);
             holder.btnRemoveReview.setVisibility(View.GONE);
         }
     }
+
+    private void showDialog() {
+        dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_review_product);
+        Window window = dialog.getWindow();
+        if(window == null) {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.CENTER;
+        window.setAttributes(windowAttributes);
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameReview;

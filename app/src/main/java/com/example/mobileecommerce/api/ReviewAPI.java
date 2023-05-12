@@ -11,8 +11,10 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ReviewAPI {
     @GET("api/review/{productId}/{username}")
@@ -23,4 +25,9 @@ public interface ReviewAPI {
 
     @DELETE("api/review/{id}")
     Call<ReviewModel> deleteReview(@Path("id") Integer reviewId);
+
+    @PUT("api/review")
+    Call<ReviewModel> updateReview(@Query("id") Integer reviewId,
+                                   @Query("rate") Integer rate,
+                                   @Query("content") String content);
 }
