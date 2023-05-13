@@ -39,7 +39,7 @@ public class PieChartAdapter extends RecyclerView.Adapter<PieChartAdapter.PieCha
         pieDataSet.setValueTextSize(12f);
 
         // Set colors for slices
-        pieDataSet.setColors(new int[] { Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED, Color.GRAY});
+        pieDataSet.setColors(new int[] { Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED, Color.MAGENTA, Color.CYAN, Color.GRAY });
 
         PieData pieData = new PieData(pieDataSet);
         holder.pieChart.setData(pieData);

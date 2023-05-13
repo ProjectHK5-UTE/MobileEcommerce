@@ -1,5 +1,6 @@
 package com.example.mobileecommerce.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,18 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
-import com.example.mobileecommerce.activity.AddBrandDialogActivity;
-import com.example.mobileecommerce.activity.AdminPanelBrandActivity;
 import com.example.mobileecommerce.activity.EditBrandDialogActivity;
-import com.example.mobileecommerce.activity.ProductGridActivity;
 import com.example.mobileecommerce.model.BrandsModel;
-import com.example.mobileecommerce.model.cartRoomDatabase.entity.Item;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-/* loaded from: classes.dex */
 public class AdminRecycleAdapterBrandsList extends RecyclerView.Adapter<AdminRecycleAdapterBrandsList.MyViewHolder> {
     private List<BrandsModel> brandsList;
     private Context context;
@@ -52,6 +47,7 @@ public class AdminRecycleAdapterBrandsList extends RecyclerView.Adapter<AdminRec
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), EditBrandDialogActivity.class);
                 intent.putExtra("brand", brand);
+                ((Activity) context).finish();
                 holder.itemView.getContext().startActivity(intent);
             }
         });

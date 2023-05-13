@@ -37,9 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddBrandDialogActivity extends AppCompatActivity {
-    private List<BrandsModel> brandsModels;
-    private AdminRecycleAdapterBrandsList mAdapter2;
-    private Button btnSelectImage, btnAddBrand;
+    private Button btnSelectImage, btnAddBrand, btnCancel;
     private ImageView imgView;
     private EditText edtBrandName;
     private Uri imgUrl;
@@ -69,6 +67,13 @@ public class AddBrandDialogActivity extends AppCompatActivity {
 
         edtBrandName = findViewById(R.id.edtName_);
 
+        btnCancel = findViewById(R.id.btnCancel_);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         btnAddBrand = findViewById(R.id.btnSave_);
         btnAddBrand.setOnClickListener(new View.OnClickListener() {
             @Override

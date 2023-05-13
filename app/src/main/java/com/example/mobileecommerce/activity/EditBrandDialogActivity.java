@@ -145,12 +145,14 @@ public class EditBrandDialogActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(EditBrandDialogActivity.this, "Failed to update brand", Toast.LENGTH_SHORT).show();
                 }
+                startActivity(new Intent(EditBrandDialogActivity.this, AdminPanelBrandActivity.class));
                 finish();
             }
 
             @Override
             public void onFailure(Call<ResponseObject> call, Throwable t) {
                 Toast.makeText(EditBrandDialogActivity.this, "Failed to call API" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(EditBrandDialogActivity.this, AdminPanelBrandActivity.class));
                 finish();
             }
         });
