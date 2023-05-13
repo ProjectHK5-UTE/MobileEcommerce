@@ -40,7 +40,6 @@ public class UploadImageActivity extends AppCompatActivity {
     private static final int CHOOSE_IMAGE = 1;
     TextView title;
     ImageView iv_back;
-
     Button chooseImage, btnUploadImage;
     TextView viewGallary;
     ImageView imgPreview;

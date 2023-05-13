@@ -2,6 +2,7 @@ package com.example.mobileecommerce.activity;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,7 +48,7 @@ public class PaymentActivity extends AppCompatActivity {
     OrderAPI orderAPI;
     ProductAPI productAPI;
     double ptotal;
-
+    ProgressDialog mProgressDialog;
     int i;
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     public void onCreate(Bundle bundle) {
@@ -70,11 +71,13 @@ public class PaymentActivity extends AppCompatActivity {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
                 orderAPI = RetrofitClient.getRetrofit60TimeOut().create(OrderAPI.class);
+                mProgressDialog = ProgressDialog.show(PaymentActivity.this, "Loading", "Please wait...", true);
                 orderAPI.order(orderDTO).enqueue(new Callback<OrderResponseDTO>() {
                     @Override
                     public void onResponse(Call<OrderResponseDTO> call, Response<OrderResponseDTO> response) {
                         ItemDatabase.getInstance(PaymentActivity.this).itemDao().deleteAll();
                         PaymentActivity.this.startActivity(new Intent(PaymentActivity.this, SucessfullActivity.class));
+                        mProgressDialog.dismiss();
                     }
                     @Override
                     public void onFailure(Call<OrderResponseDTO> call, Throwable t) {
@@ -109,17 +112,18 @@ public class PaymentActivity extends AppCompatActivity {
             return null;
         }
     }
-    void get(){
-        itemList= ItemDatabase.getInstance(this).itemDao().getAll();
+    void get() {
+        itemList = ItemDatabase.getInstance(this).itemDao().getAll();
         productAPI = RetrofitClient.getRetrofit().create(ProductAPI.class);
         product = new ArrayList<ProductGridModel>();
         lineitemDTO = new ArrayList<LineitemDTO>();
-        for(i=0;i<itemList.size();i++) {
+        for (i = 0; i < itemList.size(); i++) {
             new GetProductTask(i).execute();
         }
-        customerDTO = new CustomerDTO("thangpham","saigon",null,"Sinh Hung","0123456789");
-        orderDTO = new OrderDTO(ptotal,lineitemDTO, customerDTO);
+        customerDTO = new CustomerDTO("thangpham", "saigon", null, "Sinh Hung", "0123456789");
+        orderDTO = new OrderDTO(ptotal, lineitemDTO, customerDTO);
     }
+
     void anhXa(){
         iv_back = findViewById(R.id.iv_back);
         text_paynow = findViewById(R.id.text_paynow);
