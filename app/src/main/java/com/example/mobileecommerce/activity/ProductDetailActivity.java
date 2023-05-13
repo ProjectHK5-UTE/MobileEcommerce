@@ -40,6 +40,8 @@ import com.example.mobileecommerce.model.cartRoomDatabase.ItemDatabase;
 import com.example.mobileecommerce.model.cartRoomDatabase.entity.Item;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,21 +169,15 @@ public class ProductDetailActivity extends AppCompatActivity {
                         reviewsRecycleAdapter.notifyItemInserted(0);
                         Log.d("OKE", "OKE");
                     }
-
                     @Override
                     public void onFailure(Call<ReviewModel> call, Throwable t) {
 
                     }
                 });
-
-
                 dialog.dismiss();
-
             }
         });
-
         dialog.show();
-
     }
 
     private void AddReviews() {
@@ -201,22 +197,28 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void addItem(int optionId){
-        String pName = product.getProductName();
-        double pPrice = product.getPrice();
-        int pQuantity = 1;
-        OptionModel optionModel = null;
-        for(int i=0;i<product.getOptions().size(); i++){
-            if(optionId==product.getOptions().get(i).getOptionId()){
-                optionModel = product.getOptions().get(i);
-            }
+        if(isCheckExist(product.getProductId(), optionId)!=null){
+            Item uitem = isCheckExist(product.getProductId(), optionId);
+            uitem.setQuantity(uitem.getQuantity()+1);
+            ItemDatabase.getInstance(this).itemDao().updateItem(uitem);
+            return;
         }
+        String pName = product.getProductName();
+        int pQuantity = 1;
+        OptionModel optionModel = product.getOptions().get(oId);
+        double pPrice = optionModel.getPrice();
         String image = optionModel.getImages().get(0).getPath();
-        Item item = new Item(product.getProductId(), optionId,pName,image,1,
+        Item items = new Item(product.getProductId(), optionId,pName,image,pQuantity,
                 optionModel.getRam(),optionModel.getRom(),pPrice);
-        Log.e("dfsdfsdafasfsd",item.toString());
-        //add vào room
-        ItemDatabase.getInstance(this).itemDao().insertAll(item);
-        Toast.makeText(this, "Thêm product thành công", Toast.LENGTH_SHORT).show();
+        ItemDatabase.getInstance(this).itemDao().insertAll(items);
+    }
+
+    private Item isCheckExist(@NotNull int productId,@NotNull int optionId){
+        Item list = ItemDatabase.getInstance(this).itemDao().checkItem(productId, optionId);
+        if(list!=null){
+            return list;
+        }
+        return null;
     }
     void loadProductDetail(){
         tvName.setText(product.getProductName());

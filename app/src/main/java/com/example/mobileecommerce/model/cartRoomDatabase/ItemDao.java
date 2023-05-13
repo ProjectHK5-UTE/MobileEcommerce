@@ -18,14 +18,16 @@ public interface ItemDao {
     @Query("SELECT * FROM item WHERE id IN (:itemId)")
     List<Item> loadAllByIds(int[] itemId);
 
-    /*@Query("SELECT * FROM product WHERE id  IN (:id)")
-    Item checkUser(int id);
-    @Query("SELECT * FROM product WHERE meal  Like '%' || :name || '%'")
+    @Query("SELECT * FROM item WHERE productId  IN (:productId) and optionId IN (:optionId)")
+    Item checkItem(int productId, int optionId);
+    /*@Query("SELECT * FROM product WHERE meal  Like '%' || :name || '%'")
     List<Product> searchName(String name);*/
     @Insert
     void insertAll(Item... items);
     @Update
-    void update(Item... items);
+    void updateItem(Item... items);
     @Delete
     void delete(Item items);
+    @Query("DELETE FROM item")
+    void deleteAll();
 }

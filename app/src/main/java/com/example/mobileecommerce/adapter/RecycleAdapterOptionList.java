@@ -51,19 +51,19 @@ public class RecycleAdapterOptionList extends RecyclerView.Adapter<RecycleAdapte
     @Override
     public void onBindViewHolder(@NonNull RecycleAdapterOptionList.MyViewHolder holder, int position) {
         OptionModel optionModel = optionModelList.get(position);
-        if(position==0){
-            selectedPosition = holder.getAdapterPosition();
-            itemClickListener.onClick(optionModel.getOptionId());
-        }
         holder.radioButton.setText(optionModel.getRam() + " Ram, "+optionModel.getRom()+ " Rom");
-
+        /*if(position==0){
+            holder.radioButton.setChecked(true);
+        }else{
+            holder.radioButton.setChecked(position==selectedPosition);
+        }*/
         holder.radioButton.setChecked(position==selectedPosition);
         holder.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     selectedPosition = holder.getAdapterPosition();
-                    itemClickListener.onClick(optionModel.getOptionId());
+                    itemClickListener.onClick(selectedPosition);
                 }
             }
         });

@@ -44,12 +44,10 @@ public class MyCartActivity extends AppCompatActivity {
             public void plusQuantity(Item item) {
                 clickplusQuantity(item);
             }
-
             @Override
             public void minusQuantity(Item item) {
                 clickminusQuantity(item);
             }
-
             @Override
             public void deleteItem(Item item) {
                 clickDeleteItem(item);
@@ -69,7 +67,6 @@ public class MyCartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +77,7 @@ public class MyCartActivity extends AppCompatActivity {
 
     private void clickplusQuantity(Item item){
         item.setQuantity(item.getQuantity()+1);
-        ItemDatabase.getInstance(this).itemDao().update(item);
+        ItemDatabase.getInstance(this).itemDao().updateItem(item);
         loadData();
     }
     private void clickminusQuantity(Item item){
@@ -90,7 +87,7 @@ public class MyCartActivity extends AppCompatActivity {
             return;
         }
         item.setQuantity(quantity-1);
-        ItemDatabase.getInstance(this).itemDao().update(item);
+        ItemDatabase.getInstance(this).itemDao().updateItem(item);
         loadData();
     }
 
@@ -101,7 +98,6 @@ public class MyCartActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ItemDatabase.getInstance(MyCartActivity.this).itemDao().delete(item);
                         Toast.makeText(MyCartActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
                         loadData();
                     }
