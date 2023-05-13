@@ -98,6 +98,7 @@ public class MyCartActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ItemDatabase.getInstance(MyCartActivity.this).itemDao().delete(item);
                         Toast.makeText(MyCartActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
                         loadData();
                     }

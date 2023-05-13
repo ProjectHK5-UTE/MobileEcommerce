@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,18 +14,24 @@ import android.widget.TextView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.AdminRecycleAdapterBrandsList;
-import com.example.mobileecommerce.model.CategoriesListModellClass;
+import com.example.mobileecommerce.api.BrandAPI;
+import com.example.mobileecommerce.model.BrandsModel;
+import com.example.mobileecommerce.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdminPanelBrandActivity extends AppCompatActivity {
-    private ArrayList<CategoriesListModellClass> categoriesListModellClasses;
+    private List<BrandsModel> brandsModels;
     private AdminRecycleAdapterBrandsList mAdapter2;
     Button btnAdd;
     RecyclerView recyclerview;
-    private Integer[] image1 = {Integer.valueOf((int) R.drawable.mobile_cat), Integer.valueOf((int) R.drawable.tv_cat), Integer.valueOf((int) R.drawable.laptop_cat), Integer.valueOf((int) R.drawable.all_cat)};
-    private String[] title1 = {"Mobile", "TV", "Laptop", "All"};
     TextView title;
+    BrandAPI brandAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +47,34 @@ public class AdminPanelBrandActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddBrandDialogActivity dialog = new AddBrandDialogActivity(AdminPanelBrandActivity.this);
-                dialog.show();
+                Intent intent = new Intent(AdminPanelBrandActivity.this.getBaseContext(), AddBrandDialogActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
+        brandsModels = new ArrayList<>();
+        GetBrands();
+    }
 
-        this.categoriesListModellClasses = new ArrayList<>();
-        for (int i = 0; i < this.image1.length; i++) {
-            this.categoriesListModellClasses.add(new CategoriesListModellClass(this.image1[i], this.title1[i]));
-        }
-        this.mAdapter2 = new AdminRecycleAdapterBrandsList(this, this.categoriesListModellClasses);
-        this.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        this.recyclerview.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerview.setAdapter(this.mAdapter2);
+    private void GetBrands(){
+        brandAPI= RetrofitClient.getRetrofit().create(BrandAPI.class);
+        brandAPI.getBrands().enqueue(new Callback<List<BrandsModel>>() {
+            @Override
+            public void onResponse(Call<List<BrandsModel>> call, Response<List<BrandsModel>> response) {
+                if(response.isSuccessful()){
+                    brandsModels = response.body();
+                    mAdapter2 = new AdminRecycleAdapterBrandsList(brandsModels, AdminPanelBrandActivity.this);
+                    recyclerview.setLayoutManager(new LinearLayoutManager(AdminPanelBrandActivity.this));
+                    recyclerview.setItemAnimator(new DefaultItemAnimator());
+                    recyclerview.setAdapter(mAdapter2);
+                }else{
+                    int statusCode = response.code();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<BrandsModel>> call, Throwable t) {
+
+            }
+        });
     }
 }

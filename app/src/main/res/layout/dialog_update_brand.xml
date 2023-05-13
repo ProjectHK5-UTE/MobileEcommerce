@@ -13,16 +13,28 @@
         android:textStyle="bold"
         android:gravity="center" />
 
+    <TextView
+        android:id="@+id/oldName_"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="Old Brand Name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:gravity="left"
+        android:layout_gravity="center_horizontal|left"
+        android:nextFocusDown="@+id/edtDescription"
+        android:layout_marginTop="16dp" />
     <EditText
         android:id="@+id/edtName_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Brand Name"
+        android:hint="New Brand Name"
         android:inputType="text"
         android:maxLines="1"
         android:imeOptions="actionNext"
         android:nextFocusDown="@+id/edtDescription"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="5dp" />
 
     <ImageView
         android:id="@+id/selected_image"
