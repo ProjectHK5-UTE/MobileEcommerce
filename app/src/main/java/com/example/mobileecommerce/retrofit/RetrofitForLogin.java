@@ -11,6 +11,7 @@ public class RetrofitForLogin {
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
     private static final String BASE_URL = "https://2c41-123-21-140-66.ngrok-free.app ";
 
+
     public static Retrofit getRetrofitForLogin() {
         if(retrofit == null) {
             retrofit = new Retrofit.Builder()

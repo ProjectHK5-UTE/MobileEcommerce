@@ -55,7 +55,6 @@ public class ProductListActivity extends AppCompatActivity {
 
     ProductAPI productAPI = RetrofitClient.getRetrofit().create(ProductAPI.class);
 
-    private ProgressDialog progressDialog;
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
@@ -72,8 +71,6 @@ public class ProductListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please Wait...");
 
         LoadAllProduct();
 
@@ -185,19 +182,16 @@ public class ProductListActivity extends AppCompatActivity {
                 int endBattery = sliderBattery.getValues().get(1).intValue();
                 double startScreen = sliderScreen.getValues().get(0);
                 double endScreen = sliderScreen.getValues().get(1);
-                progressDialog.show();
                 productAPI.filterProduct(startPrice, endPrice, startBattery, endBattery, startScreen, endScreen).enqueue(new Callback<List<ProductGridModel>>() {
                     @Override
                     public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
                         listProduct = response.body();
                         productRecycleAdapter = new ProductRecycleAdapter(listProduct, ProductListActivity.this);
                         recyclerView.setAdapter(productRecycleAdapter);
-                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onFailure(Call<List<ProductGridModel>> call, Throwable t) {
-                        progressDialog.dismiss();
                     }
                 });
                 dialog.dismiss();

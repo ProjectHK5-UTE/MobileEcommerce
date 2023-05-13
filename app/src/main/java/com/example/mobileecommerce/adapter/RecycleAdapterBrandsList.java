@@ -62,12 +62,12 @@ public class RecycleAdapterBrandsList extends RecyclerView.Adapter<RecycleAdapte
         return 0;
     }
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public CircleImageView images;
+        public ImageView images;
         private TextView title;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            images=itemView.findViewById(R.id.image);
-            title=itemView.findViewById(R.id.title);
+            images=itemView.findViewById(R.id.image_brand_products);
+            title=itemView.findViewById(R.id.title_brand_products);
         }
     }
 }

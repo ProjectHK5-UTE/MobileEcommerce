@@ -1,5 +1,6 @@
 package com.example.mobileecommerce.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -25,12 +26,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BrandsListActivity extends AppCompatActivity {
-
-
     private List<BrandsModel> brandsModels;
     private RecycleAdapterBrandsList mAdapter2;
     private RecyclerView recyclerview;
-    TextView title;
     ImageView iv_back;
     BrandAPI brandAPI;
 
@@ -39,10 +37,18 @@ public class BrandsListActivity extends AppCompatActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_product_list);
+        setContentView(R.layout.activity_brands_product_list);
         anhXa();
-        title.setText("Brands");
         GetBrands();
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent = new Intent(BrandsListActivity.this, HomePageActivity.class);
+                startActivity(intent);*/
+                onBackPressed();
+            }
+        });
     }
     private void GetBrands(){
         brandAPI= RetrofitClient.getRetrofit().create(BrandAPI.class);
@@ -66,8 +72,7 @@ public class BrandsListActivity extends AppCompatActivity {
         });
     }
         void anhXa(){
-            recyclerview = findViewById(R.id.recyclerview_list_product);
-            title = findViewById(R.id.title);
+            recyclerview = findViewById(R.id.recyclerview_brands);
             iv_back = findViewById(R.id.iv_back);
         }
     }

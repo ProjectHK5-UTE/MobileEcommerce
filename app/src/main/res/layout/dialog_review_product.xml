@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_corner_16"
+    android:orientation="vertical"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@drawable/bg_yellow_corner_16_top_left_top_right"
+        android:text="Send Your FeedBack" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please send us your feedback"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="80dp"/>
+        
+        <EditText
+            android:id="@+id/edt_content_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="@drawable/bg_white_corner_10_border_gray"
+            android:layout_marginTop="16dp"
+            android:hint="FeedBack"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="4dp"
+            android:text="Rate" />
+
+        <SeekBar
+            android:id="@+id/sb_rate_review"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:max="4"
+            android:progress="0"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="60dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btn_no_thank"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_gray_corner_10"
+                android:text="NO, THANK YOU" />
+
+            <Button
+                android:id="@+id/btn_send_review"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SEND"
+                android:layout_marginLeft="32dp"
+                android:background="@drawable/bg_yellow_corner_10"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

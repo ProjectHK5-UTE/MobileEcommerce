@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -70,6 +71,13 @@ public class ProductGridActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     private void searchProduct(String searchQuery) {
         // Tìm kiếm sản phẩm theo tên
@@ -94,7 +102,6 @@ public class ProductGridActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ProductGridModel>> call, Response<List<ProductGridModel>> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(ProductGridActivity.this, "dadaad", Toast.LENGTH_SHORT).show();
                     productGridModelList = response.body();
                     mAdapter2 = new RecycleAdapterProductGrid(productGridModelList, ProductGridActivity.this);
                     recyclerview.setLayoutManager(new GridLayoutManager(ProductGridActivity.this, 2));
@@ -102,17 +109,15 @@ public class ProductGridActivity extends AppCompatActivity {
                     recyclerview.setAdapter(mAdapter2);
                 }else{
                     int statusCode = response.code();
-                    Toast.makeText(ProductGridActivity.this, "dm", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<ProductGridModel>> call, Throwable t) {
-                Toast.makeText(ProductGridActivity.this, "cc", Toast.LENGTH_SHORT).show();
             }
         });
     }
     void anhXa(){
-        recyclerview = findViewById(R.id.recyclerview);
+        recyclerview = findViewById(R.id.recyclerview_product_grid);
         title = findViewById(R.id.title);
         iv_back = findViewById(R.id.iv_back);
         inputSearch = findViewById(R.id.search_editext);

@@ -29,6 +29,10 @@ public class ProductGridModel implements Serializable {
         this.options = options;
     }
 
+    public ProductGridModel(int productId) {
+        this.productId = productId;
+    }
+
     public int getProductId() {
         return productId;
     }

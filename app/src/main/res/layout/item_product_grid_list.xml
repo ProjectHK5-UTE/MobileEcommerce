@@ -31,9 +31,9 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/image"
-                        android:layout_width="66dp"
-                        android:layout_height="133dp"
+                        android:id="@+id/image_product_grid"
+                        android:layout_width="144dp"
+                        android:layout_height="176dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:src="@drawable/s9plus" />
@@ -47,7 +47,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txtName"
+                            android:id="@+id/tv_pGrid_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -62,14 +62,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="Rs"
-                                android:textColor="@color/txt_color"
-                                android:textSize="13.3sp" />
-
-                            <TextView
+                                android:id="@+id/tv_pGrid_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_bold"
@@ -78,7 +71,15 @@
                                 android:textSize="13.3sp" />
 
                             <TextView
-                                android:id="@+id/offer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="$"
+                                android:textColor="@color/txt_color"
+                                android:textSize="13.3sp" />
+
+                            <TextView
+                                android:id="@+id/tv_pGrid_os"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
@@ -90,22 +91,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/white_light_rect1"
-                    android:fontFamily="@font/roboto_medium"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="3dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="3dp"
-                    android:text="Save 30%"
-                    android:textColor="#1c1d1d"
-                    android:textSize="8.7sp" />
             </FrameLayout>
         </LinearLayout>
 
