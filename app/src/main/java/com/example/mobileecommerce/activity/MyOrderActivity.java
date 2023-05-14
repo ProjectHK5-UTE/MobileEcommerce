@@ -2,6 +2,7 @@ package com.example.mobileecommerce.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -20,6 +21,7 @@ import com.example.mobileecommerce.model.dto.LineitemDTO;
 import com.example.mobileecommerce.model.dto.RequestOrderDTO;
 import com.example.mobileecommerce.model.dto.ResponseOrderDTO;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,10 @@ public class MyOrderActivity extends AppCompatActivity {
     private RecyclerView recyclerview;
     TextView title;
     OrderAPI orderAPI = RetrofitClient.getRetrofit().create(OrderAPI.class);
+    private String username;
+    static android.content.SharedPreferences pres;
+
+    SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -63,11 +69,13 @@ public class MyOrderActivity extends AppCompatActivity {
             }
         });
         this.recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
+        username = SharedPreferences.getUsername();
+        Log.e("Username trong myorder","là" + username);
         getOrder();
     }
 
     void getOrder(){
-        orderAPI.getOrderByUsername("thangpham").enqueue(new Callback<List<ResponseOrderDTO>>() {
+        orderAPI.getOrderByUsername(username).enqueue(new Callback<List<ResponseOrderDTO>>() {
             @Override
             public void onResponse(Call<List<ResponseOrderDTO>> call, Response<List<ResponseOrderDTO>> response) {
                 responseOrderDTOS = response.body();

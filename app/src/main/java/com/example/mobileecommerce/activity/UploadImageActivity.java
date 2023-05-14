@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,9 +20,11 @@ import android.widget.Toast;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.api.CustomerAPI;
+import com.example.mobileecommerce.model.dto.ResponseDTO;
 import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.service.RealPathUtil;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -50,6 +52,10 @@ public class UploadImageActivity extends AppCompatActivity {
     ProgressDialog mProgressDialog;
 
     CustomerAPI customerAPI = RetrofitClient.getRetrofit().create(CustomerAPI.class);
+    private String username;
+    static SharedPreferences pres;
+
+    SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,6 @@ public class UploadImageActivity extends AppCompatActivity {
                 UploadImageActivity.this.finish();
             }
         });
-
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Please wait....");
 
@@ -74,7 +79,7 @@ public class UploadImageActivity extends AppCompatActivity {
         viewGallary = (TextView) findViewById(R.id.viewGallery);
         imgPreview = (ImageView) findViewById(R.id.imgPreview);
 
-        getImage();
+        callAPIGetUserName();
 
         chooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +97,25 @@ public class UploadImageActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void callAPIGetUserName() {
+        String email = SharedPreferences.getEmail();
+        customerAPI.getUserName(email).enqueue(new Callback<ResponseDTO>() {
+            @Override
+            public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
+                if(response.isSuccessful()){
+                    username= response.body().getMessage();
+                    getImage(username);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDTO> call, Throwable t) {
+                Log.e("CALL API get Username","Fail");
+            }
+        });
+    }
+
     private void showFileChoose(){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -101,10 +125,10 @@ public class UploadImageActivity extends AppCompatActivity {
 
     private void UpdateAvatar() {
         mProgressDialog.show();
-        RequestBody responseBodyUsername = RequestBody.create(MediaType.parse("multipart/form-data"), "thangngoc");
+        RequestBody responseBodyUsername = RequestBody.create(MediaType.parse("multipart/form-data"), username);
 
         String strRealPath = RealPathUtil.getRealPath(this, mUri);
-        Log.e("Real Path", strRealPath);
+        Log.e("Real Path", "là"+strRealPath);
         File file = new File(strRealPath);
         RequestBody requestBodyAvt = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part multipartBodyAvt = MultipartBody.Part.createFormData("images", file.getName(), requestBodyAvt);
@@ -128,8 +152,8 @@ public class UploadImageActivity extends AppCompatActivity {
         });
     }
 
-    private void getImage() {
-        customerAPI.getImage("thangngoc").enqueue(new Callback<ResponseBody>() {
+    private void getImage(String username) {
+        customerAPI.getImage(username).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()) {

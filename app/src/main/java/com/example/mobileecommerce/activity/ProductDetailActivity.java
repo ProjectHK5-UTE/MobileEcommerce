@@ -2,6 +2,7 @@ package com.example.mobileecommerce.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import com.example.mobileecommerce.model.ReviewModel;
 import com.example.mobileecommerce.model.cartRoomDatabase.ItemDatabase;
 import com.example.mobileecommerce.model.cartRoomDatabase.entity.Item;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,12 +62,19 @@ public class ProductDetailActivity extends AppCompatActivity {
     List<ReviewModel> listReview;
     Button btnAddReview;
     ViewPagerAdapter mViewPagerAdapter;
+    private String username;
+
+    SharedPreferencesManager pres;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_product_detail);
         anhXa();
+        //get username
+        pres = SharedPreferencesManager
+                .getInstance(getSharedPreferences("Username", MODE_PRIVATE));
+        username = pres.getUsername();
         Intent intent = getIntent();
         product = (ProductGridModel) intent.getSerializableExtra("product");
         loadProductDetail();
@@ -145,7 +154,6 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
             }
         });
-
         btnSendReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +161,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 reviewModel.setContent(edtContent.getText().toString());
                 reviewModel.setRate(sbRate.getProgress() + 1);
                 reviewModel.setProduct(new ProductGridModel(product.getProductId()));
-                reviewModel.setCustomer(new CustomerModel("thangpham"));
+                reviewModel.setCustomer(new CustomerModel(username));
                 reviewAPI.insertReview(reviewModel).enqueue(new Callback<ReviewModel>() {
                     @Override
                     public void onResponse(Call<ReviewModel> call, Response<ReviewModel> response) {
@@ -172,8 +180,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
     private void AddReviews() {
-        reviewAPI.getReviewsByProductId(product.getProductId(), "thangpham").enqueue(new Callback<List<ReviewModel>>() {
+        reviewAPI.getReviewsByProductId(product.getProductId(), username).enqueue(new Callback<List<ReviewModel>>() {
             @Override
             public void onResponse(Call<List<ReviewModel>> call, Response<List<ReviewModel>> response) {
                 listReview = response.body();

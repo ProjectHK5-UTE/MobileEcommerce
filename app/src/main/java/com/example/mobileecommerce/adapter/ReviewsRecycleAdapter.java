@@ -3,8 +3,10 @@ package com.example.mobileecommerce.adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,9 @@ import com.example.mobileecommerce.api.ReviewAPI;
 import com.example.mobileecommerce.model.ProductGridModel;
 import com.example.mobileecommerce.model.ReviewModel;
 import com.example.mobileecommerce.model.ReviewModelClass;
+import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 
 import java.util.List;
 
@@ -43,6 +47,11 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
     ReviewAPI reviewAPI = RetrofitClient.getRetrofit().create(ReviewAPI.class);
 
     private Dialog dialog;
+
+    private String username;
+    static android.content.SharedPreferences pres;
+
+    SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
 
 
     public ReviewsRecycleAdapter(List<ReviewModel> listReview, Context context) {
@@ -75,19 +84,21 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
         holder.dateReview.setText(reviewModel.getUpdateAt().toString());
         holder.contentReview.setText(reviewModel.getContent());
 
-
+        username = SharedPreferences.getUsername();
+        Log.e("USERNAME trong Review", "Là" + username);
         // 5 phut
-        if(reviewModel.getCustomer().getUserName().equals("thangpham") &&
+        if(reviewModel.getCustomer().getUserName().equals(username) &&
                 System.currentTimeMillis() - reviewModel.getUpdateAt().getTime() < 5 * 60 * 1000) {
             holder.btnEditReview.setVisibility(View.VISIBLE);
             holder.btnRemoveReview.setVisibility(View.VISIBLE);
 
             holder.btnRemoveReview.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
-                    reviewAPI.deleteReview(reviewModel.getReviewId()).enqueue(new Callback<ReviewModel>() {
+                    reviewAPI.deleteReview(reviewModel.getReviewId()).enqueue(new Callback<ResponseObject>() {
                         @Override
-                        public void onResponse(Call<ReviewModel> call, Response<ReviewModel> response) {
+                        public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                             if(response.isSuccessful()) {
                                 listReview.remove(position);
                                 notifyItemRemoved(position);
@@ -95,7 +106,8 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
                         }
 
                         @Override
-                        public void onFailure(Call<ReviewModel> call, Throwable t) {
+                        public void onFailure(Call<ResponseObject> call, Throwable t) {
+
                         }
                     });
                 }

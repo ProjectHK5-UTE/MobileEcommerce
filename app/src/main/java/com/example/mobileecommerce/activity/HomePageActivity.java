@@ -1,6 +1,7 @@
 package com.example.mobileecommerce.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ import com.example.mobileecommerce.model.UserModel;
 import com.example.mobileecommerce.model.dto.ResponseDTO;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.retrofit.RetrofitProvince;
+import com.example.mobileecommerce.service.JwtService;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
@@ -54,10 +58,14 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     private int[] image2 = {R.drawable.home_, R.drawable.cart_, R.drawable.order, R.drawable.category, R.drawable.offer, R.drawable.profile_};
     private Toolbar toolbar;
+    SharedPreferencesManager pres;
+    ImageView ecart;
 
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        pres = SharedPreferencesManager
+                .getInstance(getSharedPreferences("jwt", MODE_PRIVATE));
         checkJWT();
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_home_page);
@@ -92,13 +100,37 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         this.actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
         invalidateOptionsMenu();
         this.fregmentlayout = (LinearLayout) findViewById(R.id.fregmentlayout);
+        this.ecart = findViewById(R.id.iv_ecart);
+        this.ecart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoCart();
+            }
+        });
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
         beginTransaction.add(R.id.fregmentlayout, homeFragment, "Home Fragment");
         beginTransaction.commit();
     }
 
+    private void gotoCart() {
+        Intent intent = new Intent(this, MyCartActivity.class);
+        startActivity(intent);
+    }
+
     private void checkJWT() {
+        try {
+            String token = pres.getJWT();
+            if (token != null) {
+                if (!JwtService.validateTokenLogin(token)) {
+                    gotoLogin();
+                }
+            }else{
+                gotoLogin();
+            }
+        }catch (Exception e){
+            Log.e("Lỗi",e.getMessage());
+        }
 
     }
 

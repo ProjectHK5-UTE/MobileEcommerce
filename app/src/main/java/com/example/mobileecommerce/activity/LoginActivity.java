@@ -17,7 +17,6 @@ import com.example.mobileecommerce.model.dto.ResponseDTO;
 import com.example.mobileecommerce.retrofit.RetrofitForLogin;
 import com.example.mobileecommerce.service.JwtService;
 import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
-import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
@@ -25,7 +24,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    SharedPreferencesManager sharedPreferencesManager;
+    SharedPreferencesManager SharedPreferencesSaveToken;
+    SharedPreferencesManager SharedPreferencesSaveEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +38,10 @@ public class LoginActivity extends AppCompatActivity {
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
 
-        sharedPreferencesManager = SharedPreferencesManager
+        SharedPreferencesSaveToken = SharedPreferencesManager
                 .getInstance(getSharedPreferences("jwt", MODE_PRIVATE));
-
+        SharedPreferencesSaveEmail = SharedPreferencesManager
+                .getInstance(getSharedPreferences("email", MODE_PRIVATE));
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     ResponseDTO responseDTO = response.body();
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     saveJWT(responseDTO.getMessage());
+                    saveEmail(username);
                     gotoHome(responseDTO.getMessage());
                 } else{
                     Toast.makeText(LoginActivity.this, "Wrong When You Login!!!", Toast.LENGTH_SHORT).show();
@@ -81,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void gotoHome(String token) {
@@ -95,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void saveJWT(String token) {
-        sharedPreferencesManager.saveJWT(token);
+        SharedPreferencesSaveToken.saveJWT(token);
+    }
+    private void saveEmail(String username) {
+        SharedPreferencesSaveEmail.saveEmail(username);
     }
 }

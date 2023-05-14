@@ -2,6 +2,7 @@ package com.example.mobileecommerce.api;
 
 import com.example.mobileecommerce.model.CustomerModel;
 import com.example.mobileecommerce.model.UserModel;
+import com.example.mobileecommerce.model.dto.ResponseDTO;
 import com.example.mobileecommerce.model.dto.ResponseObject;
 
 import okhttp3.MultipartBody;
@@ -35,4 +36,7 @@ public interface CustomerAPI {
     @GET("api/user/change-password")
     Call<UserModel> updatePassword(@Query("username") String username, @Query("oldPassword") String oldPassword,
                                    @Query("newPassword") String newPassword);
+
+    @GET("api/user/getUserName")
+    Call<ResponseDTO> getUserName(@Query("email") String email);
 }

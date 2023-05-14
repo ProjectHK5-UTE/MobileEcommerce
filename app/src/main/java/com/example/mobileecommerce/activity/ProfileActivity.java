@@ -1,13 +1,16 @@
 package com.example.mobileecommerce.activity;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -24,9 +27,11 @@ import com.example.mobileecommerce.api.CustomerAPI;
 import com.example.mobileecommerce.api.ProvinceAPI;
 import com.example.mobileecommerce.model.CustomerModel;
 import com.example.mobileecommerce.model.Province;
+import com.example.mobileecommerce.model.dto.ResponseDTO;
 import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.retrofit.RetrofitProvince;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -74,6 +79,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
+    private String username;
+    static SharedPreferences pres;
+    SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
+
+    SharedPreferencesManager pres1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +99,9 @@ public class ProfileActivity extends AppCompatActivity {
         mapView();
 
         context = this;
-
-        callAPI();
-        getAvatar();
+        pres1 = SharedPreferencesManager
+                .getInstance(getSharedPreferences("Username", MODE_PRIVATE));
+        callAPIGetUserName();
 
 
 //        imageView.setOnClickListener(new View.OnClickListener() {
@@ -123,11 +134,41 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, HomePageActivity.class);
-                startActivity(intent);
+                removeData();
+                gotoLogin();
             }
         });
     }
+    private void gotoLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void removeData() {
+        SharedPreferences.removeJWT();
+        SharedPreferences.removeEmail();
+        SharedPreferences.removeUsername();
+    }
+    private void callAPIGetUserName() {
+        String email = SharedPreferences.getEmail();
+        customerAPI.getUserName(email).enqueue(new Callback<ResponseDTO>() {
+            @Override
+            public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
+                if(response.isSuccessful()){
+                    username= response.body().getMessage();
+                    pres1.saveUsername(username);
+                    callAPI(username);
+                    getAvatar(username);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDTO> call, Throwable t) {
+                Log.e("CALL API get Username","Fail");
+            }
+        });
+    }
+
 
     private void mapView() {
         imageView = (ImageView) findViewById(R.id.iv_back);
@@ -281,8 +322,8 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void callAPI() {
-        customerAPI.getCustomerInfor("thangpham").enqueue(new Callback<ResponseObject>() {
+    private void callAPI(String username) {
+        customerAPI.getCustomerInfor(username).enqueue(new Callback<ResponseObject>() {
             @Override
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if(response.isSuccessful()) {
@@ -304,14 +345,14 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseObject> call, Throwable t) {
-                Toast.makeText(ProfileActivity.this, "Call API Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 
-    private void getAvatar() {
-        customerAPI.getImage("thangpham").enqueue(new Callback<ResponseBody>() {
+    private void getAvatar(String username) {
+        customerAPI.getImage(username).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()) {

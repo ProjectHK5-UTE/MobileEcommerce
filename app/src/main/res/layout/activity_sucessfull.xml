@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center"
-        android:text="#364290"
+        android:text=""
         android:textColor="@color/txt_color"
         android:textSize="20sp" />
 

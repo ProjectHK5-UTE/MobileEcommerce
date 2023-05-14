@@ -2,6 +2,7 @@ package com.example.mobileecommerce.api;
 
 import com.example.mobileecommerce.model.CustomerModel;
 import com.example.mobileecommerce.model.ReviewModel;
+import com.example.mobileecommerce.model.dto.ResponseObject;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface ReviewAPI {
     Call<ReviewModel> insertReview(@Body ReviewModel reviewModel);
 
     @DELETE("api/review/{id}")
-    Call<ReviewModel> deleteReview(@Path("id") Integer reviewId);
+    Call<ResponseObject> deleteReview(@Path("id") Integer reviewId);
 
     @PUT("api/review")
     Call<ReviewModel> updateReview(@Query("id") Integer reviewId,

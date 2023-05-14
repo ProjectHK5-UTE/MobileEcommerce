@@ -13,6 +13,7 @@ import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.api.CustomerAPI;
 import com.example.mobileecommerce.model.UserModel;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +25,10 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     EditText edtOldPassword;
     EditText edtNewPassword;
     EditText edtRepeatPassword;
+    private String username;
+    static android.content.SharedPreferences pres;
+
+    SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
 
     CustomerAPI customerAPI = RetrofitClient.getRetrofit().create(CustomerAPI.class);
 
@@ -33,30 +38,27 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_update_password);
         mapView();
-
+        username = SharedPreferences.getUsername();
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String newPassword = edtNewPassword.getText().toString();
                 String repeatPassword = edtRepeatPassword.getText().toString();
                 String oldPassword = edtOldPassword.getText().toString();
-                if(newPassword.length() < 7) {
-                    System.out.println("New password must be longer than 7 characters");
-                    Toast.makeText(getApplicationContext(), "New password must be longer than 7 characters", Toast.LENGTH_SHORT).show();
+                if(newPassword.length() < 6) {
+                    Toast.makeText(getApplicationContext(), "New password must be longer than 6 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(!newPassword.matches(".*\\d.*")) {
-                    System.out.println("New password must have at least 1 digit");
-                    Toast.makeText(getApplicationContext(), "New password must have at least 1 digit", Toast.LENGTH_SHORT).show();
+                if(!newPassword.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()-+={}\\[\\]|;:'\"<>,.?/~`]).+$")) {
+                    Toast.makeText(getApplicationContext(), "Password must contain 3 uppercase, lowercase, and special characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!newPassword.equals(repeatPassword)) {
-                    System.out.println("New password and repeat password do not match");
                     Toast.makeText(getApplicationContext(), "New password and repeat password do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                customerAPI.updatePassword("thangngoc", oldPassword, newPassword).enqueue(new Callback<UserModel>() {
+                customerAPI.updatePassword(username, oldPassword, newPassword).enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                         if(response.isSuccessful()) {

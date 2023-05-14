@@ -30,6 +30,8 @@ public class BrandsListActivity extends AppCompatActivity {
     private RecycleAdapterBrandsList mAdapter2;
     private RecyclerView recyclerview;
     ImageView iv_back;
+
+    TextView title;
     BrandAPI brandAPI;
 
     /* JADX INFO: Access modifiers changed from: protected */
@@ -39,6 +41,7 @@ public class BrandsListActivity extends AppCompatActivity {
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_brands_product_list);
         anhXa();
+        title.setText("Brands List");
         GetBrands();
 
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -74,5 +77,6 @@ public class BrandsListActivity extends AppCompatActivity {
         void anhXa(){
             recyclerview = findViewById(R.id.recyclerview_brands);
             iv_back = findViewById(R.id.iv_back);
+            title = findViewById(R.id.title);
         }
     }

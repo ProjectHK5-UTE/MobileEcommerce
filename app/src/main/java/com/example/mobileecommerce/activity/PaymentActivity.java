@@ -22,6 +22,7 @@ import com.example.mobileecommerce.model.dto.LineitemDTO;
 import com.example.mobileecommerce.model.dto.RequestOrderDTO;
 import com.example.mobileecommerce.model.dto.OrderResponseDTO;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,11 @@ public class PaymentActivity extends AppCompatActivity {
     double ptotal;
     ProgressDialog mProgressDialog;
     int i;
+
+    private String username;
+    static android.content.SharedPreferences pres;
+
+    SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -52,7 +58,7 @@ public class PaymentActivity extends AppCompatActivity {
         anhXa();
         Intent intent = getIntent();
         ptotal = (double) intent.getSerializableExtra("total");
-
+        username = SharedPreferences.getUsername();
         total.setText(String.valueOf(ptotal)+" $");
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
@@ -114,7 +120,7 @@ public class PaymentActivity extends AppCompatActivity {
         for (i = 0; i < itemList.size(); i++) {
             new GetProductTask(i).execute();
         }
-        customerDTO = new RequestCustomerDTO("thangpham", "saigon", null, "Sinh Hung", "0123456789");
+        customerDTO = new RequestCustomerDTO(username, null, null, null, null);
         orderDTO = new RequestOrderDTO(ptotal, lineitemDTO, customerDTO);
     }
 

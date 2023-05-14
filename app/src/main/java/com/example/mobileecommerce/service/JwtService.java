@@ -55,7 +55,7 @@ public class JwtService {
     }
 
     // Từ token lấy ra Date
-    private Date getExpirationDateFromToken(String token) {
+    private static Date getExpirationDateFromToken(String token) {
         token = stripBearerToken(token);
         Date expiration = null;
         JWTClaimsSet claims = getClaimsFromToken(token);
@@ -97,14 +97,14 @@ public class JwtService {
     }
 
     // Kiểm tra token có hết hạn hay không
-    private Boolean isTokenExpired(String token) {
+    private static Boolean isTokenExpired(String token) {
         token = stripBearerToken(token);
         Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
     // Kiểm tra token có hợp lệ không
-    public Boolean validateTokenLogin(String token) {
+    public static Boolean validateTokenLogin(String token) {
         token = stripBearerToken(token);
         if (token == null || token.trim().length() == 0) {
             return false;

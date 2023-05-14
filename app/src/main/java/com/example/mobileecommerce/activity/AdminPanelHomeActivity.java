@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +20,7 @@ import com.example.mobileecommerce.api.MonthlyBillAPI;
 import com.example.mobileecommerce.api.OrderByBrandAPI;
 import com.example.mobileecommerce.api.StatisticAPI;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
+import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
 
@@ -36,6 +38,8 @@ import retrofit2.Response;
 public class AdminPanelHomeActivity extends AppCompatActivity {
 
     ImageView brandImageView;
+
+    ImageView iv_back;
     TextView reviewsQuantityTextView;
     TextView productsQuantityTextView;
     TextView customersQuantityTextView;
@@ -47,6 +51,9 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
     StatisticAPI statisticAPI;
     MonthlyBillAPI monthlyBillAPI;
     OrderByBrandAPI orderByBrandAPI;
+
+    static android.content.SharedPreferences pres;
+    SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,7 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
         revenueQuantityTextView = (TextView) findViewById(R.id.revenue_quantity_textview);
         reviewsQuantityTextView = (TextView) findViewById(R.id.review_quantity_textview);
         title = (TextView) findViewById(R.id.title);
+        this.iv_back = (ImageView) findViewById(R.id.iv_back);
         listStatistic = new ArrayList<Float>();
         pieChart = (RecyclerView) findViewById(R.id.pie_chart_recyclerview);
         barChart = (RecyclerView) findViewById(R.id.bar_chart_recyclerview);
@@ -73,7 +81,13 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        this.iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeData();
+                gotoLogin();
+            }
+        });
         // Call API get Data cho số liệu thống kê
         statisticAPI = RetrofitClient.getRetrofit().create(StatisticAPI.class);
         Call<HashMap<String, Float>> call = statisticAPI.getStatistics();
@@ -164,5 +178,16 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void gotoLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void removeData() {
+        SharedPreferences.removeJWT();
+        SharedPreferences.removeEmail();
+        SharedPreferences.removeUsername();
     }
 }
