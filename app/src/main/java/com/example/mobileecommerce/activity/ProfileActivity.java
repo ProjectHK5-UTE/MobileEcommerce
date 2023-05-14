@@ -147,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void removeData() {
         SharedPreferences.removeJWT();
         SharedPreferences.removeEmail();
-        SharedPreferences.removeUsername();
+        //SharedPreferences.removeUsername();
     }
     private void callAPIGetUserName() {
         String email = SharedPreferences.getEmail();
