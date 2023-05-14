@@ -21,19 +21,21 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_width="260dp"
+                    android:layout_height="290dp"
                     android:layout_gravity="center"
                     android:clipToPadding="false" />
 
                 <me.relex.circleindicator.CircleIndicator
                     android:id="@+id/indicator"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="60dp"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
                     app:ci_drawable="@drawable/ic_circular_selected"
@@ -55,6 +57,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Rs. 1450"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
                     android:textColor="@color/txt_color" />
 
                 <TextView
@@ -64,7 +68,7 @@
                     android:layout_marginLeft="15dp"
                     android:text="@string/rs_2500"
                     android:textColor="#7c7b7b"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -81,12 +85,25 @@
                     android:textSize="11.3sp" />
             </LinearLayout>
 
+            <RatingBar
+                android:theme="@style/RatingBar"
+                android:id="@+id/ratingbar"
+                android:layout_width="82dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="0.5"
+                style="?android:attr/ratingBarStyleSmall"/>
+
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/roboto_regular"
                 android:lineSpacingExtra="3dp"
@@ -97,7 +114,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:orientation="horizontal">
 
@@ -105,7 +122,6 @@
                     android:id="@+id/btn_addtocart"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/btn_red_rect"
@@ -114,9 +130,10 @@
                     android:paddingLeft="15sp"
                     android:paddingRight="15sp"
                     android:text="Add To Cart"
+                    android:textStyle="bold"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="45dp"
@@ -190,10 +207,12 @@
                     android:gravity="right">
                     <Button
                         android:id="@+id/btn_add_review"
-                        android:layout_width="60dp"
+                        android:layout_width="70dp"
                         android:layout_height="40dp"
                         android:text="Add"
-                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:textColor="@color/duskYellow"
                         android:background="@drawable/btn_red_rect"
                         android:fontFamily="@font/roboto_regular"
                         />

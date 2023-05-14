@@ -42,7 +42,7 @@
 
             <Button
                 android:id="@+id/btn_edit_review"
-                android:layout_width="60dp"
+                android:layout_width="65dp"
                 android:layout_height="40dp"
                 android:text="Edit"
                 android:textSize="11sp"
@@ -51,7 +51,7 @@
 
             <Button
                 android:id="@+id/btn_remove_review"
-                android:layout_width="82dp"
+                android:layout_width="95dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
                 android:text="Remove"

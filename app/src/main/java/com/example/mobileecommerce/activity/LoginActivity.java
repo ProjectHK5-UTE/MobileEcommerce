@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void callAPIGetUsername(String email) {
-        CustomerAPI customerAPI = RetrofitClient.getRetrofit().create(CustomerAPI.class);
+        CustomerAPI customerAPI = RetrofitForLogin.getRetrofitForLogin().create(CustomerAPI.class);
         customerAPI.getUserName(email).enqueue(new Callback<ResponseDTO>() {
             @Override
             public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
@@ -131,5 +131,6 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void saveUsername(String username) {
         SharedPreferencesSaveUsername.saveUsername(username);
+        Log.e("username là:", username);
     }
 }

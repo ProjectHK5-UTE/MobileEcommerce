@@ -81,6 +81,7 @@ public class PaymentActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(Call<OrderResponseDTO> call, Throwable t) {
+                        mProgressDialog.dismiss();
                     }
                 });
             }
