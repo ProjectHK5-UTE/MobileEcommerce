@@ -1,18 +1,13 @@
 package com.example.mobileecommerce.activity;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,13 +17,12 @@ import com.example.mobileecommerce.api.ProductAPI;
 import com.example.mobileecommerce.model.ProductGridModel;
 import com.example.mobileecommerce.model.cartRoomDatabase.ItemDatabase;
 import com.example.mobileecommerce.model.cartRoomDatabase.entity.Item;
-import com.example.mobileecommerce.model.dto.CustomerDTO;
+import com.example.mobileecommerce.model.dto.RequestCustomerDTO;
 import com.example.mobileecommerce.model.dto.LineitemDTO;
-import com.example.mobileecommerce.model.dto.OrderDTO;
+import com.example.mobileecommerce.model.dto.RequestOrderDTO;
 import com.example.mobileecommerce.model.dto.OrderResponseDTO;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +34,10 @@ import retrofit2.Response;
 public class PaymentActivity extends AppCompatActivity {
     ImageView iv_back;
     TextView text_paynow, total;
-    OrderDTO orderDTO;
+    RequestOrderDTO orderDTO;
     private List<Item> itemList;
     private List<LineitemDTO> lineitemDTO;
-    private CustomerDTO customerDTO;
+    private RequestCustomerDTO customerDTO;
     private List<ProductGridModel> product;
     OrderAPI orderAPI;
     ProductAPI productAPI;
@@ -120,8 +114,8 @@ public class PaymentActivity extends AppCompatActivity {
         for (i = 0; i < itemList.size(); i++) {
             new GetProductTask(i).execute();
         }
-        customerDTO = new CustomerDTO("thangpham", "saigon", null, "Sinh Hung", "0123456789");
-        orderDTO = new OrderDTO(ptotal, lineitemDTO, customerDTO);
+        customerDTO = new RequestCustomerDTO("thangpham", "saigon", null, "Sinh Hung", "0123456789");
+        orderDTO = new RequestOrderDTO(ptotal, lineitemDTO, customerDTO);
     }
 
     void anhXa(){

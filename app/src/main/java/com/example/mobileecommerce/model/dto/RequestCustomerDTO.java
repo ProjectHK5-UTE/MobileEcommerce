@@ -1,6 +1,6 @@
 package com.example.mobileecommerce.model.dto;
 
-public class CustomerDTO {
+public class RequestCustomerDTO {
     private String userName;
 
     private String address;
@@ -11,7 +11,7 @@ public class CustomerDTO {
 
     private String phonenumber;
 
-    public CustomerDTO(String userName, String address, String avatar, String fullname, String phonenumber) {
+    public RequestCustomerDTO(String userName, String address, String avatar, String fullname, String phonenumber) {
         this.userName = userName;
         this.address = address;
         this.avatar = avatar;

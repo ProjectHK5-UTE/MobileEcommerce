@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.model.MyOrderModelClass;
 
@@ -25,16 +26,12 @@ public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAd
         TextView order_no;
         TextView price;
         TextView qty;
-        TextView title;
-
         public MyViewHolder(View view) {
             super(view);
-            this.image = (ImageView) view.findViewById(R.id.image);
-            this.title = (TextView) view.findViewById(R.id.title);
-            this.qty = (TextView) view.findViewById(R.id.qty);
-            this.price = (TextView) view.findViewById(R.id.price);
-            this.date = (TextView) view.findViewById(R.id.date);
-            this.order_no = (TextView) view.findViewById(R.id.order_no);
+            this.image = (ImageView) view.findViewById(R.id.im_Oimage);
+            this.qty = (TextView) view.findViewById(R.id.tv_Oqty);
+            this.price = (TextView) view.findViewById(R.id.tv_Oprice);
+            this.order_no = (TextView) view.findViewById(R.id.tv_order_no);
         }
     }
 
@@ -51,12 +48,12 @@ public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAd
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
         MyOrderModelClass myOrderModelClass = this.OfferList.get(i);
-        myViewHolder.image.setImageResource(myOrderModelClass.getImage().intValue());
-        myViewHolder.title.setText(myOrderModelClass.getTitle());
-        myViewHolder.qty.setText(myOrderModelClass.getQuantity());
-        myViewHolder.price.setText(myOrderModelClass.getPrice());
-        myViewHolder.date.setText(myOrderModelClass.getDate());
-        myViewHolder.order_no.setText(myOrderModelClass.getOrder_no());
+        Glide.with(context)
+                .load(myOrderModelClass.getImage())
+                .into(myViewHolder.image);
+        myViewHolder.qty.setText(String.valueOf(myOrderModelClass.getQuantity()));
+        myViewHolder.price.setText(String.valueOf(myOrderModelClass.getPrice()));
+        myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrder_no()));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
