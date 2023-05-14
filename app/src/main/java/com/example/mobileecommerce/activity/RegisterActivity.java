@@ -17,14 +17,9 @@ import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.service.UserService;
 import com.google.android.material.button.MaterialButton;
 
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -51,18 +46,46 @@ public class RegisterActivity extends AppCompatActivity {
                         re_password.getText().toString().trim());
                 if(isCheck == "Success")
                 {
-                    UserModel user = new UserModel(
-                            username.getText().toString().trim(),
+                    CheckSignUp(username.getText().toString().trim(),
                             email.getText().toString().trim(),
-                            password.getText().toString().trim()
-                    );
-                    //gotoOTPVerify(user);
-                    CallSignUpAPI(user);
+                            password.getText().toString().trim());
+//                    UserModel user = new UserModel(
+//                            username.getText().toString().trim(),
+//                            email.getText().toString().trim(),
+//                            password.getText().toString().trim()
+//                    );
+//                    //gotoOTPVerify(user);
+//                    CallSignUpAPI(user);
                 } else {
                     Toast.makeText(RegisterActivity.this,isCheck,Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void CheckSignUp(String username, String email, String password) {
+        SignUpAPI signUpAPI = RetrofitClient.getRetrofit().create(SignUpAPI.class);
+        signUpAPI.checkSignUp(username, email).enqueue(new Callback<ResponseDTO>() {
+            @Override
+            public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
+                if(response.isSuccessful()){
+                    UserModel user = new UserModel(
+                            username,
+                            email,
+                            password);
+                    //gotoOTPVerify(user);
+                    CallSignUpAPI(user);
+                } else{
+                    Toast.makeText(RegisterActivity.this, "Username or Email already exists", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDTO> call, Throwable t) {
+
+            }
+        });
+
     }
 
     public void CallSignUpAPI(UserModel user) {
