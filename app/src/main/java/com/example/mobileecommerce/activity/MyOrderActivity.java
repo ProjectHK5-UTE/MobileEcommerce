@@ -14,9 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.MyOrderRecycleAdapter;
+import com.example.mobileecommerce.api.OrderAPI;
 import com.example.mobileecommerce.model.MyOrderModelClass;
+import com.example.mobileecommerce.model.dto.LineitemDTO;
+import com.example.mobileecommerce.model.dto.RequestOrderDTO;
+import com.example.mobileecommerce.model.dto.ResponseOrderDTO;
+import com.example.mobileecommerce.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /* loaded from: classes.dex */
 public class MyOrderActivity extends AppCompatActivity {
@@ -24,16 +34,13 @@ public class MyOrderActivity extends AppCompatActivity {
     ImageView iv_back;
     private MyOrderRecycleAdapter mAdapter2;
     private ArrayList<MyOrderModelClass> myOrderModelClasses;
+
+    private List<ResponseOrderDTO> responseOrderDTOS;
     private RecyclerView recyclerview;
     TextView title;
-    private Integer[] image = {Integer.valueOf((int) R.drawable.s9plus), Integer.valueOf((int) R.drawable.shoesfila)};
-    private String[] title1 = {"Samsung Galaxy S9 Plus", "Fila Super"};
-    private String[] price = {"Rs. 30,000", "Rs. 2500"};
-    private String[] qty = {"1", "1"};
-    private String[] date = {"28/01/2019 5:00PM", "12/02/2019 11:00 AM"};
-    private String[] order_no = {"#412458", "#154352"};
+    OrderAPI orderAPI = RetrofitClient.getRetrofit().create(OrderAPI.class);
 
-    @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
+    @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -44,25 +51,44 @@ public class MyOrderActivity extends AppCompatActivity {
         this.iv_back = (ImageView) findViewById(R.id.iv_back);
         this.fl_ecart = (FrameLayout) findViewById(R.id.fl_ecart);
         this.iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override // android.view.View.OnClickListener
+            @Override
             public void onClick(View view) {
                 MyOrderActivity.this.finish();
             }
         });
         this.fl_ecart.setOnClickListener(new View.OnClickListener() {
-            @Override // android.view.View.OnClickListener
+            @Override
             public void onClick(View view) {
                 MyOrderActivity.this.startActivity(new Intent(MyOrderActivity.this, MyCartActivity.class));
             }
         });
         this.recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
-        this.myOrderModelClasses = new ArrayList<>();
-        for (int i = 0; i < this.image.length; i++) {
-            this.myOrderModelClasses.add(new MyOrderModelClass(this.image[i], this.title1[i], this.price[i], this.qty[i], this.date[i], this.order_no[i]));
-        }
-        this.mAdapter2 = new MyOrderRecycleAdapter(this, this.myOrderModelClasses);
-        this.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        this.recyclerview.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerview.setAdapter(this.mAdapter2);
+        getOrder();
+    }
+
+    void getOrder(){
+        orderAPI.getOrderByUsername("thangpham").enqueue(new Callback<List<ResponseOrderDTO>>() {
+            @Override
+            public void onResponse(Call<List<ResponseOrderDTO>> call, Response<List<ResponseOrderDTO>> response) {
+                responseOrderDTOS = response.body();
+                myOrderModelClasses = new ArrayList<>();
+                for (int i = 0; i < responseOrderDTOS.size(); i++) {
+                    for(int j=0;j<responseOrderDTOS.get(i).getLineitems().size(); j++){
+                        LineitemDTO lineitemDTO = responseOrderDTOS.get(i).getLineitems().get(j);
+                        myOrderModelClasses.add(new MyOrderModelClass(lineitemDTO.getOption().getImages().get(0).getPath()
+                                , lineitemDTO.getOption().getPrice(),lineitemDTO.getQuantity(),
+                                responseOrderDTOS.get(i).getOrderId()));
+
+                    }
+                }
+                mAdapter2 = new MyOrderRecycleAdapter(MyOrderActivity.this, myOrderModelClasses);
+                recyclerview.setLayoutManager(new LinearLayoutManager(MyOrderActivity.this));
+                recyclerview.setItemAnimator(new DefaultItemAnimator());
+                recyclerview.setAdapter(mAdapter2);
+            }
+            @Override
+            public void onFailure(Call<List<ResponseOrderDTO>> call, Throwable t) {
+            }
+        });
     }
 }

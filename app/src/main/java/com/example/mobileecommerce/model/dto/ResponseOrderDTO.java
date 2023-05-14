@@ -1,20 +1,21 @@
 package com.example.mobileecommerce.model.dto;
 
+import com.example.mobileecommerce.model.CustomerModel;
+
 import java.util.List;
 
-public class OrderDTO {
+public class ResponseOrderDTO {
     private int orderId;
     private double totalPrice;
     private List<LineitemDTO> lineitems;
+    private CustomerModel customer;
 
-    private CustomerDTO customer;
-
-    public OrderDTO(double totalPrice, List<LineitemDTO> lineitems, CustomerDTO customer) {
+    public ResponseOrderDTO(int orderId, double totalPrice, List<LineitemDTO> lineitems, CustomerModel customer) {
+        this.orderId = orderId;
         this.totalPrice = totalPrice;
         this.lineitems = lineitems;
         this.customer = customer;
     }
-
     public int getOrderId() {
         return orderId;
     }
@@ -39,11 +40,11 @@ public class OrderDTO {
         this.lineitems = lineitems;
     }
 
-    public CustomerDTO getCustomer() {
+    public CustomerModel getCustomer() {
         return customer;
     }
 
-    public void setCustomer(CustomerDTO customer) {
+    public void setCustomer(CustomerModel customer) {
         this.customer = customer;
     }
 }
