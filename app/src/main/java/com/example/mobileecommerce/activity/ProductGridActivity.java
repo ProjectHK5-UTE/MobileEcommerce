@@ -41,7 +41,7 @@ public class ProductGridActivity extends AppCompatActivity {
     ImageView iv_back;
     TextView title;
     ProductAPI productAPI;
-    int id;
+    static int id;
     EditText inputSearch;
     @Override
     public void onCreate(Bundle bundle) {

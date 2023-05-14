@@ -63,6 +63,10 @@ public class MyCartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyCartActivity.this, PaymentActivity.class);
+                if(itemList.size()==0){
+                    Toast.makeText(MyCartActivity.this, "Chưa có sản phẩm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 intent.putExtra("total", total);
                 startActivity(intent);
             }
@@ -98,6 +102,7 @@ public class MyCartActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ItemDatabase.getInstance(MyCartActivity.this).itemDao().delete(item);
                         Toast.makeText(MyCartActivity.this, "Đã xóa thành công", Toast.LENGTH_SHORT).show();
                         loadData();
                     }

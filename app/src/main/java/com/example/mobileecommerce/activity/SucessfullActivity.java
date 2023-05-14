@@ -29,7 +29,8 @@ public class SucessfullActivity extends AppCompatActivity {
         this.btnBuying.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                SucessfullActivity.this.startActivity(new Intent(SucessfullActivity.this, ProductGridActivity.class));
+                Intent intent = new Intent(SucessfullActivity.this, HomePageActivity.class);
+                startActivity(intent);
             }
         });
     }

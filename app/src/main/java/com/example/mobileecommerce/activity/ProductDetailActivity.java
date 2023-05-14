@@ -1,25 +1,21 @@
 package com.example.mobileecommerce.activity;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -27,22 +23,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import com.example.mobileecommerce.R;
-import com.example.mobileecommerce.adapter.ProductDetailPagerAdapter;
 import com.example.mobileecommerce.adapter.RecycleAdapterOptionList;
 import com.example.mobileecommerce.adapter.ReviewsRecycleAdapter;
+import com.example.mobileecommerce.adapter.ViewPagerAdapter;
 import com.example.mobileecommerce.api.ReviewAPI;
 import com.example.mobileecommerce.model.CustomerModel;
 import com.example.mobileecommerce.model.OptionModel;
 import com.example.mobileecommerce.model.ProductGridModel;
 import com.example.mobileecommerce.model.ReviewModel;
-import com.example.mobileecommerce.model.ReviewModelClass;
 import com.example.mobileecommerce.model.cartRoomDatabase.ItemDatabase;
 import com.example.mobileecommerce.model.cartRoomDatabase.entity.Item;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -59,18 +53,13 @@ public class ProductDetailActivity extends AppCompatActivity {
     ProductGridModel product;
     RecyclerView rc_view;
     RecycleAdapterOptionList recycleAdapterOptionList;
-    private int oId;
-
+    private int oId=0;
     RecyclerView rcvReview;
-
     private ReviewsRecycleAdapter reviewsRecycleAdapter;
-
     ReviewAPI reviewAPI = RetrofitClient.getRetrofit().create(ReviewAPI.class);
-
     List<ReviewModel> listReview;
-
     Button btnAddReview;
-
+    ViewPagerAdapter mViewPagerAdapter;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -79,14 +68,17 @@ public class ProductDetailActivity extends AppCompatActivity {
         anhXa();
         Intent intent = getIntent();
         product = (ProductGridModel) intent.getSerializableExtra("product");
-
         loadProductDetail();
-
         // Recycle Review Set Up
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
         rcvReview.setLayoutManager(linearLayoutManager1);
         rcvReview.setItemAnimator(new DefaultItemAnimator());
         AddReviews();
+        //view Pager
+        mViewPagerAdapter = new ViewPagerAdapter(ProductDetailActivity.this, product, LayoutInflater.from(this));
+        viewPager.setAdapter(mViewPagerAdapter);
+        CircleIndicator circleIndicator = (CircleIndicator) findViewById(R.id.indicator);
+        circleIndicator.setViewPager(this.viewPager);
         recycleAdapterOptionList = new RecycleAdapterOptionList(this, product.getOptions(), new RecycleAdapterOptionList.ItemClickListener() {
             @Override
             public void onClick(int id) {
@@ -222,10 +214,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
     void loadProductDetail(){
         tvName.setText(product.getProductName());
-        tvPrice.setText(String.valueOf(product.getPrice()));
+        tvPrice.setText(String.valueOf(product.getPrice())+" $");
         tvDescription.setText(product.getDescription());
     }
-
     void anhXa(){
         title = findViewById(R.id.title);
         iv_back = findViewById(R.id.iv_back);

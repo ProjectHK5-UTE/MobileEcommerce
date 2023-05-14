@@ -76,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Wrong When You Login!!!", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseDTO> call, Throwable t) {
 
@@ -95,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         startActivity(intent);
     }
-
     private void saveJWT(String token) {
         sharedPreferencesManager.saveJWT(token);
     }

@@ -1,9 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical" android:background="@color/white" android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView android:textSize="16sp" android:textColor="@color/txt_color" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="60dp" android:layout_marginTop="80dp" android:layout_marginRight="60dp" android:text="Congratulation,your order purchase on the way" android:fontFamily="@font/roboto_medium"/>
-    <ImageView android:layout_gravity="center" android:background="@drawable/ic_shopping_basket_red" android:layout_width="100dp" android:layout_height="100dp" android:layout_marginTop="30dp"/>
-    <TextView android:textSize="16sp" android:textColor="#acacac" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="30dp" android:text="Order Number" android:fontFamily="@font/roboto_regular"/>
-    <TextView android:textSize="20sp" android:textColor="@color/txt_color" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="#364290" android:fontFamily="@font/roboto_medium"/>
-    <Button android:textSize="14sp" android:textColor="@color/white" android:id="@+id/btnOrder" android:background="@drawable/btn_red" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="70dp" android:layout_marginTop="50dp" android:layout_marginRight="70dp" android:layout_marginBottom="10dp" android:text="Manage Order" android:textAllCaps="false" android:fontFamily="@font/roboto_regular"/>
-    <Button android:textSize="14sp" android:textColor="@color/txt_color" android:id="@+id/btnBuying" android:background="@drawable/white_dark" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="70dp" android:layout_marginTop="10dp" android:layout_marginRight="70dp" android:layout_marginBottom="10dp" android:text="Continue Buying" android:textAllCaps="false" android:fontFamily="@font/roboto_regular"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="60dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Congratulation,your order purchase on the way"
+        android:textColor="@color/txt_color"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ic_shopping_basket_red" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:text="Order Number"
+        android:textColor="#acacac"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="#364290"
+        android:textColor="@color/txt_color"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_red"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Manage Order"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnBuying"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/white_dark"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Back to home"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 </LinearLayout>
