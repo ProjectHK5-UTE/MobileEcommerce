@@ -3,6 +3,7 @@ package com.example.mobileecommerce.retrofit;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.mobileecommerce.service.JwtService;
 import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = " https://2c41-123-21-140-66.ngrok-free.app ";
+    private static final String BASE_URL = "https://784e-2001-ee0-4fc7-dce0-61a2-fcaf-6829-fbd5.ngrok-free.app";
 
 
     static SharedPreferences pres;
@@ -32,7 +33,6 @@ public class RetrofitClient {
                 public Response intercept(Chain chain) throws IOException {
                     Request request = chain.request();
                     String token = getJWT();
-                    Log.e("jwt",token);
                     if (token != null && !token.isEmpty()) {
                         request = request.newBuilder()
                                 .addHeader("Authorization", "Bearer " + token)
@@ -52,9 +52,9 @@ public class RetrofitClient {
 
     public static Retrofit getRetrofit() {
         if(retrofit == null) {
-           HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+//           HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(client)

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.example.mobileecommerce.api.LoginAPI;
 import com.example.mobileecommerce.model.UserModel;
 import com.example.mobileecommerce.model.dto.ResponseDTO;
 import com.example.mobileecommerce.retrofit.RetrofitForLogin;
+import com.example.mobileecommerce.service.JwtService;
 import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.google.android.material.button.MaterialButton;
@@ -69,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                     ResponseDTO responseDTO = response.body();
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     saveJWT(responseDTO.getMessage());
-                    gotoHome();
+                    gotoHome(responseDTO.getMessage());
                 } else{
                     Toast.makeText(LoginActivity.this, "Wrong When You Login!!!", Toast.LENGTH_SHORT).show();
                 }
@@ -82,8 +84,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void gotoHome() {
-        Intent intent = new Intent(this, HomePageActivity.class);
+    private void gotoHome(String token) {
+        String role = JwtService.getRoleFromToken(token);
+        Log.e("ROLE", "là "+ role);
+        Intent intent;
+        if(role.equals("ROLE_ADMIN")){
+            intent = new Intent(this, AdminPanelHomeActivity.class);
+        }else {
+            intent = new Intent(this, HomePageActivity.class);
+        }
         startActivity(intent);
     }
 

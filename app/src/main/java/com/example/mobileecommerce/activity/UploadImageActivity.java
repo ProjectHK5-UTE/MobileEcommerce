@@ -121,6 +121,7 @@ public class UploadImageActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseObject> call, Throwable t) {
+                Log.e("chang images", t.toString());
                 mProgressDialog.dismiss();
                 Toast.makeText(UploadImageActivity.this, "Avatar update failed", Toast.LENGTH_SHORT).show();
                 System.out.println("Thay đổi avatar thất bại!");
