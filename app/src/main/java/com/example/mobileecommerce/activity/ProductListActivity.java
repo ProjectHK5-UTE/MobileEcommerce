@@ -66,6 +66,13 @@ public class ProductListActivity extends AppCompatActivity {
         ImageView imgSearch = findViewById(R.id.img_click_search);
         EditText edtSearch = findViewById(R.id.edit_txt_search);
         this.iv_back = imageView;
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         recyclerView = findViewById(R.id.recyclerview_list_product);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);

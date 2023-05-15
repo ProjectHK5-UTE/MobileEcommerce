@@ -131,5 +131,6 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void saveUsername(String username) {
         SharedPreferencesSaveUsername.saveUsername(username);
+        Log.e("username là:", username);
     }
 }

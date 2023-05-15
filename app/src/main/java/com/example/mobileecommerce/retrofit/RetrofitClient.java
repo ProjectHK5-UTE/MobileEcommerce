@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "https://c71f-2001-ee0-4fc7-dce0-cdad-efb-3035-d8aa.ngrok-free.app";
+    private static final String BASE_URL = "http://192.168.11.100:8088";
 
 
     static SharedPreferences pres;

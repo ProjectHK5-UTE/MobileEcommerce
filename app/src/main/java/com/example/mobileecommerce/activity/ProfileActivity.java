@@ -63,7 +63,6 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imgAvatar;
 
     Button btnLoadImage;
-    ImageView imageView;
     Button btnChangePassword;
     Button btnUpdateProfile;
 
@@ -92,7 +91,14 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         //
         this.title = (TextView) findViewById(R.id.title);
-        this.iv_back = imageView;
+        this.iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
 
@@ -171,7 +177,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private void mapView() {
-        imageView = (ImageView) findViewById(R.id.iv_back);
         btnLoadImage = (Button) findViewById(R.id.btnLoadImage);
         btnChangePassword = (Button) findViewById(R.id.btnChangePwd);
         btnUpdateProfile = (Button) findViewById(R.id.btn_update_profile);

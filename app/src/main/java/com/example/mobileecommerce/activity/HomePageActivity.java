@@ -66,7 +66,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(bundle);
         pres = SharedPreferencesManager
                 .getInstance(getSharedPreferences("jwt", MODE_PRIVATE));
-        checkJWT();
+//        checkJWT();
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_home_page);
         getWindow().setSoftInputMode(3);

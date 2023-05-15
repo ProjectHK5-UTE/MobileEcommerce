@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -49,6 +50,7 @@ import retrofit2.Response;
 /* loaded from: classes.dex */
 public class ProductDetailActivity extends AppCompatActivity {
     ImageView iv_back;
+    RatingBar ratingBar;
     TextView title,tvName, tvPrice, tvDescription;
     Button addToCart;
     ViewPager viewPager;
@@ -152,6 +154,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnNoThank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
             }
         });
         btnSendReview.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +189,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ReviewModel>> call, Response<List<ReviewModel>> response) {
                 listReview = response.body();
+                float rate=0;
+                for(int i=0; i<listReview.size();i++){
+                    rate += listReview.get(i).getRate();
+                }
+                ratingBar.setRating((float) rate/(float) listReview.size());
                 reviewsRecycleAdapter = new ReviewsRecycleAdapter(listReview, ProductDetailActivity.this);
                 rcvReview.setAdapter(reviewsRecycleAdapter);
             }
@@ -237,6 +245,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         rc_view = findViewById(R.id.rc_view_option);
         rcvReview = findViewById(R.id.recyclerview_review);
         btnAddReview = findViewById(R.id.btn_add_review);
+        ratingBar = findViewById(R.id.ratingbar);
     }
-
 }

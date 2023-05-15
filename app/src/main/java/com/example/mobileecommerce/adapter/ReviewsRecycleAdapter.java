@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Rating;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -83,6 +85,7 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
         holder.nameReview.setText(reviewModel.getCustomer().getUserName());
         holder.dateReview.setText(reviewModel.getUpdateAt().toString());
         holder.contentReview.setText(reviewModel.getContent());
+        holder.ratingBar.setRating(reviewModel.getRate());
 
         username = SharedPreferences.getUsername();
         Log.e("USERNAME trong Review", "Là" + username);
@@ -187,7 +190,7 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
         TextView contentReview;
         Button btnEditReview;
         Button btnRemoveReview;
-
+        RatingBar ratingBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             nameReview = itemView.findViewById(R.id.txt_name_review);
@@ -195,6 +198,7 @@ public class ReviewsRecycleAdapter extends RecyclerView.Adapter<ReviewsRecycleAd
             contentReview = itemView.findViewById(R.id.txt_content_review);
             btnEditReview = itemView.findViewById(R.id.btn_edit_review);
             btnRemoveReview = itemView.findViewById(R.id.btn_remove_review);
+            ratingBar = itemView.findViewById(R.id.ratingbar);
         }
     }
 }
