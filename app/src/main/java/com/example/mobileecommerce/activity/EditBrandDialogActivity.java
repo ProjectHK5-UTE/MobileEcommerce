@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -129,6 +130,7 @@ public class EditBrandDialogActivity extends AppCompatActivity {
             File file = new File(RealPathUtil.getRealPath(this, imgUrl));
             RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
             image = MultipartBody.Part.createFormData("images", file.getName(), requestFile);
+            Log.e("images", image.toString());
         }
 
         Call<ResponseObject> call = brandAPI.update(oldName, brandName, image);
