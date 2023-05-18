@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitForLogin {
     private static Retrofit retrofit = null;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "http://192.168.11.100:8088";
+    private static final String BASE_URL = "http://172.16.31.40:8088";
 
     public static Retrofit getRetrofitForLogin() {
         if(retrofit == null) {

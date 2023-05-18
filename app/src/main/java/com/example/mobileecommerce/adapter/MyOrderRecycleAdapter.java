@@ -24,14 +24,16 @@ public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAd
         TextView date;
         ImageView image;
         TextView order_no;
+        TextView status;
         TextView price;
-        TextView qty;
+        TextView order_date;
         public MyViewHolder(View view) {
             super(view);
             this.image = (ImageView) view.findViewById(R.id.im_Oimage);
-            this.qty = (TextView) view.findViewById(R.id.tv_Oqty);
-            this.price = (TextView) view.findViewById(R.id.tv_Oprice);
+            this.order_date = (TextView) view.findViewById(R.id.tv_order_date);
+            this.price = (TextView) view.findViewById(R.id.tv_total_price);
             this.order_no = (TextView) view.findViewById(R.id.tv_order_no);
+            this.status = (TextView) view.findViewById(R.id.tv_status);
         }
     }
 
@@ -51,7 +53,7 @@ public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAd
         Glide.with(context)
                 .load(myOrderModelClass.getImage())
                 .into(myViewHolder.image);
-        myViewHolder.qty.setText(String.valueOf(myOrderModelClass.getQuantity()));
+        myViewHolder.order_date.setText(String.valueOf(myOrderModelClass.getQuantity()));
         myViewHolder.price.setText(String.valueOf(myOrderModelClass.getPrice()));
         myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrder_no()));
     }

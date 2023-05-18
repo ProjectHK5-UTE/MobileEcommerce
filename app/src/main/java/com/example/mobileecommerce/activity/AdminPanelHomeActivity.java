@@ -158,9 +158,9 @@ public class AdminPanelHomeActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     TreeMap<String,Float> treeMap = response.body();
                     List<BarEntry> entries = new ArrayList<>();
-                    int index = -2;
                     for (Map.Entry<String, Float> entry : treeMap.entrySet()) {
                         float value = entry.getValue().floatValue(); // Chuyển đổi kiểu dữ liệu từ Integer sang float
+                        int index = Integer.parseInt(entry.getKey());
                         BarEntry barEntry = new BarEntry(index, value);
                         entries.add(barEntry);
                         index++;
