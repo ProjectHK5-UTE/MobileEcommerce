@@ -15,44 +15,47 @@ import com.example.mobileecommerce.model.MyOrderModelClass;
 import java.util.List;
 
 /* loaded from: classes.dex */
-public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAdapter.MyViewHolder> {
+public class OrderDetailRecycleAdapter extends RecyclerView.Adapter<OrderDetailRecycleAdapter.MyViewHolder> {
     private List<MyOrderModelClass> OfferList;
     Context context;
 
     /* loaded from: classes.dex */
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView date;
+        TextView name;
         ImageView image;
         TextView order_no;
-        TextView status;
         TextView price;
-        TextView order_date;
+        TextView quantity;
         public MyViewHolder(View view) {
             super(view);
+            this.name = (TextView) view.findViewById(R.id.title);
             this.image = (ImageView) view.findViewById(R.id.im_Oimage);
-            this.order_date = (TextView) view.findViewById(R.id.tv_order_date);
-            this.price = (TextView) view.findViewById(R.id.tv_total_price);
+            this.price = (TextView) view.findViewById(R.id.tv_Oprice);
             this.order_no = (TextView) view.findViewById(R.id.tv_order_no);
-            this.status = (TextView) view.findViewById(R.id.tv_status);
+            this.quantity = (TextView) view.findViewById(R.id.tv_Oqty);
         }
     }
 
-    public MyOrderRecycleAdapter(Context context, List<MyOrderModelClass> list) {
+    public OrderDetailRecycleAdapter(Context context, List<MyOrderModelClass> list) {
         this.OfferList = list;
         this.context = context;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_order_list, viewGroup, false));
+        return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_order_product_list, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
         MyOrderModelClass myOrderModelClass = this.OfferList.get(i);
-        myViewHolder.order_date.setText(String.valueOf(myOrderModelClass.getQuantity()));
+        Glide.with(context)
+                .load(myOrderModelClass.getImage())
+                .into(myViewHolder.image);
+        myViewHolder.quantity.setText(String.valueOf(myOrderModelClass.getQuantity()));
         myViewHolder.price.setText(String.valueOf(myOrderModelClass.getPrice()));
         myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrder_no()));
+        myViewHolder.name.setText(String.valueOf(myOrderModelClass.getName()));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

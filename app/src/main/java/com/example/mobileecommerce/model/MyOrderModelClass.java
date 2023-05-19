@@ -2,6 +2,7 @@ package com.example.mobileecommerce.model;
 
 /* loaded from: classes.dex */
 public class MyOrderModelClass {
+    String name;
     String image;
     double price;
     Integer quantity;
@@ -13,7 +14,13 @@ public class MyOrderModelClass {
         this.quantity = quantity;
         this.order_no = order_no;
     }
-
+    public MyOrderModelClass(String name, String image, double price, Integer quantity, Integer order_no) {
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.quantity = quantity;
+        this.order_no = order_no;
+    }
     public String getImage() {
         return image;
     }
@@ -44,5 +51,13 @@ public class MyOrderModelClass {
 
     public void setOrder_no(Integer order_no) {
         this.order_no = order_no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
