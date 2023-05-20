@@ -24,6 +24,7 @@ import com.example.mobileecommerce.model.MyOrderModelClass;
 import com.example.mobileecommerce.model.Status;
 import com.example.mobileecommerce.model.cartRoomDatabase.ItemDatabase;
 import com.example.mobileecommerce.model.dto.LineitemDTO;
+import com.example.mobileecommerce.model.dto.OrderResponseDTO;
 import com.example.mobileecommerce.model.dto.RequestOrderDTO;
 import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.model.dto.ResponseOrderDTO;
@@ -75,15 +76,15 @@ public class MyOrderActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            orderAPI.updateStatus(orderId, Status.SUCCESSFUL).enqueue(new Callback<ResponseObject>() {
+                            orderAPI.updateStatus(orderId, Status.SUCCESSFUL).enqueue(new Callback<OrderResponseDTO>() {
                                 @Override
-                                public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                                public void onResponse(Call<OrderResponseDTO> call, Response<OrderResponseDTO> response) {
                                     myOrderModelClasses.get(id).setStatus(Status.SUCCESSFUL);
                                     mAdapter2.setData(myOrderModelClasses);
                                 }
 
                                 @Override
-                                public void onFailure(Call<ResponseObject> call, Throwable t) {
+                                public void onFailure(Call<OrderResponseDTO> call, Throwable t) {
 
                                 }
                             });
@@ -100,15 +101,15 @@ public class MyOrderActivity extends AppCompatActivity {
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        orderAPI.updateStatus(orderId, Status.CANCELLED).enqueue(new Callback<ResponseObject>() {
+                                        orderAPI.updateStatus(orderId, Status.CANCELLED).enqueue(new Callback<OrderResponseDTO>() {
                                             @Override
-                                            public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                                            public void onResponse(Call<OrderResponseDTO> call, Response<OrderResponseDTO> response) {
                                                 myOrderModelClasses.get(id).setStatus(Status.CANCELLED);
                                                 mAdapter2.setData(myOrderModelClasses);
                                             }
 
                                             @Override
-                                            public void onFailure(Call<ResponseObject> call, Throwable t) {
+                                            public void onFailure(Call<OrderResponseDTO> call, Throwable t) {
 
                                             }
                                         });
