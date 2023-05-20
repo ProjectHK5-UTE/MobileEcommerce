@@ -1,12 +1,8 @@
 package com.example.mobileecommerce.api;
 
-import static com.example.mobileecommerce.model.Status.PENDING;
-
 import com.example.mobileecommerce.model.ProductGridModel;
-import com.example.mobileecommerce.model.Status;
 import com.example.mobileecommerce.model.dto.RequestOrderDTO;
 import com.example.mobileecommerce.model.dto.OrderResponseDTO;
-import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.model.dto.ResponseOrderDTO;
 
 import java.util.List;
@@ -23,6 +19,4 @@ public interface OrderAPI {
     Call<OrderResponseDTO> order(@Body RequestOrderDTO orderDTO);
     @GET("api/order/{username}")
     Call<List<ResponseOrderDTO>> getOrderByUsername(@Path("username") String username);
-    @GET("api/order/update-status/{orderId}/{status}")
-    Call<ResponseObject> updateStatus(@Path("orderId") int orderId, @Path("status") Status status);
 }

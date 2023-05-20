@@ -70,9 +70,6 @@ public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAd
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
         MyOrderModelClass myOrderModelClass = this.OfferList.get(i);
-        Glide.with(context)
-                .load(myOrderModelClass.getImage())
-                .into(myViewHolder.image);
         myViewHolder.order_date.setText(String.valueOf(myOrderModelClass.getQuantity()));
         myViewHolder.price.setText(String.valueOf(myOrderModelClass.getPrice()));
         myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrder_no()));
