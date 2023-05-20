@@ -96,6 +96,8 @@
         <activity
             android:name=".activity.OrderDetailActivity"
             android:exported="false" />
+        <activity android:name=".activity.ShipOrderActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/white_light_rect"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="220sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Order No : "
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_order_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="#123"
+                    android:textColor="@color/txt_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Total Price : "
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="$10000"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                &lt;!&ndash;<TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Date : "
+                    android:textColor="#acacac"
+                    android:textSize="13sp" />&ndash;&gt;
+
+                &lt;!&ndash;<TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="28/01/2019 5:00PM"
+                    android:textColor="@color/txt_color"
+                    android:textSize="13sp" />&ndash;&gt;
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Customer : "
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="NoName"
+                    android:textColor="@color/txt_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Address : "
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="No.1, Vo Van Ngan"
+                    android:textColor="@color/txt_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Order Date : "
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_order_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="18/05/2023"
+                    android:textColor="@color/txt_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="#FF5722"
+                android:text="Nhận"
+                android:drawableLeft="@drawable/ic_transit"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="#4CAF50"
+                android:drawableLeft="@drawable/ic_gift"
+                android:text="Đã giao"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
