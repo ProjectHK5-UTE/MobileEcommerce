@@ -1,7 +1,10 @@
 package com.example.mobileecommerce.model.dto;
 
+import android.text.format.Time;
+
 import com.example.mobileecommerce.model.Status;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class RequestOrderDTO {
@@ -9,7 +12,7 @@ public class RequestOrderDTO {
     private double totalPrice;
     private Status status;
     private List<LineitemDTO> lineitems;
-
+    private Timestamp order_date;
     private RequestCustomerDTO customer;
 
     public RequestOrderDTO(double totalPrice, Status status, List<LineitemDTO> lineitems, RequestCustomerDTO customer) {
@@ -57,5 +60,13 @@ public class RequestOrderDTO {
 
     public void setCustomer(RequestCustomerDTO customer) {
         this.customer = customer;
+    }
+
+    public Timestamp getOrder_date() {
+        return order_date;
+    }
+
+    public void setOrder_date(Timestamp order_date) {
+        this.order_date = order_date;
     }
 }

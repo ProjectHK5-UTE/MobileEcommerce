@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="230sp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -32,7 +32,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Order No : "
-                    android:textColor="#acacac"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
                     android:textSize="13sp" />
 
                 <TextView
@@ -57,7 +58,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Total Price : "
-                    android:textColor="#acacac"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
                     android:textSize="13sp" />
 
                 <TextView
@@ -67,7 +69,8 @@
                     android:layout_marginLeft="4dp"
                     android:fontFamily="@font/roboto_regular"
                     android:text="$10000"
-                    android:textColor="@color/txt_color"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -107,7 +110,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Customer : "
-                    android:textColor="#acacac"
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
                     android:textSize="13sp" />
 
                 <TextView
@@ -132,7 +136,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Address : "
-                    android:textColor="#acacac"
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
                     android:textSize="13sp" />
 
                 <TextView
@@ -156,7 +161,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Order Date : "
-                    android:textColor="#acacac"
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
                     android:textSize="13sp" />
 
                 <TextView

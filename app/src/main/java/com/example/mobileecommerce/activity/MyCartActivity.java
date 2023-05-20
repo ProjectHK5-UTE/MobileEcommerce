@@ -33,7 +33,7 @@ public class MyCartActivity extends AppCompatActivity {
     private List<Item> itemList;
     double total;
 
-    @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
+    @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -118,10 +118,9 @@ public class MyCartActivity extends AppCompatActivity {
         for(int i=0;i<itemList.size();i++){
             total += itemList.get(i).getPrice()*itemList.get(i).getQuantity();
         }
-        tv_subTotal.setText(String.valueOf(total));
-        tv_Total.setText(String.valueOf(total));
+        tv_subTotal.setText('$'+String.valueOf(total));
+        tv_Total.setText('$'+String.valueOf(total));
         cartItemAdapter.setData(itemList);
-
     }
     void anhXa(){
         rc_view = findViewById(R.id.rc_view);
