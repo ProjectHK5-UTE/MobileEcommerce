@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;
     static Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
-    private static final String BASE_URL = "http://192.168.56.1:8088/";
+    private static final String BASE_URL = "http://192.168.11.104:8088/";
     static SharedPreferences pres;
 
     private static OkHttpClient client = new OkHttpClient.Builder()
@@ -50,9 +50,9 @@ public class RetrofitClient {
 
     public static Retrofit getRetrofit() {
         if(retrofit == null) {
-           HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+//           HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(client)

@@ -1,6 +1,5 @@
 package com.example.mobileecommerce.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.example.mobileecommerce.model.dto.ResponseOrderDTO;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
