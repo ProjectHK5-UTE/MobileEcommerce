@@ -6,4 +6,12 @@
     <string name="rs_2500">Rs. 2510</string>
     <string name="offer">Rs 40500</string>
     <string name="offer1">Rs 40500</string>
+
+    <string-array name="status_array">
+        <item>Đang chờ duyệt</item>
+        <item>Đang chờ lấy hàng</item>
+        <item>Đang vận chuyển</item>
+        <item>Đã hoàn tất</item>
+        <item>Đã hủy</item>
+    </string-array>
 </resources>

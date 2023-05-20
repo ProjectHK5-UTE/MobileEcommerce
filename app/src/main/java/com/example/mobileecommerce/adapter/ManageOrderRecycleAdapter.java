@@ -117,6 +117,13 @@ public class ManageOrderRecycleAdapter extends RecyclerView.Adapter<ManageOrderR
         myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrderId()));
         myViewHolder.order_date.setText(String.valueOf(myOrderModelClass.getOrder_date()));
 
+        if(myOrderModelClass.getStatus()!=Status.PENDING){
+            myViewHolder.btnSubmit.setVisibility(View.GONE);
+            myViewHolder.btnSubmit.setEnabled(false);
+            myViewHolder.btnReject.setVisibility(View.GONE);
+            myViewHolder.btnReject.setEnabled(false);
+        }
+
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
