@@ -236,6 +236,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
     void anhXa(){
         title = findViewById(R.id.title);
+        title.setText("Product Detail");
         iv_back = findViewById(R.id.iv_back);
         tvName = findViewById(R.id.tvName);
         tvPrice = findViewById(R.id.tvPrice);

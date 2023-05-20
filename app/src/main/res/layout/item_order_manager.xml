@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="106dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="1dp"
         android:layout_marginRight="10dp"
@@ -15,14 +15,8 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <ImageView
-            android:id="@+id/im_Oimage"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:src="@drawable/cart_" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="230sp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
@@ -34,7 +28,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Order No : "
@@ -59,7 +53,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Total Price : "
@@ -109,20 +103,45 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Status : "
+                    android:text="Customer : "
                     android:textColor="#acacac"
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/tv_status"
+                    android:id="@+id/tv_customer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Chờ Duyệt"
+                    android:text="NoName"
+                    android:textColor="@color/txt_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Address : "
+                    android:textColor="#acacac"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="No.1, Vo Van Ngan"
                     android:textColor="@color/txt_color"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -133,7 +152,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Order Date : "
@@ -150,12 +169,14 @@
                     android:textColor="@color/txt_color"
                     android:textSize="13sp" />
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <Button
@@ -163,8 +184,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:drawableLeft="@drawable/ic_gift"
-                android:text="Đã nhận"
+                android:drawableLeft="@drawable/icon_upload"
+                android:text="Duyệt"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
                 android:textSize="12sp"

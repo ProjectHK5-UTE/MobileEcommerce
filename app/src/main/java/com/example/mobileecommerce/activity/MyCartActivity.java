@@ -26,6 +26,7 @@ import java.util.List;
 /* loaded from: classes.dex */
 public class MyCartActivity extends AppCompatActivity {
     ImageView iv_back;
+    TextView title;
     TextView tv_subTotal, tv_Total, text_checkout;
     RecyclerView rc_view;
     CartItemAdapter cartItemAdapter;
@@ -128,5 +129,7 @@ public class MyCartActivity extends AppCompatActivity {
         tv_Total = findViewById(R.id.tv_Total);
         text_checkout = findViewById(R.id.text_checkout);
         iv_back = findViewById(R.id.iv_back);
+        title = findViewById(R.id.title);
+        title.setText("My Cart");
     }
 }
