@@ -22,6 +22,7 @@ import com.example.mobileecommerce.api.OrderAPI;
 import com.example.mobileecommerce.api.ProductAPI;
 import com.example.mobileecommerce.model.MyOrderModelClass;
 import com.example.mobileecommerce.model.ProductGridModel;
+import com.example.mobileecommerce.model.Status;
 import com.example.mobileecommerce.model.dto.LineitemDTO;
 import com.example.mobileecommerce.model.dto.ResponseOrderDTO;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
@@ -39,6 +40,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     OrderAPI orderAPI;
     Integer orderId;
+
     OptionAPI optionAPI;
     Integer productId;
     ProductAPI productAPI;
@@ -98,7 +100,8 @@ public class OrderDetailActivity extends AppCompatActivity {
                                     MyOrderModelClass myOrderModelClass = new MyOrderModelClass(productName,
                                             lineitemDTO.getOption().getImages().get(0).getPath()
                                             , lineitemDTO.getOption().getPrice(),lineitemDTO.getQuantity(),
-                                            responseOrderDTOS.getOrderId());
+                                            responseOrderDTOS.getOrderId(), responseOrderDTOS.getStatus(),
+                                            productGridModel.getProductId());
                                     myOrderModelClasses.add(myOrderModelClass);
                                     // Kiểm tra xem đã thêm hết sản phẩm vào danh sách chưa
                                     if (myOrderModelClasses.size() == responseOrderDTOS.getLineitems().size()) {

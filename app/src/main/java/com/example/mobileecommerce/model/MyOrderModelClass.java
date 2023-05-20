@@ -8,6 +8,15 @@ public class MyOrderModelClass {
     Status status;
     Integer quantity;
     Integer order_no;
+    Integer productId;
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
     public MyOrderModelClass(String image, double price, Status status, Integer quantity, Integer order_no) {
         this.image = image;
@@ -16,12 +25,14 @@ public class MyOrderModelClass {
         this.quantity = quantity;
         this.order_no = order_no;
     }
-    public MyOrderModelClass(String name, String image, double price, Integer quantity, Integer order_no) {
+    public MyOrderModelClass(String name, String image, double price, Integer quantity, Integer order_no, Status status, Integer productId) {
         this.name = name;
         this.image = image;
         this.price = price;
         this.quantity = quantity;
         this.order_no = order_no;
+        this.status = status;
+        this.productId = productId;
     }
     public String getImage() {
         return image;
