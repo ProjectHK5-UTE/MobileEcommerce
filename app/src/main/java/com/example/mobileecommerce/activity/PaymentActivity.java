@@ -15,6 +15,7 @@ import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.api.OrderAPI;
 import com.example.mobileecommerce.api.ProductAPI;
 import com.example.mobileecommerce.model.ProductGridModel;
+import com.example.mobileecommerce.model.Status;
 import com.example.mobileecommerce.model.cartRoomDatabase.ItemDatabase;
 import com.example.mobileecommerce.model.cartRoomDatabase.entity.Item;
 import com.example.mobileecommerce.model.dto.RequestCustomerDTO;
@@ -76,6 +77,7 @@ public class PaymentActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<OrderResponseDTO> call, Response<OrderResponseDTO> response) {
                         ItemDatabase.getInstance(PaymentActivity.this).itemDao().deleteAll();
+
                         PaymentActivity.this.startActivity(new Intent(PaymentActivity.this, SucessfullActivity.class));
                         mProgressDialog.dismiss();
                     }
@@ -122,7 +124,7 @@ public class PaymentActivity extends AppCompatActivity {
             new GetProductTask(i).execute();
         }
         customerDTO = new RequestCustomerDTO(username, null, null, null, null);
-        orderDTO = new RequestOrderDTO(ptotal, lineitemDTO, customerDTO);
+        orderDTO = new RequestOrderDTO(ptotal, Status.PENDING,lineitemDTO, customerDTO);
     }
 
     void anhXa(){

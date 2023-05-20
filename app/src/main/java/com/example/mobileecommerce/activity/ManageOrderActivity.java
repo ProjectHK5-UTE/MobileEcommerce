@@ -1,6 +1,5 @@
 package com.example.mobileecommerce.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobileecommerce.R;
 import com.example.mobileecommerce.adapter.ManageOrderRecycleAdapter;
 import com.example.mobileecommerce.api.OrderAPI;
+import com.example.mobileecommerce.model.Status;
 import com.example.mobileecommerce.model.dto.ResponseOrderDTO;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
@@ -30,7 +30,7 @@ import retrofit2.Response;
 public class ManageOrderActivity extends AppCompatActivity {
     FrameLayout fl_ecart;
     ImageView iv_back;
-    private ManageOrderRecycleAdapter mAdapter2;
+    public ManageOrderRecycleAdapter mAdapter2;
     private List<ResponseOrderDTO> responseOrderDTOS;
     private RecyclerView recyclerview;
     TextView title;
@@ -60,11 +60,11 @@ public class ManageOrderActivity extends AppCompatActivity {
         this.recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
         username = SharedPreferences.getUsername();
         Log.e("Username trong myorder","là" + username);
+
         getOrder();
     }
-
     void getOrder(){
-        orderAPI.getOrderByStatus("PENDING").enqueue(new Callback<List<ResponseOrderDTO>>() {
+        orderAPI.getOrderByStatus(Status.PENDING).enqueue(new Callback<List<ResponseOrderDTO>>() {
             @Override
             public void onResponse(Call<List<ResponseOrderDTO>> call, Response<List<ResponseOrderDTO>> response) {
                 if(response.isSuccessful()){
@@ -73,6 +73,7 @@ public class ManageOrderActivity extends AppCompatActivity {
                     recyclerview.setLayoutManager(new LinearLayoutManager(ManageOrderActivity.this));
                     recyclerview.setItemAnimator(new DefaultItemAnimator());
                     recyclerview.setAdapter(mAdapter2);
+                    loadData(responseOrderDTOS);
                 } else{
                     int statusCode = response.code();
                 }
@@ -81,5 +82,9 @@ public class ManageOrderActivity extends AppCompatActivity {
             public void onFailure(Call<List<ResponseOrderDTO>> call, Throwable t) {
             }
         });
+
+    }
+    public void loadData(List<ResponseOrderDTO> responseOrderDTOS){
+        mAdapter2.setData(responseOrderDTOS);
     }
 }

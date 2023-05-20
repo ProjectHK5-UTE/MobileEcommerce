@@ -1,16 +1,20 @@
 package com.example.mobileecommerce.model.dto;
 
+import com.example.mobileecommerce.model.Status;
+
 import java.util.List;
 
 public class RequestOrderDTO {
     private int orderId;
     private double totalPrice;
+    private Status status;
     private List<LineitemDTO> lineitems;
 
     private RequestCustomerDTO customer;
 
-    public RequestOrderDTO(double totalPrice, List<LineitemDTO> lineitems, RequestCustomerDTO customer) {
+    public RequestOrderDTO(double totalPrice, Status status, List<LineitemDTO> lineitems, RequestCustomerDTO customer) {
         this.totalPrice = totalPrice;
+        this.status = status;
         this.lineitems = lineitems;
         this.customer = customer;
     }
@@ -29,6 +33,14 @@ public class RequestOrderDTO {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public List<LineitemDTO> getLineitems() {
