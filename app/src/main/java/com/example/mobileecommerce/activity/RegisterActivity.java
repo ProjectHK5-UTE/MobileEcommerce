@@ -49,13 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
                     CheckSignUp(username.getText().toString().trim(),
                             email.getText().toString().trim(),
                             password.getText().toString().trim());
-//                    UserModel user = new UserModel(
-//                            username.getText().toString().trim(),
-//                            email.getText().toString().trim(),
-//                            password.getText().toString().trim()
-//                    );
-//                    //gotoOTPVerify(user);
-//                    CallSignUpAPI(user);
                 } else {
                     Toast.makeText(RegisterActivity.this,isCheck,Toast.LENGTH_SHORT).show();
                 }
@@ -73,7 +66,6 @@ public class RegisterActivity extends AppCompatActivity {
                             username,
                             email,
                             password);
-                    //gotoOTPVerify(user);
                     CallSignUpAPI(user);
                 } else{
                     Toast.makeText(RegisterActivity.this, "Username or Email already exists", Toast.LENGTH_LONG).show();
