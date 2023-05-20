@@ -84,7 +84,7 @@ public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAd
     public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
         ResponseOrderDTO myOrderModelClass = this.OfferList.get(i);
 
-        myViewHolder.price.setText(String.valueOf(myOrderModelClass.getTotalPrice()));
+        myViewHolder.price.setText('$'+String.valueOf(myOrderModelClass.getTotalPrice()));
         myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrderId()));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         myViewHolder.order_date.setText(String.valueOf(dateFormat.format(myOrderModelClass.getOrder_date())));

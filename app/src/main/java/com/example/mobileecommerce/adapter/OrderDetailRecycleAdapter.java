@@ -53,7 +53,7 @@ public class OrderDetailRecycleAdapter extends RecyclerView.Adapter<OrderDetailR
                 .load(myOrderModelClass.getImage())
                 .into(myViewHolder.image);
         myViewHolder.quantity.setText(String.valueOf(myOrderModelClass.getQuantity()));
-        myViewHolder.price.setText(String.valueOf(myOrderModelClass.getPrice()));
+        myViewHolder.price.setText('$'+String.valueOf(myOrderModelClass.getPrice()));
         myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrder_no()));
         myViewHolder.name.setText(String.valueOf(myOrderModelClass.getName()));
     }

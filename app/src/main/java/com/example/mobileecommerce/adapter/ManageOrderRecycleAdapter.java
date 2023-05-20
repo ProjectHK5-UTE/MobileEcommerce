@@ -113,7 +113,7 @@ public class ManageOrderRecycleAdapter extends RecyclerView.Adapter<ManageOrderR
             }
         });
         myViewHolder.customer.setText(String.valueOf(myOrderModelClass.getCustomer().getUserName()));
-        myViewHolder.price.setText(String.valueOf(myOrderModelClass.getTotalPrice()));
+        myViewHolder.price.setText('$'+String.valueOf(myOrderModelClass.getTotalPrice()));
         myViewHolder.order_no.setText(String.valueOf(myOrderModelClass.getOrderId()));
         myViewHolder.order_date.setText(String.valueOf(myOrderModelClass.getOrder_date()));
 

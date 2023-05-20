@@ -4,14 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mobileecommerce.R;
+import com.example.mobileecommerce.api.CustomerAPI;
 import com.example.mobileecommerce.api.OrderAPI;
 import com.example.mobileecommerce.api.ProductAPI;
 import com.example.mobileecommerce.model.ProductGridModel;
@@ -22,8 +25,11 @@ import com.example.mobileecommerce.model.dto.RequestCustomerDTO;
 import com.example.mobileecommerce.model.dto.LineitemDTO;
 import com.example.mobileecommerce.model.dto.RequestOrderDTO;
 import com.example.mobileecommerce.model.dto.OrderResponseDTO;
+import com.example.mobileecommerce.model.dto.ResponseObject;
 import com.example.mobileecommerce.retrofit.RetrofitClient;
 import com.example.mobileecommerce.sharedpreferences.SharedPreferencesManager;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +40,10 @@ import retrofit2.Response;
 
 /* loaded from: classes.dex */
 public class PaymentActivity extends AppCompatActivity {
+    ImageView iv_address;
     ImageView iv_back;
     TextView text_paynow, total;
+    TextView text_address;
     RequestOrderDTO orderDTO;
     private List<Item> itemList;
     private List<LineitemDTO> lineitemDTO;
@@ -43,15 +51,16 @@ public class PaymentActivity extends AppCompatActivity {
     private List<ProductGridModel> product;
     OrderAPI orderAPI;
     ProductAPI productAPI;
+    CustomerAPI customerAPI;
     double ptotal;
     ProgressDialog mProgressDialog;
     int i;
-
     private String username;
+    private String address;
     static android.content.SharedPreferences pres;
 
     SharedPreferencesManager SharedPreferences = SharedPreferencesManager.getInstance(pres);
-    @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
+    @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -71,6 +80,10 @@ public class PaymentActivity extends AppCompatActivity {
         text_paynow.setOnClickListener(new View.OnClickListener() {
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
+                if(address==null || address.equals("")){
+                    Toast.makeText(PaymentActivity.this, "Vui lòng cập nhật địa chỉ ở Profile", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 orderAPI = RetrofitClient.getRetrofit60TimeOut().create(OrderAPI.class);
                 mProgressDialog = ProgressDialog.show(PaymentActivity.this, "Loading", "Please wait...", true);
                 orderAPI.order(orderDTO).enqueue(new Callback<OrderResponseDTO>() {
@@ -88,6 +101,33 @@ public class PaymentActivity extends AppCompatActivity {
                 });
             }
         });
+        customerAPI = RetrofitClient.getRetrofit().create(CustomerAPI.class);
+        customerAPI.getCustomerInfor(username)
+                .enqueue(new Callback<ResponseObject>() {
+                    @Override
+                    public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                        if(response.isSuccessful()){
+                            try {
+                                ResponseObject responseObject = response.body();
+                                Gson gson = new Gson();
+                                JsonObject jsonObject = gson.fromJson(gson.toJson(responseObject.getData()), JsonObject.class);
+                                address = jsonObject.get("address").getAsString();
+                                Log.e("Address là: ", address);
+                                text_address.setText(address);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else{
+                            int statusCode = response.code();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseObject> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
         get();
     }
 
@@ -123,13 +163,22 @@ public class PaymentActivity extends AppCompatActivity {
         for (i = 0; i < itemList.size(); i++) {
             new GetProductTask(i).execute();
         }
+
         customerDTO = new RequestCustomerDTO(username, null, null, null, null);
-        orderDTO = new RequestOrderDTO(ptotal, Status.PENDING,lineitemDTO, customerDTO);
+        orderDTO = new RequestOrderDTO(ptotal, Status.PENDING, lineitemDTO, customerDTO);
     }
 
     void anhXa(){
         iv_back = findViewById(R.id.iv_back);
         text_paynow = findViewById(R.id.text_paynow);
         total = findViewById(R.id.ptotal);
+        text_address = findViewById(R.id.tv_address_payment);
+        iv_address = findViewById(R.id.img_edit_address);
+        iv_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PaymentActivity.this, ProfileActivity.class));
+            }
+        });
     }
 }
