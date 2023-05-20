@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.mobileecommerce.R;
@@ -36,11 +39,19 @@ public class RegisterActivity extends AppCompatActivity {
         EditText re_password = (EditText) findViewById(R.id.repassword);
         MaterialButton regbtn = (MaterialButton) findViewById(R.id.signupbtn);
 
+        Spinner spinnerOptions = findViewById(R.id.spinner_options_role);
+        String[] options = {"ROLE_USER", "ROLE_MANAGER", "ROLE_SHIPPER"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOptions.setAdapter(adapter);
+
         regbtn.setOnClickListener(new View.OnClickListener() {
             UserService userService = new UserService();
 
             @Override
             public void onClick(View v) {
+                String selectedOption = spinnerOptions.getSelectedItem().toString();
+                Log.e("Role", "là" + selectedOption);
                 String isCheck = userService.checkFormSignUp(email.getText().toString().trim(),
                         password.getText().toString().trim(),
                         re_password.getText().toString().trim());
@@ -48,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     CheckSignUp(username.getText().toString().trim(),
                             email.getText().toString().trim(),
-                            password.getText().toString().trim());
+                            password.getText().toString().trim(), selectedOption);
                 } else {
                     Toast.makeText(RegisterActivity.this,isCheck,Toast.LENGTH_SHORT).show();
                 }
@@ -56,8 +67,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void CheckSignUp(String username, String email, String password) {
-        SignUpAPI signUpAPI = RetrofitClient.getRetrofit().create(SignUpAPI.class);
+    private void CheckSignUp(String username, String email, String password, String role) {
+        SignUpAPI signUpAPI = RetrofitClient.getRetrofit60TimeOut().create(SignUpAPI.class);
         signUpAPI.checkSignUp(username, email).enqueue(new Callback<ResponseDTO>() {
             @Override
             public void onResponse(Call<ResponseDTO> call, Response<ResponseDTO> response) {
@@ -65,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                     UserModel user = new UserModel(
                             username,
                             email,
-                            password);
+                            password, role);
                     CallSignUpAPI(user);
                 } else{
                     Toast.makeText(RegisterActivity.this, "Username or Email already exists", Toast.LENGTH_LONG).show();
@@ -99,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseDTO> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, "Error When You Register", Toast.LENGTH_SHORT).show();
+                Log.e("error signup",t.getMessage());
             }
         });
     }

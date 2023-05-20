@@ -113,6 +113,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProductDetailActivity.this, MyCartActivity.class);
                 //intent.putExtra("product", product);
+                Log.e("ID khi add cart","là " + product.getProductId());
                 addItem(oId);
                 startActivity(intent);
             }

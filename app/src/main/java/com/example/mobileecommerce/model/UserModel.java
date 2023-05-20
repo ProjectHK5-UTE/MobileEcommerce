@@ -10,10 +10,11 @@ public class UserModel implements Serializable {
     private String role;
     private Timestamp updateAt;
 
-    public UserModel(String userName, String email, String password) {
+    public UserModel(String userName, String email, String password, String role) {
         this.email = email;
         this.password = password;
         this.userName = userName;
+        this.role = role;
     }
     public UserModel(String email, String password) {
         this.email = email;

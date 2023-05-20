@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ResponseDTO> call, Throwable t) {
-
+                Log.e("error when login",t.getMessage());
             }
         });
 
