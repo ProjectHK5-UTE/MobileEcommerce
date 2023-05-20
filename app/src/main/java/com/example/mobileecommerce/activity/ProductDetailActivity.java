@@ -62,7 +62,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     private ReviewsRecycleAdapter reviewsRecycleAdapter;
     ReviewAPI reviewAPI = RetrofitClient.getRetrofit().create(ReviewAPI.class);
     List<ReviewModel> listReview;
-    Button btnAddReview;
     ViewPagerAdapter mViewPagerAdapter;
     private String username;
 
@@ -119,12 +118,12 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
-        btnAddReview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openReviewDialog();
-            }
-        });
+//        btnAddReview.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openReviewDialog();
+//            }
+//        });
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,56 +132,56 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void openReviewDialog() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_review_product);
-        Window window = dialog.getWindow();
-        if(window == null) {
-            return;
-        }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-        windowAttributes.gravity = Gravity.CENTER;
-        window.setAttributes(windowAttributes);
-
-        Button btnNoThank = dialog.findViewById(R.id.btn_no_thank);
-        SeekBar sbRate = dialog.findViewById(R.id.sb_rate_review);
-        EditText edtContent = dialog.findViewById(R.id.edt_content_review);
-        Button btnSendReview = dialog.findViewById(R.id.btn_send_review);
-
-        btnNoThank.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        btnSendReview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ReviewModel reviewModel = new ReviewModel();
-                reviewModel.setContent(edtContent.getText().toString());
-                reviewModel.setRate(sbRate.getProgress() + 1);
-                reviewModel.setProduct(new ProductGridModel(product.getProductId()));
-                reviewModel.setCustomer(new CustomerModel(username));
-                reviewAPI.insertReview(reviewModel).enqueue(new Callback<ReviewModel>() {
-                    @Override
-                    public void onResponse(Call<ReviewModel> call, Response<ReviewModel> response) {
-                        listReview.add(0, response.body());
-                        reviewsRecycleAdapter.notifyItemInserted(0);
-                        Log.d("OKE", "OKE");
-                    }
-                    @Override
-                    public void onFailure(Call<ReviewModel> call, Throwable t) {
-
-                    }
-                });
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
+//    private void openReviewDialog() {
+//        final Dialog dialog = new Dialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.dialog_review_product);
+//        Window window = dialog.getWindow();
+//        if(window == null) {
+//            return;
+//        }
+//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+//        windowAttributes.gravity = Gravity.CENTER;
+//        window.setAttributes(windowAttributes);
+//
+//        Button btnNoThank = dialog.findViewById(R.id.btn_no_thank);
+//        SeekBar sbRate = dialog.findViewById(R.id.sb_rate_review);
+//        EditText edtContent = dialog.findViewById(R.id.edt_content_review);
+//        Button btnSendReview = dialog.findViewById(R.id.btn_send_review);
+//
+//        btnNoThank.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//        btnSendReview.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ReviewModel reviewModel = new ReviewModel();
+//                reviewModel.setContent(edtContent.getText().toString());
+//                reviewModel.setRate(sbRate.getProgress() + 1);
+//                reviewModel.setProduct(new ProductGridModel(product.getProductId()));
+//                reviewModel.setCustomer(new CustomerModel(username));
+//                reviewAPI.insertReview(reviewModel).enqueue(new Callback<ReviewModel>() {
+//                    @Override
+//                    public void onResponse(Call<ReviewModel> call, Response<ReviewModel> response) {
+//                        listReview.add(0, response.body());
+//                        reviewsRecycleAdapter.notifyItemInserted(0);
+//                        Log.d("OKE", "OKE");
+//                    }
+//                    @Override
+//                    public void onFailure(Call<ReviewModel> call, Throwable t) {
+//
+//                    }
+//                });
+//                dialog.dismiss();
+//            }
+//        });
+//        dialog.show();
+//    }
 
 
     private void AddReviews() {
@@ -246,7 +245,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         rc_view = findViewById(R.id.rc_view_option);
         rcvReview = findViewById(R.id.recyclerview_review);
-        btnAddReview = findViewById(R.id.btn_add_review);
+//        btnAddReview = findViewById(R.id.btn_add_review);
         ratingBar = findViewById(R.id.ratingbar);
     }
 }

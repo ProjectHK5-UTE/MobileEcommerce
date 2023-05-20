@@ -95,6 +95,7 @@ public class MyOrderRecycleAdapter extends RecyclerView.Adapter<MyOrderRecycleAd
             public void onClick(View view) {
                 Intent intent = new Intent(myViewHolder.itemView.getContext(), OrderDetailActivity.class);
                 intent.putExtra("orderId", (Integer) myOrderModelClass.getOrderId());
+                intent.putExtra("status", myOrderModelClass.getStatus());
                 myViewHolder.itemView.getContext().startActivity(intent);
             }
         });
