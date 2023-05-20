@@ -4,12 +4,14 @@ package com.example.mobileecommerce.model;
 public class MyOrderModelClass {
     String image;
     double price;
+    Status status;
     Integer quantity;
     Integer order_no;
 
-    public MyOrderModelClass(String image, double price, Integer quantity, Integer order_no) {
+    public MyOrderModelClass(String image, double price, Status status, Integer quantity, Integer order_no) {
         this.image = image;
         this.price = price;
+        this.status = status;
         this.quantity = quantity;
         this.order_no = order_no;
     }
@@ -28,6 +30,14 @@ public class MyOrderModelClass {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Integer getQuantity() {
