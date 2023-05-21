@@ -118,6 +118,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent;
         if(role.equals("ROLE_ADMIN")){
             intent = new Intent(this, AdminPanelHomeActivity.class);
+        }else if(role.equals("ROLE_MANAGER")){
+            intent = new Intent(this, ManageOrderActivity.class);
+        }else if(role.equals("ROLE_SHIPPER")){
+            intent = new Intent(this,ShipOrderActivity.class);
         }else {
             intent = new Intent(this, HomePageActivity.class);
         }

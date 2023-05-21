@@ -96,12 +96,13 @@ public class PaymentActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(Call<OrderResponseDTO> call, Throwable t) {
+                        Log.e("ERROR API ORDER", t.getMessage());
                         mProgressDialog.dismiss();
                     }
                 });
             }
         });
-        customerAPI = RetrofitClient.getRetrofit().create(CustomerAPI.class);
+        customerAPI = RetrofitClient.getRetrofit60TimeOut().create(CustomerAPI.class);
         customerAPI.getCustomerInfor(username)
                 .enqueue(new Callback<ResponseObject>() {
                     @Override
