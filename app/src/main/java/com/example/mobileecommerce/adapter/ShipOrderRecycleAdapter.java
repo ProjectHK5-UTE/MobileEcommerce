@@ -154,7 +154,7 @@ public class ShipOrderRecycleAdapter extends RecyclerView.Adapter<ShipOrderRecyc
                                         if(response.isSuccessful()){
                                             String message = "Nhận đơn hàng thành công !";
                                             Toast.makeText(myViewHolder.itemView.getContext(),message,Toast.LENGTH_SHORT).show();
-                                            orderAPI.getOrderByStatus(Status.PENDING).enqueue(new Callback<List<ResponseOrderDTO>>() {
+                                            orderAPI.getOrderByStatus(Status.PICKING).enqueue(new Callback<List<ResponseOrderDTO>>() {
                                                 @Override
                                                 public void onResponse(Call<List<ResponseOrderDTO>> call, Response<List<ResponseOrderDTO>> response) {
                                                     mActivity.loadData(response.body()); // Reload data in adapter
@@ -207,7 +207,7 @@ public class ShipOrderRecycleAdapter extends RecyclerView.Adapter<ShipOrderRecyc
                                         if(response.isSuccessful()){
                                             String message = "Đơn hàng đã hoàn tất !";
                                             Toast.makeText(myViewHolder.itemView.getContext(),message,Toast.LENGTH_SHORT).show();
-                                            orderAPI.getOrderByStatus(Status.PICKING).enqueue(new Callback<List<ResponseOrderDTO>>() {
+                                            orderAPI.getOrderByStatus(Status.TRANSIT).enqueue(new Callback<List<ResponseOrderDTO>>() {
                                                 @Override
                                                 public void onResponse(Call<List<ResponseOrderDTO>> call, Response<List<ResponseOrderDTO>> response) {
                                                     mActivity.loadData(response.body()); // Reload data in adapter
